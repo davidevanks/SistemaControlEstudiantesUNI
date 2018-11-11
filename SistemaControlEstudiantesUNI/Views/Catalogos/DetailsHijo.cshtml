@@ -1,0 +1,38 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.Catalogos_VM
+
+@{
+    ViewBag.Title = "DetailsHijo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-offset-1">
+    <h2>Detalle</h2>
+
+    <div>
+        <h4>Categorias de catalogos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.activo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.activo)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "EditHijo", new { id = Model.id }, new { @class = "btn btn-primary" })|
+        @Html.ActionLink("Regresar", "ListarCatHijos", new { id = Convert.ToInt32(Session["idPadre"]) }, new { @class = "btn btn-primary" })
+    </p>
+    </div>

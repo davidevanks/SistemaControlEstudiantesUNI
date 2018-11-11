@@ -1,0 +1,63 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.Docentes_VM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="col-md-offset-1">
+        <h2>Detalle</h2>
+
+        <div>
+            <h4>Docentes</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.apellidos)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.apellidos)
+                </dd>
+
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nombre_rango_academico)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nombre_rango_academico)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.no_cedula)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.no_cedula)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.activo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.activo)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+    </p>
+</div>

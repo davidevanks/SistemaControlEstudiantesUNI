@@ -1,0 +1,50 @@
+﻿@using SistemaControlEstudiantesUNI.Utiles;
+
+
+@{
+    var alerts = TempData.ContainsKey(Alert.TempDataKey)
+                ? (List<Alert>)TempData[Alert.TempDataKey]
+                : new List<Alert>();
+
+    if (alerts.Any())
+    {
+        <hr />
+    }
+
+
+ 
+
+
+    foreach (var alert in alerts)
+    {
+        if (alert.AlertStyle == "success")
+        {
+
+            
+            <div class="alert-uni alert alert-@alert.AlertStyle ">
+              
+                @Html.Raw(alert.Message)
+            </div>
+
+        }
+        else
+        {
+            var dismissableClass = alert.Dismissable ? "alert-dismissable" : null;
+            <div class="alert alert-@alert.AlertStyle @dismissableClass">
+                @if (alert.Dismissable)
+                {
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                }
+                @Html.Raw(alert.Message)
+            </div>
+
+        }
+
+    }
+}
+
+
+<script>
+    $('.alert-uni').fadeOut(10000);
+
+</script>
