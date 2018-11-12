@@ -142,5 +142,14 @@ namespace SistemaControlEstudiantesUNI
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual ObjectResult<ListarAsignaturas_Result> ListarAsignaturas(Nullable<long> idAsignatura)
+        {
+            var idAsignaturaParameter = idAsignatura.HasValue ?
+                new ObjectParameter("idAsignatura", idAsignatura) :
+                new ObjectParameter("idAsignatura", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarAsignaturas_Result>("ListarAsignaturas", idAsignaturaParameter);
+        }
     }
 }

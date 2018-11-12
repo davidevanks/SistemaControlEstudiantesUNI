@@ -1,0 +1,57 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.AsignaturaSimple_VM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-offset-1">
+    <h2>Detalle</h2>
+
+    <div>
+        <h4>Asignatura</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.codigoAsignatura)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.codigoAsignatura)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.asignatura)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.asignatura)
+            </dd>
+
+
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.asignaturasRequisito)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.asignaturasRequisito)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.activo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.activo)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+    </p>
+
+    </div>

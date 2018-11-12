@@ -222,6 +222,7 @@
       <DependentUpon>ControlEstudiantesDatos.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsignaturaController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CatalogosController.cs" />
     <Compile Include="Controllers\DocentesController.cs" />
@@ -247,10 +248,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ListarAsignaturas_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="localidad.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Asignaturas_DL.cs" />
     <Compile Include="Models\Catalogos_DL.cs" />
     <Compile Include="Models\Docentes_DL.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -275,6 +280,7 @@
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Utiles\Alert.cs" />
+    <Compile Include="ViewModels\Asignaturas_VM.cs" />
     <Compile Include="ViewModels\Catalogos_VM.cs" />
     <Compile Include="ViewModels\Docentes_VM.cs" />
     <Compile Include="ViewModels\Periodo_VM.cs" />
@@ -382,6 +388,10 @@
     <Content Include="Views\Turnos\Details.cshtml" />
     <Content Include="Views\Turnos\Create.cshtml" />
     <Content Include="Views\Turnos\Edit.cshtml" />
+    <Content Include="Views\Asignatura\Index.cshtml" />
+    <Content Include="Views\Asignatura\Create.cshtml" />
+    <Content Include="Views\Asignatura\Edit.cshtml" />
+    <Content Include="Views\Asignatura\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

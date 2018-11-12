@@ -18,6 +18,7 @@ namespace SistemaControlEstudiantesUNI
         public catalogos()
         {
             this.estudianteGrupo = new HashSet<estudianteGrupo>();
+            this.docentes = new HashSet<docentes>();
         }
     
         public long id { get; set; }
@@ -27,5 +28,7 @@ namespace SistemaControlEstudiantesUNI
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<estudianteGrupo> estudianteGrupo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<docentes> docentes { get; set; }
     }
 }

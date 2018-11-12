@@ -28,6 +28,7 @@
         <AssociationConnector Association="ControlAlumnosModel.FK_estudianteGrupo_estudiante" ManuallyRouted="false" />
         <AssociationConnector Association="ControlAlumnosModel.FK_estudianteNotas_estudiante" ManuallyRouted="false" />
         <AssociationConnector Association="ControlAlumnosModel.FK_estudianteAsignatura_periodo" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlAlumnosModel.FK_docentes_catalogos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

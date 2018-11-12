@@ -157,6 +157,18 @@
           <Property Name="horario_turno" Type="varchar" MaxLength="100" />
           <Property Name="activo" Type="bit" />
         </EntityType>
+        <Association Name="FK_docentes_catalogos">
+          <End Role="catalogos" Type="Self.catalogos" Multiplicity="0..1" />
+          <End Role="docentes" Type="Self.docentes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catalogos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="docentes">
+              <PropertyRef Name="id_categoria_academica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_estudiante_turnos">
           <End Role="turnos" Type="Self.turnos" Multiplicity="1" />
           <End Role="estudiante" Type="Self.estudiante" Multiplicity="*" />
@@ -290,6 +302,9 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="ListarAsignaturas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idAsignatura" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -333,6 +348,10 @@
           <EntitySet Name="localidad" EntityType="Self.localidad" Schema="estudiantes" store:Type="Tables" />
           <EntitySet Name="periodo" EntityType="Self.periodo" Schema="estudiantes" store:Type="Tables" />
           <EntitySet Name="turnos" EntityType="Self.turnos" Schema="estudiantes" store:Type="Tables" />
+          <AssociationSet Name="FK_docentes_catalogos" Association="Self.FK_docentes_catalogos">
+            <End Role="catalogos" EntitySet="catalogos" />
+            <End Role="docentes" EntitySet="docentes" />
+          </AssociationSet>
           <AssociationSet Name="FK_estudiante_turnos" Association="Self.FK_estudiante_turnos">
             <End Role="turnos" EntitySet="turnos" />
             <End Role="estudiante" EntitySet="estudiante" />
@@ -423,6 +442,7 @@
           <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" />
           <NavigationProperty Name="estudianteGrupo" Relationship="Self.FK_estudianteGrupo_catalogos" FromRole="catalogos" ToRole="estudianteGrupo" />
+          <NavigationProperty Name="docentes" Relationship="ControlAlumnosModel.FK_docentes_catalogos" FromRole="catalogos" ToRole="docentes" />
         </EntityType>
         <EntityType Name="docentes">
           <Key>
@@ -437,6 +457,7 @@
           <NavigationProperty Name="estudianteAsignatura" Relationship="Self.FK_estudianteAsignatura_docentes" FromRole="docentes" ToRole="estudianteAsignatura" />
           <NavigationProperty Name="estudianteNotas" Relationship="Self.FK_estudianteNotas_docentes" FromRole="docentes" ToRole="estudianteNotas" />
           <NavigationProperty Name="estudianteNotas1" Relationship="Self.FK_estudianteNotas_docentes1" FromRole="docentes" ToRole="estudianteNotas" />
+          <NavigationProperty Name="catalogos" Relationship="ControlAlumnosModel.FK_docentes_catalogos" FromRole="docentes" ToRole="catalogos" />
         </EntityType>
         <EntityType Name="estudiante">
           <Key>
@@ -775,6 +796,13 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_docentes_catalogos" Association="ControlAlumnosModel.FK_docentes_catalogos">
+            <End Role="catalogos" EntitySet="catalogos" />
+            <End Role="docentes" EntitySet="docentes" />
+          </AssociationSet>
+          <FunctionImport Name="ListarAsignaturas" ReturnType="Collection(ControlAlumnosModel.ListarAsignaturas_Result)">
+            <Parameter Name="idAsignatura" Mode="In" Type="Int64" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -786,6 +814,27 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <Association Name="FK_docentes_catalogos">
+          <End Type="ControlAlumnosModel.catalogos" Role="catalogos" Multiplicity="0..1" />
+          <End Type="ControlAlumnosModel.docentes" Role="docentes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catalogos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="docentes">
+              <PropertyRef Name="id_categoria_academica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="ListarAsignaturas_Result">
+          <Property Type="Int64" Name="asignaturaId" Nullable="false" />
+          <Property Type="String" Name="codigoAsignatura" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="asignatura" Nullable="true" MaxLength="150" />
+          <Property Type="Int64" Name="asignaturaRequisitoId" Nullable="false" />
+          <Property Type="String" Name="codigoAsignaturaRequisito" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="asignaturaRequisito" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="activoAsignatura" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -981,6 +1030,19 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ControlAlumnosModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ControlAlumnosModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="ListarAsignaturas" FunctionName="ControlAlumnosModel.Store.ListarAsignaturas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarAsignaturas_Result">
+                <ScalarProperty Name="asignaturaId" ColumnName="asignaturaId" />
+                <ScalarProperty Name="codigoAsignatura" ColumnName="codigoAsignatura" />
+                <ScalarProperty Name="asignatura" ColumnName="asignatura" />
+                <ScalarProperty Name="asignaturaRequisitoId" ColumnName="asignaturaRequisitoId" />
+                <ScalarProperty Name="codigoAsignaturaRequisito" ColumnName="codigoAsignaturaRequisito" />
+                <ScalarProperty Name="asignaturaRequisito" ColumnName="asignaturaRequisito" />
+                <ScalarProperty Name="activoAsignatura" ColumnName="activoAsignatura" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

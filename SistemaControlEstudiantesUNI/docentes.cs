@@ -35,5 +35,6 @@ namespace SistemaControlEstudiantesUNI
         public virtual ICollection<estudianteNotas> estudianteNotas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<estudianteNotas> estudianteNotas1 { get; set; }
+        public virtual catalogos catalogos { get; set; }
     }
 }
