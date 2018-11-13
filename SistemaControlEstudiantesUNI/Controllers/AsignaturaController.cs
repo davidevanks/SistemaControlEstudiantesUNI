@@ -7,10 +7,12 @@ using SistemaControlEstudiantesUNI.Models;
 using SistemaControlEstudiantesUNI.ViewModels;
 using SistemaControlEstudiantesUNI.Controllers;
 
+
 namespace SistemaControlEstudiantesUNI.Controllers
 {
-    public class AsignaturaController : BaseController
+    public  class AsignaturaController : BaseController
     {
+       
         Asignaturas_DL dl = new Asignaturas_DL();
         // GET: Asignatura
         public ActionResult Index()
