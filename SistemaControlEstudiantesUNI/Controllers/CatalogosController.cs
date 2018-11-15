@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Data;
 using SistemaControlEstudiantesUNI.Models;
 using SistemaControlEstudiantesUNI.ViewModels;
-using SistemaControlEstudiantesUNI.Controllers;
+
 
 
 namespace SistemaControlEstudiantesUNI.Controllers

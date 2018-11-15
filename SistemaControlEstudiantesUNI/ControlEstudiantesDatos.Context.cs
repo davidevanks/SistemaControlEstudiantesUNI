@@ -151,5 +151,14 @@ namespace SistemaControlEstudiantesUNI
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarAsignaturas_Result>("ListarAsignaturas", idAsignaturaParameter);
         }
+    
+        public virtual ObjectResult<ListarEstudiantes_Result> ListarEstudiantes(Nullable<long> idEs)
+        {
+            var idEsParameter = idEs.HasValue ?
+                new ObjectParameter("idEs", idEs) :
+                new ObjectParameter("idEs", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudiantes_Result>("ListarEstudiantes", idEsParameter);
+        }
     }
 }

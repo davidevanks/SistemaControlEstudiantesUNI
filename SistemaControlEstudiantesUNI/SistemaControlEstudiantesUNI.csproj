@@ -262,6 +262,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CatalogosController.cs" />
     <Compile Include="Controllers\DocentesController.cs" />
+    <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
@@ -288,6 +289,9 @@
     <Compile Include="ListarAsignaturas_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="ListarEstudiantes_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="localidad.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
@@ -295,6 +299,7 @@
     <Compile Include="Models\Asignaturas_DL.cs" />
     <Compile Include="Models\Catalogos_DL.cs" />
     <Compile Include="Models\Docentes_DL.cs" />
+    <Compile Include="Models\Estudiantes_DL.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Periodo_DL.cs" />
@@ -327,6 +332,7 @@
     <Compile Include="ViewModels\Asignaturas_VM.cs" />
     <Compile Include="ViewModels\Catalogos_VM.cs" />
     <Compile Include="ViewModels\Docentes_VM.cs" />
+    <Compile Include="ViewModels\Estudiantes_VM.cs" />
     <Compile Include="ViewModels\Periodo_VM.cs" />
     <Compile Include="ViewModels\Turnos_VM.cs" />
   </ItemGroup>
@@ -464,6 +470,7 @@
     <Content Include="Views\Asignatura\Edit.cshtml" />
     <Content Include="Views\Asignatura\Details.cshtml" />
     <Content Include="Views\Reportes\ReportEmployee.cshtml" />
+    <Content Include="Views\Estudiantes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
