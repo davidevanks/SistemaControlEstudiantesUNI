@@ -11,6 +11,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundles/mask")
    
 
 
@@ -75,6 +76,16 @@
                 }
             });
         });
+
+
+        $(document).ready(function(){
+            $('.celular').mask('000-00000', { reverse: true, placeholder: "000-00000" });
+            $('.tel').mask('000-00000', { reverse: true, placeholder: "000-00000" });
+            $('.fecha').mask('00/00/0000', { reverse: true, placeholder: "__/__/____" });
+            $('.cedula').mask('000-000000-0000A', { reverse: true, placeholder: "___-______-_____" });
+        
+        });
+
     </script>
   
 

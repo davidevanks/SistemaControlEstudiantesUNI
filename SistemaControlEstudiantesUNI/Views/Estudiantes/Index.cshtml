@@ -4,71 +4,78 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="col-md-offset-1">
+    <h2>Estudiantes</h2>
 
-<h2>Index</h2>
+    <p>
+        @Html.ActionLink("Registar Nuevo Estudiante", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <table id="table-uni" class="table  table-bordered table-hover table-uni">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombres)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.apellidos)
+                </th>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidos)
-        </th>
-        
-        
-        
-      
-       
-        <th>
-            @Html.DisplayNameFor(model => model.no_carnet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.no_cedula)
-        </th>
-      
 
-       
-        <th>
-            @Html.DisplayNameFor(model => model.activo)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidos)
-        </td>
-        
-        
-       
-    
-      
-        <td>
-            @Html.DisplayFor(modelItem => item.no_carnet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.no_cedula)
-        </td>
-       
 
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.activo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
 
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.no_carnet)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.no_cedula)
+                </th>
+
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.activo)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.apellidos)
+                    </td>
+
+
+
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.no_carnet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.no_cedula)
+                    </td>
+
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.activo)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) 
+                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+    </div>

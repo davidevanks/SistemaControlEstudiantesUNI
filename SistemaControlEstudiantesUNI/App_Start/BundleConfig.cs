@@ -29,6 +29,9 @@ namespace SistemaControlEstudiantesUNI
 
             bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
                        "~/Scripts/jquery.dataTables.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/mask").Include(
+                     "~/Scripts/jquery.mask.min.js"));
         }
     }
 }
