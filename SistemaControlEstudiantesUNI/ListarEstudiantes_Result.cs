@@ -16,11 +16,12 @@ namespace SistemaControlEstudiantesUNI
         public long idEs { get; set; }
         public string nombres { get; set; }
         public string apellidos { get; set; }
-        public string direccion_habitual { get; set; }
         public Nullable<System.DateTime> fecha_nacimiento { get; set; }
         public Nullable<int> edad { get; set; }
         public string celular { get; set; }
         public string centro_trabajo { get; set; }
+        public string direccion_habitual { get; set; }
+        public string cargo_trabajo { get; set; }
         public string email { get; set; }
         public string lugar_nacimiento { get; set; }
         public Nullable<bool> trabaja { get; set; }

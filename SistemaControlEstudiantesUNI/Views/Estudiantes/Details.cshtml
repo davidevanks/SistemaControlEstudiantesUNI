@@ -1,0 +1,235 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.EstudianteSimple
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-offset-1">
+    <h2>Detalle</h2>
+
+    <div>
+        <h4>Estudiante</h4>
+        <hr />
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.nombres)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nombres)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.apellidos)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.apellidos)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.direccion_habitual)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.direccion_habitual)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.fecha_nacimiento)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.fecha_nacimiento)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.edad)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.edad)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.celular)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.celular)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.centro_trabajo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.centro_trabajo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.lugar_nacimiento)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.lugar_nacimiento)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.trabaja)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.trabaja)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.no_carnet)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.no_carnet)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.no_cedula)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.no_cedula)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.telefono)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.telefono)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.telefono_trabajo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.telefono_trabajo)
+                </dd>
+
+
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.fecha_ingreso)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.fecha_ingreso)
+                </dd>
+
+
+
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Carrera)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Carrera)
+                </dd>
+
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Departamento)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Departamento)
+                </dd>
+                </dl>
+        </div>
+            <div class="col-md-6">
+                <dl>
+                   
+
+                  
+
+
+                   
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.estadoCivil)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.estadoCivil)
+                    </dd>
+
+                   
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Municipio)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Municipio)
+                    </dd>
+
+                 
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.planEstudio)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.planEstudio)
+                    </dd>
+
+                   
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Sexo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Sexo)
+                    </dd>
+
+                   
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Turno)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Turno)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.activo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.activo)
+                    </dd>
+                </dl>
+            </div>
+
+      
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+</p>
+    </div>

@@ -24,7 +24,12 @@ namespace SistemaControlEstudiantesUNI.Controllers
         // GET: Estudiantes/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            EstudianteSimple estudiantes = new EstudianteSimple();
+            estudiantes = dl.ListarEstudianteDetailsId(id);
+           
+       
+
+            return View(estudiantes);
         }
 
         // GET: Estudiantes/Create
@@ -42,9 +47,9 @@ namespace SistemaControlEstudiantesUNI.Controllers
             estudiante.Turnos = dl.lstTurnos();
             estudiante.estadoCiviles = dl.lstCatalogos(3);
             estudiante.fecha_grabacion = DateTime.Now;
-            estudiante.fecha_ingreso = DateTime.Now;
-            estudiante.fecha_nacimiento = DateTime.Now;
-            Session["Modelo"] = estudiante;
+            estudiante.fecha_ingreso = DateTime.Now.ToShortDateString();
+            estudiante.fecha_nacimiento = DateTime.Now.ToShortDateString();
+      
             return View(estudiante);
         }
 
@@ -102,22 +107,55 @@ namespace SistemaControlEstudiantesUNI.Controllers
         // GET: Estudiantes/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+
+            AgregarEstudiante estudiantes = new AgregarEstudiante();
+            estudiantes = dl.ListarEstudianteId(id);
+            estudiantes.Carreras = dl.lstCatalogos(1);
+            estudiantes.Departamentos = dl.lstDepartamentos();
+            estudiantes.Municipios = dl.lstMunicipio(Convert.ToInt32(estudiantes.id_departamento));
+            estudiantes.planEstudios = dl.lstCatalogos(5);
+            estudiantes.Sexos = dl.lstCatalogos(4);
+            estudiantes.Turnos = dl.lstTurnos();
+            estudiantes.estadoCiviles = dl.lstCatalogos(3);
+            estudiantes.fecha_modificacion = DateTime.Now;
+
+            return View(estudiantes);
         }
 
         // POST: Estudiantes/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(AgregarEstudiante ag)
         {
             try
             {
-                // TODO: Add update logic here
+                ag.fecha_modificacion = DateTime.Now;
+                if (ModelState.IsValid)
+                {
+                    if (dl.EditarEstudiante(ag))
+                    {
+                        //Mandar msj de confirmación de guardado
+                        Success("Registro actualizado!", true);
+                        return RedirectToAction("Index");
+                    }
 
-                return RedirectToAction("Index");
+                    else
+                    {
+
+                        // return View(catalogos);
+
+                    }
+
+                }
+                // TODO: Add insert logic here
+                Danger("Error al actualizar registro", true);
+                return View(ag);
+
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                string msj = ex.ToString();
+                Danger("Error al guardar registro: " + ex.ToString(), true);
+                return View(ag);
             }
         }
 

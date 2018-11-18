@@ -807,7 +807,7 @@
           <Parameter Name="idAsignatura" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ListarEstudiantes" ReturnType="Collection(ControlAlumnosModel.ListarEstudiantes_Result)">
-          <Parameter Name="idEs" Mode="In" Type="Int64" />
+            <Parameter Name="idEs" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -846,11 +846,12 @@
           <Property Type="Int64" Name="idEs" Nullable="false" />
           <Property Type="String" Name="nombres" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="apellidos" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="direccion_habitual" Nullable="true" />
           <Property Type="DateTime" Name="fecha_nacimiento" Nullable="true" />
           <Property Type="Int32" Name="edad" Nullable="true" />
           <Property Type="String" Name="celular" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="centro_trabajo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="direccion_habitual" Nullable="true" />
+          <Property Type="String" Name="cargo_trabajo" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="lugar_nacimiento" Nullable="true" MaxLength="150" />
           <Property Type="Boolean" Name="trabaja" Nullable="true" />
@@ -1090,11 +1091,12 @@
                 <ScalarProperty Name="idEs" ColumnName="idEs" />
                 <ScalarProperty Name="nombres" ColumnName="nombres" />
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
-                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
                 <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
                 <ScalarProperty Name="edad" ColumnName="edad" />
                 <ScalarProperty Name="celular" ColumnName="celular" />
                 <ScalarProperty Name="centro_trabajo" ColumnName="centro_trabajo" />
+                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
+                <ScalarProperty Name="cargo_trabajo" ColumnName="cargo_trabajo" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
                 <ScalarProperty Name="trabaja" ColumnName="trabaja" />

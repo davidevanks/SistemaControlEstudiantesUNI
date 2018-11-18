@@ -61,6 +61,56 @@ namespace SistemaControlEstudiantesUNI.Models
 
         }
 
+        public EstudianteSimple ListarEstudianteDetailsId(int id)
+        {
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                EstudianteSimple lstEstudiantes = new EstudianteSimple();
+
+                lstEstudiantes = contexto.ListarEstudiantes(id).Select(y => new EstudianteSimple
+                {
+                    id = y.idEs,
+                    nombres = y.nombres,
+                    apellidos = y.apellidos,
+                    direccion_habitual = y.direccion_habitual,
+                    fecha_nacimiento = (DateTime)y.fecha_nacimiento,
+                    edad = (int)y.edad,
+                    celular = y.celular,
+                    centro_trabajo = y.centro_trabajo,
+                    email = y.email,
+                    lugar_nacimiento = y.lugar_nacimiento,
+                    trabaja = (bool)y.trabaja,
+                    no_carnet = y.no_carnet,
+                    no_cedula = y.no_cedula,
+                    telefono = y.telefono,
+                    telefono_trabajo = y.telefono_trabajo,
+                    fecha_grabacion = (DateTime)y.fecha_grabacion,
+                    fecha_ingreso = (DateTime)y.fecha_ingreso,
+                    // fecha_modificacion=(DateTime)y.fecha_modificacion,
+                    id_carrera = y.id_carrera,
+                    Carrera = y.Carrera,
+                    id_departamento = (long)y.id_departamento,
+                    Departamento = y.Departamento,
+                    id_municipio = (long)y.id_municipio,
+                    Municipio = y.Municipio,
+                    id_estado_civil = (long)y.id_estado_civil,
+                    estadoCivil = y.estadoCivil,
+                    id_plan_estudio = y.id_plan_estudio,
+                    planEstudio = y.planEstudio,
+                    id_sexo = (long)y.id_sexo,
+                    Sexo = y.Sexo,
+                    id_turno = y.id_turno,
+                    Turno = y.Turno,
+                    activo = (bool)y.activo
+
+
+                }).FirstOrDefault();
+
+                return lstEstudiantes;
+            }
+
+        }
 
         //Metodos para catalogos de la tabla estudiantes
         public List<Catalogos_VM> lstCatalogos(int id)
@@ -203,8 +253,8 @@ namespace SistemaControlEstudiantesUNI.Models
                     est.edad = estudiantes.edad;
                     est.email = estudiantes.email;
                     est.fecha_grabacion = DateTime.Now;
-                    est.fecha_ingreso = estudiantes.fecha_ingreso;
-                    est.fecha_nacimiento = estudiantes.fecha_nacimiento;
+                    est.fecha_ingreso = Convert.ToDateTime(estudiantes.fecha_ingreso);
+                    est.fecha_nacimiento = Convert.ToDateTime(estudiantes.fecha_nacimiento);
                     est.id_carrera = estudiantes.id_carrera;
                     est.id_departamento = estudiantes.id_departamento;
                     est.id_estado_civil = estudiantes.id_estado_civil;
@@ -238,6 +288,125 @@ namespace SistemaControlEstudiantesUNI.Models
 
         }
 
+        public AgregarEstudiante ListarEstudianteId(int id)
+        {
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                AgregarEstudiante lstEstudiantes = new AgregarEstudiante();
+
+                lstEstudiantes = contexto.ListarEstudiantes(0).Where(y=>y.idEs==id).Select(y => new AgregarEstudiante
+                {
+                    id = y.idEs,
+                    nombres = y.nombres,
+                    apellidos = y.apellidos,
+                    direccion_habitual = y.direccion_habitual,
+                    fecha_nacimiento = Convert.ToDateTime(y.fecha_nacimiento).ToShortDateString(),
+                    edad = (int)y.edad,
+                    celular = y.celular,
+                    centro_trabajo = y.centro_trabajo,
+                    email = y.email,
+                    lugar_nacimiento = y.lugar_nacimiento,
+                    trabaja = (bool)y.trabaja,
+                    no_carnet = y.no_carnet,
+                    no_cedula = y.no_cedula,
+                    telefono = y.telefono,
+                    cargo_trabajo=y.cargo_trabajo,
+                    telefono_trabajo = y.telefono_trabajo,
+                    fecha_grabacion = (DateTime)y.fecha_grabacion,
+                    fecha_ingreso = Convert.ToDateTime(y.fecha_ingreso).ToShortDateString(),
+                    // fecha_modificacion=(DateTime)y.fecha_modificacion,
+                    id_carrera = y.id_carrera,
+                    //Carrera = y.Carrera,
+                    id_departamento = (long)y.id_departamento,
+                    //Departamento = y.Departamento,
+                    id_municipio = (long)y.id_municipio,
+                    //Municipio = y.Municipio,
+                    id_estado_civil = (long)y.id_estado_civil,
+                    //estadoCivil = y.estadoCivil,
+                    id_plan_estudio = y.id_plan_estudio,
+                    //planEstudio = y.planEstudio,
+                    id_sexo = (long)y.id_sexo,
+                    //Sexo = y.Sexo,
+                    id_turno = y.id_turno,
+                    //Turno = y.Turno,
+                    activo = (bool)y.activo
+
+
+                }).FirstOrDefault();
+
+                return lstEstudiantes;
+            }
+
+        }
+
+
+
+        public bool EditarEstudiante(AgregarEstudiante est)
+        {
+
+            try
+            {
+                var estudiantes = new estudiante { idEstudiante = est.id };
+              
+
+                using (var context = new ControlAlumnosEntities())
+
+                {
+
+                    context.estudiante.Attach(estudiantes);
+
+
+                    estudiantes.nombres = est.nombres;
+                    estudiantes.apellidos = est.apellidos;
+                    estudiantes.direccion_habitual = est.direccion_habitual;
+                    estudiantes.fecha_nacimiento = Convert.ToDateTime(est.fecha_nacimiento);
+                    estudiantes.edad = (int)est.edad;
+                    estudiantes.celular = est.celular;
+                    estudiantes.centro_trabajo = est.centro_trabajo;
+                    estudiantes.email = est.email;
+                    estudiantes.lugar_nacimiento = est.lugar_nacimiento;
+                    estudiantes.trabaja = (bool)est.trabaja;
+                    estudiantes.no_carnet = est.no_carnet;
+                    estudiantes.no_cedula = est.no_cedula;
+                    estudiantes.telefono = est.telefono;
+                    estudiantes.cargo_trabajo = est.cargo_trabajo;
+                    estudiantes.telefono_trabajo = est.telefono_trabajo;
+                    //estudiantes.fecha_grabacion = est.fecha_grabacion;
+                    estudiantes.fecha_ingreso = Convert.ToDateTime(est.fecha_ingreso);
+                    estudiantes.fecha_modificacion = est.fecha_modificacion;
+                    estudiantes.id_carrera = est.id_carrera;
+                    //Carrera = y.Carrera,
+                    estudiantes.id_departamento = (long)est.id_departamento;
+                    //Departamento = y.Departamento,
+                    estudiantes.id_municipio = (long)est.id_municipio;
+                    //Municipio = y.Municipio,
+                    estudiantes.id_estado_civil = (long)est.id_estado_civil;
+                    //estadoCivil = y.estadoCivil,
+                    estudiantes.id_plan_estudio = est.id_plan_estudio;
+                    //planEstudio = y.planEstudio,
+                    estudiantes.id_sexo = (long)est.id_sexo;
+                    //Sexo = y.Sexo,
+                    estudiantes.id_turno = est.id_turno;
+                    //Turno = y.Turno,
+                    estudiantes.activo = (bool)est.activo;
+
+                    context.Configuration.ValidateOnSaveEnabled = false;
+
+                    context.SaveChanges();
+                    return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw;
+            }
+
+
+
+        }
 
 
     }

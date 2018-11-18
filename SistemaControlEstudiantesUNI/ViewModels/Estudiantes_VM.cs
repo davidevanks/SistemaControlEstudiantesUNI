@@ -82,7 +82,8 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         public string direccion_habitual { get; set; }
         [Display(Name = "Fecha de Nacimiento")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public System.DateTime fecha_nacimiento { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string fecha_nacimiento { get; set; }
         [Display(Name = "Edad")]
         [Range(14, 100, ErrorMessage = "Edad fuera de rango permitido")]
         public int edad { get; set; }
@@ -106,13 +107,14 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         public string telefono { get; set; }
         [Display(Name = "No Teléfono Trabajo")]
         public string telefono_trabajo { get; set; }
-        
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime fecha_grabacion { get; set; }
         [Display(Name = "Fecha de Ingreso")]
         [Required(ErrorMessage = "Campo Requerido")]
-
-        public System.DateTime fecha_ingreso { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public string fecha_ingreso { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime fecha_modificacion { get; set; }
         [Display(Name = "Carrera")]
         [Required(ErrorMessage = "Campo Requerido")]

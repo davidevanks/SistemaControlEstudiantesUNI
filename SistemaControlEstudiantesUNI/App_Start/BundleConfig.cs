@@ -25,13 +25,13 @@ namespace SistemaControlEstudiantesUNI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css","~/Content/jquery-ui.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
                        "~/Scripts/jquery.dataTables.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/mask").Include(
-                     "~/Scripts/jquery.mask.min.js"));
+                     "~/Scripts/jquery.mask.min.js","~/Scripts/jquery-ui.min.js"));
         }
     }
 }
