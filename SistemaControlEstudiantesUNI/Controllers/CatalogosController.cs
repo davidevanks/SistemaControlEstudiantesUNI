@@ -11,6 +11,7 @@ using SistemaControlEstudiantesUNI.ViewModels;
 
 namespace SistemaControlEstudiantesUNI.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CatalogosController : BaseController
     {
         // GET: Catalogos
