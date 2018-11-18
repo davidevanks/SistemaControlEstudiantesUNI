@@ -54,7 +54,17 @@
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Estudiantes", "Index", "Estudiantes")</li>
                            
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Gestión Usuarios <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
 
+                            <li>@Html.ActionLink("Crear Usuario", "CreateUser", "Admin")</li>
+                            <li>@Html.ActionLink("Crear Role", "CreateRole", "Admin")</li>
+                            <li>@Html.ActionLink("Asignar roles a usuarios", "AssignRole", "Admin")</li>
                         </ul>
                     </li>
                 </ul>

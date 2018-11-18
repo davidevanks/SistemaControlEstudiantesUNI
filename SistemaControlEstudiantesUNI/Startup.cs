@@ -18,9 +18,9 @@ namespace SistemaControlEstudiantesUNI
         public void CreateUserAndRoles()
         {
             ApplicationDbContext contexto =new ApplicationDbContext();
-
-            var rolemanager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
-            var usermanager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
+            
+            var rolemanager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(contexto));
+            var usermanager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(contexto));
 
             if (!rolemanager.RoleExists("Admin"))
             {
@@ -37,7 +37,7 @@ namespace SistemaControlEstudiantesUNI
                 var newUser = usermanager.Create(user,pwd);
                 if (newUser.Succeeded)
                 {
-
+                    usermanager.AddToRole(user.Id,"Admin");
                 }
 
             }
