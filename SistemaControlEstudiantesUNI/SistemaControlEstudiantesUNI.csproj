@@ -337,6 +337,7 @@
     <Compile Include="ViewModels\Asignaturas_VM.cs" />
     <Compile Include="ViewModels\Catalogos_VM.cs" />
     <Compile Include="ViewModels\Docentes_VM.cs" />
+    <Compile Include="ViewModels\estudianteAsignatura_VM.cs" />
     <Compile Include="ViewModels\Estudiantes_VM.cs" />
     <Compile Include="ViewModels\Periodo_VM.cs" />
     <Compile Include="ViewModels\Turnos_VM.cs" />

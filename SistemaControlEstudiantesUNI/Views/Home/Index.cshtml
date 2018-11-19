@@ -1,7 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+@if(!User.Identity.IsAuthenticated)
+{
 <div class="jumbotron">
     <h2>SISTEMA DE CONTROL DE ESTUDIANTES</h2>
     <p class="lead">Bienvenido</p>
@@ -30,3 +31,16 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>*@
+
+
+}
+else
+{
+
+    <div class="jumbotron">
+        <h2>SISTEMA DE CONTROL DE ESTUDIANTES</h2>
+        <p class="lead">Bienvenido</p>
+        @*<p><a href="~/Views/Account/Login.cshtml" class="btn btn-primary btn-lg">Iniciar sesión &raquo;</a></p>*@
+       
+    </div>
+}

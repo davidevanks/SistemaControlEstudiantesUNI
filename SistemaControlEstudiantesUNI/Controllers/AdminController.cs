@@ -46,7 +46,7 @@ namespace SistemaControlEstudiantesUNI.Controllers
                 Success("Usuario: "+ UserName +"creado con exito!!");
             }
             //Hacer Cambio posterior a Home de bienvenida de usuario loggeado
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult CreateRole()
         {
@@ -80,8 +80,8 @@ namespace SistemaControlEstudiantesUNI.Controllers
 
                 Danger("Error al crear Role, ya existe");
             }
-               
-            return View();
+
+           return  RedirectToAction("Index","Home");
         }
         public ActionResult AssignRole()
         {
@@ -113,8 +113,8 @@ namespace SistemaControlEstudiantesUNI.Controllers
             {
                 Danger("Error en la asignación de roles");
             }
-            
-            return View();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
