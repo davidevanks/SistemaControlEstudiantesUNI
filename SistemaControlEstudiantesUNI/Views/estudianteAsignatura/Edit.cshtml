@@ -1,0 +1,259 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.AgregarEstudianteAsignatura_VM
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-offset-1">
+    <h2>Asignar clases</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Asignaturas por estudiante</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.idEstudianteAsignatura, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.idEstudianteAsignatura, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.idEstudianteAsignatura, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Periodo, htmlAttributes: new { @class = "control-label " })
+                    @*<div class="col-md-10">*@
+                    @Html.DisplayFor(model => model.Periodo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Periodo, "", new { @class = "text-danger" })
+                    @*</div>*@
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nombres, htmlAttributes: new { @class = "control-label " })
+
+                    @Html.DisplayFor(model => model.nombres, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.apellidos, htmlAttributes: new { @class = "control-label " })
+
+                    @Html.DisplayFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.celular, htmlAttributes: new { @class = "control-label " })
+
+                    @Html.DisplayFor(model => model.celular, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.celular, "", new { @class = "text-danger" })
+
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.direccion_habitual, htmlAttributes: new { @class = "control-label " })
+
+                    @Html.DisplayFor(model => model.direccion_habitual, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.direccion_habitual, "", new { @class = "text-danger" })
+
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.no_carnet, htmlAttributes: new { @class = "control-label " })
+
+                    @Html.DisplayFor(model => model.no_carnet, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.no_carnet, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.no_cedula, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DisplayFor(model => model.no_cedula, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.no_cedula, "", new { @class = "text-danger" })
+
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Carrera, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DisplayFor(model => model.Carrera, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Carrera, "", new { @class = "text-danger" })
+
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.estadoCivil, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DisplayFor(model => model.estadoCivil, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.estadoCivil, "", new { @class = "text-danger" })
+
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.planEstudio, htmlAttributes: new { @class = "control-label " })
+
+                    @Html.DisplayFor(model => model.planEstudio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.planEstudio, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Sexo, htmlAttributes: new { @class = "control-label " })
+
+                    @Html.DisplayFor(model => model.Sexo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Turno, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DisplayFor(model => model.Turno, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Turno, "", new { @class = "text-danger" })
+
+                </div>
+
+
+
+
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.horario, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.horario, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.horario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.id_docente, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.id_docente, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.id_docente, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.activo, htmlAttributes: new { @class = "control-label " })
+
+                    <div class="checkbox">
+                        @Html.DisplayFor(model => model.activo)
+                        @Html.ValidationMessageFor(model => model.activo, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+        
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+            </div>
+            @*aqui*@
+
+
+        </div>
+    }
+
+
+
+
+
+    <h4><strong>Lista de asignaturas asignadas</strong></h4>
+    <hr color="black" />
+    <p>
+        @Html.ActionLink("Asignar nueva clase", "AsignarClase", null, new { @class = "btn btn-primary" })
+    </p>
+    <table id="table-uni" class="table  table-bordered table-hover table-uni">
+        <thead>
+            <tr>
+                <th>
+                    Asignatura
+                </th>
+                <th>
+                    Horario
+                </th>
+
+
+                <th>
+                    Docente
+                </th>
+
+                <th>
+                    Grupo
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.lstHijosEsAsig)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Asignatura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.horario)
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Docente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Grupo)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Editar", "EditAsignacion", new { id = item.idEstudianteAsignatura }) |
+                        @Html.ActionLink("Eliminar", "EliminarAsignacion", new { id = item.idEstudianteAsignatura })
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+
+
+
+
+
+</div>
+

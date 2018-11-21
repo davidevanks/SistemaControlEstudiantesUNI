@@ -18,7 +18,7 @@ namespace SistemaControlEstudiantesUNI
         public Nullable<long> id_estudiante { get; set; }
         public Nullable<long> id_asignatura { get; set; }
         public Nullable<long> id_docente { get; set; }
-        public Nullable<System.TimeSpan> horario { get; set; }
+        public string horario { get; set; }
         public Nullable<long> id_periodo { get; set; }
         public Nullable<double> parcial_uno { get; set; }
         public Nullable<double> parcial_dos { get; set; }
@@ -28,10 +28,6 @@ namespace SistemaControlEstudiantesUNI
         public Nullable<System.DateTime> fecha_inscripcion { get; set; }
         public Nullable<bool> aprobado { get; set; }
         public Nullable<bool> completado { get; set; }
-    
-        public virtual asignaturas asignaturas { get; set; }
-        public virtual docentes docentes { get; set; }
-        public virtual estudiante estudiante { get; set; }
-        public virtual periodo periodo { get; set; }
+        public Nullable<long> id_grupo { get; set; }
     }
 }

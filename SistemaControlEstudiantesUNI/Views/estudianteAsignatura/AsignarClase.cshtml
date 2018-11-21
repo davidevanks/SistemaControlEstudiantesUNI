@@ -1,0 +1,78 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.AgregarHijosEstudianteAsignatura
+
+@{
+    ViewBag.Title = "AsignarClase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AsignarClase</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>AgregarHijosEstudianteAsignatura</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_estudiante)
+        @Html.HiddenFor(model => model.id_periodo)
+
+      
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_docente, "Docente", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_docente, new SelectList(Model.Docente, "idDocentes", "nombre"), "- Seleccione Docente -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_docente)
+            </div>
+        </div>
+
+
+     
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_asignatura, "Asignatura", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_asignatura, new SelectList(Model.Asignatura, "idAsignatura", "nombreAsignatura"), "- Seleccione Asignatura -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_asignatura)
+            </div>
+        </div>
+
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.idPadre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idPadre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.idPadre, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.horario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.horario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.horario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_grupo, "Grupo", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_grupo, new SelectList(Model.Grupo, "id", "Nombre"), "- Seleccione Grupo -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_grupo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

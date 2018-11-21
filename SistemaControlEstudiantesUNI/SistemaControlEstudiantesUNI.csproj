@@ -267,6 +267,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CatalogosController.cs" />
     <Compile Include="Controllers\DocentesController.cs" />
+    <Compile Include="Controllers\estudianteAsignaturaController.cs" />
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -294,7 +295,13 @@
     <Compile Include="ListarAsignaturas_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="ListarEstudianteAsignatura1_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="ListarEstudiantes_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarHijosEstudianteAsig1_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="localidad.cs">
@@ -304,6 +311,7 @@
     <Compile Include="Models\Asignaturas_DL.cs" />
     <Compile Include="Models\Catalogos_DL.cs" />
     <Compile Include="Models\Docentes_DL.cs" />
+    <Compile Include="Models\estudianteAsignatura_DL.cs" />
     <Compile Include="Models\Estudiantes_DL.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -493,6 +501,9 @@
     <Content Include="Views\Admin\CreateUser.cshtml" />
     <Content Include="Views\Admin\AssignRole.cshtml" />
     <Content Include="Views\Admin\CreateRole.cshtml" />
+    <Content Include="Views\estudianteAsignatura\Index.cshtml" />
+    <Content Include="Views\estudianteAsignatura\Edit.cshtml" />
+    <Content Include="Views\estudianteAsignatura\AsignarClase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -85,6 +85,7 @@
           <Property Name="fecha_modificacion" Type="datetime" />
           <Property Name="id_municipio" Type="bigint" />
           <Property Name="fecha_ingreso" Type="datetime" />
+          <Property Name="id_periodo" Type="bigint" />
           <Property Name="activo" Type="bit" />
         </EntityType>
         <EntityType Name="estudianteAsignatura">
@@ -95,8 +96,9 @@
           <Property Name="id_estudiante" Type="bigint" />
           <Property Name="id_asignatura" Type="bigint" />
           <Property Name="id_docente" Type="bigint" />
-          <Property Name="horario" Type="time" Precision="7" />
+          <Property Name="horario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="id_periodo" Type="bigint" />
+          <Property Name="id_grupo" Type="bigint" />
           <Property Name="parcial_uno" Type="float" />
           <Property Name="parcial_dos" Type="float" />
           <Property Name="convocatoria" Type="float" />
@@ -181,54 +183,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_estudianteAsignatura_asignaturas">
-          <End Role="asignaturas" Type="Self.asignaturas" Multiplicity="0..1" />
-          <End Role="estudianteAsignatura" Type="Self.estudianteAsignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="asignaturas">
-              <PropertyRef Name="idAsignatura" />
-            </Principal>
-            <Dependent Role="estudianteAsignatura">
-              <PropertyRef Name="id_asignatura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_estudianteAsignatura_docentes">
-          <End Role="docentes" Type="Self.docentes" Multiplicity="0..1" />
-          <End Role="estudianteAsignatura" Type="Self.estudianteAsignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="docentes">
-              <PropertyRef Name="idDocentes" />
-            </Principal>
-            <Dependent Role="estudianteAsignatura">
-              <PropertyRef Name="id_docente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_estudianteAsignatura_estudiante">
-          <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
-          <End Role="estudianteAsignatura" Type="Self.estudianteAsignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="estudiante">
-              <PropertyRef Name="idEstudiante" />
-            </Principal>
-            <Dependent Role="estudianteAsignatura">
-              <PropertyRef Name="id_estudiante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_estudianteAsignatura_periodo">
-          <End Role="periodo" Type="Self.periodo" Multiplicity="0..1" />
-          <End Role="estudianteAsignatura" Type="Self.estudianteAsignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="periodo">
-              <PropertyRef Name="idPeriodo" />
-            </Principal>
-            <Dependent Role="estudianteAsignatura">
-              <PropertyRef Name="id_periodo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_estudianteGrupo_catalogos">
           <End Role="catalogos" Type="Self.catalogos" Multiplicity="0..1" />
           <End Role="estudianteGrupo" Type="Self.estudianteGrupo" Multiplicity="*" />
@@ -305,8 +259,14 @@
         <Function Name="ListarAsignaturas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idAsignatura" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="ListarEstudianteAsignatura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ides" Type="int" Mode="In" />
+        </Function>
         <Function Name="ListarEstudiantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idEs" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ListarHijosEstudianteAsig" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ides" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -358,22 +318,6 @@
           <AssociationSet Name="FK_estudiante_turnos" Association="Self.FK_estudiante_turnos">
             <End Role="turnos" EntitySet="turnos" />
             <End Role="estudiante" EntitySet="estudiante" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudianteAsignatura_asignaturas" Association="Self.FK_estudianteAsignatura_asignaturas">
-            <End Role="asignaturas" EntitySet="asignaturas" />
-            <End Role="estudianteAsignatura" EntitySet="estudianteAsignatura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudianteAsignatura_docentes" Association="Self.FK_estudianteAsignatura_docentes">
-            <End Role="docentes" EntitySet="docentes" />
-            <End Role="estudianteAsignatura" EntitySet="estudianteAsignatura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudianteAsignatura_estudiante" Association="Self.FK_estudianteAsignatura_estudiante">
-            <End Role="estudiante" EntitySet="estudiante" />
-            <End Role="estudianteAsignatura" EntitySet="estudianteAsignatura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudianteAsignatura_periodo" Association="Self.FK_estudianteAsignatura_periodo">
-            <End Role="periodo" EntitySet="periodo" />
-            <End Role="estudianteAsignatura" EntitySet="estudianteAsignatura" />
           </AssociationSet>
           <AssociationSet Name="FK_estudianteGrupo_catalogos" Association="Self.FK_estudianteGrupo_catalogos">
             <End Role="catalogos" EntitySet="catalogos" />
@@ -433,7 +377,6 @@
           <Property Name="nombreAsignatura" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="idPadre" Type="Int64" />
           <Property Name="activo" Type="Boolean" />
-          <NavigationProperty Name="estudianteAsignatura" Relationship="Self.FK_estudianteAsignatura_asignaturas" FromRole="asignaturas" ToRole="estudianteAsignatura" />
           <NavigationProperty Name="estudianteNotas" Relationship="Self.FK_estudianteNotas_asignaturas" FromRole="asignaturas" ToRole="estudianteNotas" />
         </EntityType>
         <EntityType Name="catalogos">
@@ -457,69 +400,9 @@
           <Property Name="id_categoria_academica" Type="Int64" />
           <Property Name="no_cedula" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" />
-          <NavigationProperty Name="estudianteAsignatura" Relationship="Self.FK_estudianteAsignatura_docentes" FromRole="docentes" ToRole="estudianteAsignatura" />
           <NavigationProperty Name="estudianteNotas" Relationship="Self.FK_estudianteNotas_docentes" FromRole="docentes" ToRole="estudianteNotas" />
           <NavigationProperty Name="estudianteNotas1" Relationship="Self.FK_estudianteNotas_docentes1" FromRole="docentes" ToRole="estudianteNotas" />
           <NavigationProperty Name="catalogos" Relationship="ControlAlumnosModel.FK_docentes_catalogos" FromRole="docentes" ToRole="catalogos" />
-        </EntityType>
-        <EntityType Name="estudiante">
-          <Key>
-            <PropertyRef Name="idEstudiante" />
-          </Key>
-          <Property Name="idEstudiante" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_carrera" Type="Int64" Nullable="false" />
-          <Property Name="id_turno" Type="Int64" Nullable="false" />
-          <Property Name="id_plan_estudio" Type="Int64" Nullable="false" />
-          <Property Name="nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="no_carnet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="id_estado_civil" Type="Int64" />
-          <Property Name="id_sexo" Type="Int64" />
-          <Property Name="lugar_nacimiento" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
-          <Property Name="id_departamento" Type="Int64" />
-          <Property Name="no_cedula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="edad" Type="Int32" />
-          <Property Name="direccion_habitual" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="celular" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="trabaja" Type="Boolean" />
-          <Property Name="centro_trabajo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="telefono_trabajo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="cargo_trabajo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_grabacion" Type="DateTime" Precision="3" />
-          <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
-          <Property Name="id_municipio" Type="Int64" />
-          <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
-          <Property Name="activo" Type="Boolean" />
-          <NavigationProperty Name="turnos" Relationship="Self.FK_estudiante_turnos" FromRole="estudiante" ToRole="turnos" />
-          <NavigationProperty Name="estudianteAsignatura" Relationship="Self.FK_estudianteAsignatura_estudiante" FromRole="estudiante" ToRole="estudianteAsignatura" />
-          <NavigationProperty Name="estudianteGrupo" Relationship="Self.FK_estudianteGrupo_estudiante" FromRole="estudiante" ToRole="estudianteGrupo" />
-          <NavigationProperty Name="estudianteNotas" Relationship="Self.FK_estudianteNotas_estudiante" FromRole="estudiante" ToRole="estudianteNotas" />
-        </EntityType>
-        <EntityType Name="estudianteAsignatura">
-          <Key>
-            <PropertyRef Name="idEstudianteAsignatura" />
-          </Key>
-          <Property Name="idEstudianteAsignatura" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_estudiante" Type="Int64" />
-          <Property Name="id_asignatura" Type="Int64" />
-          <Property Name="id_docente" Type="Int64" />
-          <Property Name="horario" Type="Time" Precision="7" />
-          <Property Name="id_periodo" Type="Int64" />
-          <Property Name="parcial_uno" Type="Double" />
-          <Property Name="parcial_dos" Type="Double" />
-          <Property Name="convocatoria" Type="Double" />
-          <Property Name="nota_final" Type="Double" />
-          <Property Name="activo" Type="Boolean" />
-          <Property Name="fecha_inscripcion" Type="DateTime" Precision="3" />
-          <Property Name="aprobado" Type="Boolean" />
-          <NavigationProperty Name="asignaturas" Relationship="Self.FK_estudianteAsignatura_asignaturas" FromRole="estudianteAsignatura" ToRole="asignaturas" />
-          <NavigationProperty Name="docentes" Relationship="Self.FK_estudianteAsignatura_docentes" FromRole="estudianteAsignatura" ToRole="docentes" />
-          <NavigationProperty Name="estudiante" Relationship="Self.FK_estudianteAsignatura_estudiante" FromRole="estudianteAsignatura" ToRole="estudiante" />
-          <NavigationProperty Name="periodo" Relationship="Self.FK_estudianteAsignatura_periodo" FromRole="estudianteAsignatura" ToRole="periodo" />
-          <Property Name="completado" Type="Boolean" />
         </EntityType>
         <EntityType Name="estudianteGrupo">
           <Key>
@@ -530,7 +413,7 @@
           <Property Name="id_grupo" Type="Int64" />
           <Property Name="activo" Type="Boolean" />
           <NavigationProperty Name="catalogos" Relationship="Self.FK_estudianteGrupo_catalogos" FromRole="estudianteGrupo" ToRole="catalogos" />
-          <NavigationProperty Name="estudiante" Relationship="Self.FK_estudianteGrupo_estudiante" FromRole="estudianteGrupo" ToRole="estudiante" />
+          <NavigationProperty Name="estudiante" Relationship="ControlAlumnosModel.FK_estudianteGrupo_estudiante" FromRole="estudianteGrupo" ToRole="estudiante" />
         </EntityType>
         <EntityType Name="estudianteNotas">
           <Key>
@@ -550,7 +433,7 @@
           <NavigationProperty Name="asignaturas" Relationship="Self.FK_estudianteNotas_asignaturas" FromRole="estudianteNotas" ToRole="asignaturas" />
           <NavigationProperty Name="docentes" Relationship="Self.FK_estudianteNotas_docentes" FromRole="estudianteNotas" ToRole="docentes" />
           <NavigationProperty Name="docentes1" Relationship="Self.FK_estudianteNotas_docentes1" FromRole="estudianteNotas" ToRole="docentes" />
-          <NavigationProperty Name="estudiante" Relationship="Self.FK_estudianteNotas_estudiante" FromRole="estudianteNotas" ToRole="estudiante" />
+          <NavigationProperty Name="estudiante" Relationship="ControlAlumnosModel.FK_estudianteNotas_estudiante" FromRole="estudianteNotas" ToRole="estudiante" />
         </EntityType>
         <EntityType Name="localidad">
           <Key>
@@ -568,7 +451,6 @@
           <Property Name="idPeriodo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre_periodo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" />
-          <NavigationProperty Name="estudianteAsignatura" Relationship="Self.FK_estudianteAsignatura_periodo" FromRole="periodo" ToRole="estudianteAsignatura" />
         </EntityType>
         <EntityType Name="turnos">
           <Key>
@@ -578,20 +460,8 @@
           <Property Name="nombre_turno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="horario_turno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" />
-          <NavigationProperty Name="estudiante" Relationship="Self.FK_estudiante_turnos" FromRole="turnos" ToRole="estudiante" />
+          <NavigationProperty Name="estudiante" Relationship="ControlAlumnosModel.FK_estudiante_turnos" FromRole="turnos" ToRole="estudiante" />
         </EntityType>
-        <Association Name="FK_estudianteAsignatura_asignaturas">
-          <End Role="asignaturas" Type="Self.asignaturas" Multiplicity="0..1" />
-          <End Role="estudianteAsignatura" Type="Self.estudianteAsignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="asignaturas">
-              <PropertyRef Name="idAsignatura" />
-            </Principal>
-            <Dependent Role="estudianteAsignatura">
-              <PropertyRef Name="id_asignatura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_estudianteNotas_asignaturas">
           <End Role="asignaturas" Type="Self.asignaturas" Multiplicity="0..1" />
           <End Role="estudianteNotas" Type="Self.estudianteNotas" Multiplicity="*" />
@@ -613,18 +483,6 @@
             </Principal>
             <Dependent Role="estudianteGrupo">
               <PropertyRef Name="id_estudiante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_estudianteAsignatura_docentes">
-          <End Role="docentes" Type="Self.docentes" Multiplicity="0..1" />
-          <End Role="estudianteAsignatura" Type="Self.estudianteAsignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="docentes">
-              <PropertyRef Name="idDocentes" />
-            </Principal>
-            <Dependent Role="estudianteAsignatura">
-              <PropertyRef Name="id_docente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -652,83 +510,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_estudiante_turnos">
-          <End Role="turnos" Type="Self.turnos" Multiplicity="1" />
-          <End Role="estudiante" Type="Self.estudiante" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="turnos">
-              <PropertyRef Name="idTurno" />
-            </Principal>
-            <Dependent Role="estudiante">
-              <PropertyRef Name="id_turno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_estudianteAsignatura_estudiante">
-          <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
-          <End Role="estudianteAsignatura" Type="Self.estudianteAsignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="estudiante">
-              <PropertyRef Name="idEstudiante" />
-            </Principal>
-            <Dependent Role="estudianteAsignatura">
-              <PropertyRef Name="id_estudiante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_estudianteGrupo_estudiante">
-          <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
-          <End Role="estudianteGrupo" Type="Self.estudianteGrupo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="estudiante">
-              <PropertyRef Name="idEstudiante" />
-            </Principal>
-            <Dependent Role="estudianteGrupo">
-              <PropertyRef Name="id_estudiante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_estudianteNotas_estudiante">
-          <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
-          <End Role="estudianteNotas" Type="Self.estudianteNotas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="estudiante">
-              <PropertyRef Name="idEstudiante" />
-            </Principal>
-            <Dependent Role="estudianteNotas">
-              <PropertyRef Name="id_estudiante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_estudianteAsignatura_periodo">
-          <End Role="periodo" Type="Self.periodo" Multiplicity="0..1" />
-          <End Role="estudianteAsignatura" Type="Self.estudianteAsignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="periodo">
-              <PropertyRef Name="idPeriodo" />
-            </Principal>
-            <Dependent Role="estudianteAsignatura">
-              <PropertyRef Name="id_periodo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ControlAlumnosEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bitacora" EntityType="Self.bitacora" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="asignaturas" EntityType="Self.asignaturas" />
           <EntitySet Name="catalogos" EntityType="Self.catalogos" />
           <EntitySet Name="docentes" EntityType="Self.docentes" />
-          <EntitySet Name="estudiante" EntityType="Self.estudiante" />
-          <EntitySet Name="estudianteAsignatura" EntityType="Self.estudianteAsignatura" />
           <EntitySet Name="estudianteGrupo" EntityType="Self.estudianteGrupo" />
           <EntitySet Name="estudianteNotas" EntityType="Self.estudianteNotas" />
           <EntitySet Name="localidad" EntityType="Self.localidad" />
           <EntitySet Name="periodo" EntityType="Self.periodo" />
           <EntitySet Name="turnos" EntityType="Self.turnos" />
-          <AssociationSet Name="FK_estudianteAsignatura_asignaturas" Association="Self.FK_estudianteAsignatura_asignaturas">
-            <End Role="asignaturas" EntitySet="asignaturas" />
-            <End Role="estudianteAsignatura" EntitySet="estudianteAsignatura" />
-          </AssociationSet>
           <AssociationSet Name="FK_estudianteNotas_asignaturas" Association="Self.FK_estudianteNotas_asignaturas">
             <End Role="asignaturas" EntitySet="asignaturas" />
             <End Role="estudianteNotas" EntitySet="estudianteNotas" />
@@ -737,10 +529,6 @@
             <End Role="catalogos" EntitySet="catalogos" />
             <End Role="estudianteGrupo" EntitySet="estudianteGrupo" />
           </AssociationSet>
-          <AssociationSet Name="FK_estudianteAsignatura_docentes" Association="Self.FK_estudianteAsignatura_docentes">
-            <End Role="docentes" EntitySet="docentes" />
-            <End Role="estudianteAsignatura" EntitySet="estudianteAsignatura" />
-          </AssociationSet>
           <AssociationSet Name="FK_estudianteNotas_docentes" Association="Self.FK_estudianteNotas_docentes">
             <End Role="docentes" EntitySet="docentes" />
             <End Role="estudianteNotas" EntitySet="estudianteNotas" />
@@ -748,26 +536,6 @@
           <AssociationSet Name="FK_estudianteNotas_docentes1" Association="Self.FK_estudianteNotas_docentes1">
             <End Role="docentes" EntitySet="docentes" />
             <End Role="estudianteNotas" EntitySet="estudianteNotas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudiante_turnos" Association="Self.FK_estudiante_turnos">
-            <End Role="turnos" EntitySet="turnos" />
-            <End Role="estudiante" EntitySet="estudiante" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudianteAsignatura_estudiante" Association="Self.FK_estudianteAsignatura_estudiante">
-            <End Role="estudiante" EntitySet="estudiante" />
-            <End Role="estudianteAsignatura" EntitySet="estudianteAsignatura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudianteGrupo_estudiante" Association="Self.FK_estudianteGrupo_estudiante">
-            <End Role="estudiante" EntitySet="estudiante" />
-            <End Role="estudianteGrupo" EntitySet="estudianteGrupo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudianteNotas_estudiante" Association="Self.FK_estudianteNotas_estudiante">
-            <End Role="estudiante" EntitySet="estudiante" />
-            <End Role="estudianteNotas" EntitySet="estudianteNotas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_estudianteAsignatura_periodo" Association="Self.FK_estudianteAsignatura_periodo">
-            <End Role="periodo" EntitySet="periodo" />
-            <End Role="estudianteAsignatura" EntitySet="estudianteAsignatura" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -807,7 +575,33 @@
           <Parameter Name="idAsignatura" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ListarEstudiantes" ReturnType="Collection(ControlAlumnosModel.ListarEstudiantes_Result)">
-            <Parameter Name="idEs" Mode="In" Type="Int64" />
+          <Parameter Name="idEs" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="estudianteAsignatura" EntityType="ControlAlumnosModel.estudianteAsignatura" />
+          <FunctionImport Name="ListarHijosEstudianteAsig">
+          <Parameter Name="ides" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarEstudianteAsignatura">
+          <Parameter Name="ides" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="estudiante" EntityType="ControlAlumnosModel.estudiante" />
+          <AssociationSet Name="FK_estudiante_turnos" Association="ControlAlumnosModel.FK_estudiante_turnos">
+            <End Role="turnos" EntitySet="turnos" />
+            <End Role="estudiante" EntitySet="estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estudianteGrupo_estudiante" Association="ControlAlumnosModel.FK_estudianteGrupo_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="estudianteGrupo" EntitySet="estudianteGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estudianteNotas_estudiante" Association="ControlAlumnosModel.FK_estudianteNotas_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="estudianteNotas" EntitySet="estudianteNotas" />
+          </AssociationSet>
+          <FunctionImport Name="ListarEstudianteAsignatura1" ReturnType="Collection(ControlAlumnosModel.ListarEstudianteAsignatura1_Result)">
+            <Parameter Name="ides" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarHijosEstudianteAsig1" ReturnType="Collection(ControlAlumnosModel.ListarHijosEstudianteAsig1_Result)">
+            <Parameter Name="ides" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -878,6 +672,138 @@
           <Property Type="String" Name="Turno" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="activo" Nullable="true" />
         </ComplexType>
+        <EntityType Name="estudianteAsignatura">
+          <Key>
+            <PropertyRef Name="idEstudianteAsignatura" />
+          </Key>
+          <Property Name="idEstudianteAsignatura" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_estudiante" Type="Int64" />
+          <Property Name="id_asignatura" Type="Int64" />
+          <Property Name="id_docente" Type="Int64" />
+          <Property Name="horario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_periodo" Type="Int64" />
+          <Property Name="parcial_uno" Type="Double" />
+          <Property Name="parcial_dos" Type="Double" />
+          <Property Name="convocatoria" Type="Double" />
+          <Property Name="nota_final" Type="Double" />
+          <Property Name="activo" Type="Boolean" />
+          <Property Name="fecha_inscripcion" Type="DateTime" Precision="3" />
+          <Property Name="aprobado" Type="Boolean" />
+          <Property Name="completado" Type="Boolean" />
+          <Property Name="id_grupo" Type="Int64" />
+        </EntityType>
+        <EntityType Name="estudiante">
+          <Key>
+            <PropertyRef Name="idEstudiante" />
+          </Key>
+          <Property Name="idEstudiante" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_carrera" Type="Int64" Nullable="false" />
+          <Property Name="id_turno" Type="Int64" Nullable="false" />
+          <Property Name="id_plan_estudio" Type="Int64" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="no_carnet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado_civil" Type="Int64" />
+          <Property Name="id_sexo" Type="Int64" />
+          <Property Name="lugar_nacimiento" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="id_departamento" Type="Int64" />
+          <Property Name="no_cedula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="Int32" />
+          <Property Name="direccion_habitual" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="trabaja" Type="Boolean" />
+          <Property Name="centro_trabajo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_trabajo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="cargo_trabajo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_grabacion" Type="DateTime" Precision="3" />
+          <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+          <Property Name="id_municipio" Type="Int64" />
+          <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
+          <Property Name="id_periodo" Type="Int64" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="turnos" Relationship="ControlAlumnosModel.FK_estudiante_turnos" FromRole="estudiante" ToRole="turnos" />
+          <NavigationProperty Name="estudianteGrupo" Relationship="ControlAlumnosModel.FK_estudianteGrupo_estudiante" FromRole="estudiante" ToRole="estudianteGrupo" />
+          <NavigationProperty Name="estudianteNotas" Relationship="ControlAlumnosModel.FK_estudianteNotas_estudiante" FromRole="estudiante" ToRole="estudianteNotas" />
+        </EntityType>
+        <Association Name="FK_estudiante_turnos">
+          <End Type="ControlAlumnosModel.turnos" Role="turnos" Multiplicity="1" />
+          <End Type="ControlAlumnosModel.estudiante" Role="estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="turnos">
+              <PropertyRef Name="idTurno" />
+            </Principal>
+            <Dependent Role="estudiante">
+              <PropertyRef Name="id_turno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estudianteGrupo_estudiante">
+          <End Type="ControlAlumnosModel.estudiante" Role="estudiante" Multiplicity="0..1" />
+          <End Type="ControlAlumnosModel.estudianteGrupo" Role="estudianteGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="idEstudiante" />
+            </Principal>
+            <Dependent Role="estudianteGrupo">
+              <PropertyRef Name="id_estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estudianteNotas_estudiante">
+          <End Type="ControlAlumnosModel.estudiante" Role="estudiante" Multiplicity="0..1" />
+          <End Type="ControlAlumnosModel.estudianteNotas" Role="estudianteNotas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="idEstudiante" />
+            </Principal>
+            <Dependent Role="estudianteNotas">
+              <PropertyRef Name="id_estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="ListarEstudianteAsignatura1_Result">
+          <Property Type="Int64" Name="idEs" Nullable="false" />
+          <Property Type="Int64" Name="idPeriodo" Nullable="false" />
+          <Property Type="String" Name="Periodo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombres" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="apellidos" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="fecha_nacimiento" Nullable="true" />
+          <Property Type="Int32" Name="edad" Nullable="true" />
+          <Property Type="String" Name="celular" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="centro_trabajo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="direccion_habitual" Nullable="true" />
+          <Property Type="String" Name="cargo_trabajo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="lugar_nacimiento" Nullable="true" MaxLength="150" />
+          <Property Type="Boolean" Name="trabaja" Nullable="true" />
+          <Property Type="String" Name="no_carnet" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="no_cedula" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="telefono_trabajo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Carrera" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Departamento" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="estadoCivil" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="planEstudio" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Turno" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarHijosEstudianteAsig1_Result">
+          <Property Type="Int64" Name="id_estudiante" Nullable="true" />
+          <Property Type="Int64" Name="id_docente" Nullable="true" />
+          <Property Type="Int64" Name="id_asignatura" Nullable="true" />
+          <Property Type="Int64" Name="idPadre" Nullable="true" />
+          <Property Type="Int64" Name="idEstudianteAsignatura" Nullable="false" />
+          <Property Type="String" Name="Asignatura" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Docente" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="horario" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="idGrupo" Nullable="false" />
+          <Property Type="String" Name="Grupo" Nullable="true" MaxLength="200" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -936,59 +862,6 @@
                 <ScalarProperty Name="id_categoria_academica" ColumnName="id_categoria_academica" />
                 <ScalarProperty Name="no_cedula" ColumnName="no_cedula" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="estudiante">
-            <EntityTypeMapping TypeName="ControlAlumnosModel.estudiante">
-              <MappingFragment StoreEntitySet="estudiante">
-                <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
-                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
-                <ScalarProperty Name="id_turno" ColumnName="id_turno" />
-                <ScalarProperty Name="id_plan_estudio" ColumnName="id_plan_estudio" />
-                <ScalarProperty Name="nombres" ColumnName="nombres" />
-                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
-                <ScalarProperty Name="no_carnet" ColumnName="no_carnet" />
-                <ScalarProperty Name="id_estado_civil" ColumnName="id_estado_civil" />
-                <ScalarProperty Name="id_sexo" ColumnName="id_sexo" />
-                <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
-                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
-                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
-                <ScalarProperty Name="no_cedula" ColumnName="no_cedula" />
-                <ScalarProperty Name="edad" ColumnName="edad" />
-                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="celular" ColumnName="celular" />
-                <ScalarProperty Name="trabaja" ColumnName="trabaja" />
-                <ScalarProperty Name="centro_trabajo" ColumnName="centro_trabajo" />
-                <ScalarProperty Name="telefono_trabajo" ColumnName="telefono_trabajo" />
-                <ScalarProperty Name="cargo_trabajo" ColumnName="cargo_trabajo" />
-                <ScalarProperty Name="fecha_grabacion" ColumnName="fecha_grabacion" />
-                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
-                <ScalarProperty Name="id_municipio" ColumnName="id_municipio" />
-                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="estudianteAsignatura">
-            <EntityTypeMapping TypeName="ControlAlumnosModel.estudianteAsignatura">
-              <MappingFragment StoreEntitySet="estudianteAsignatura">
-                <ScalarProperty Name="completado" ColumnName="completado" />
-                <ScalarProperty Name="idEstudianteAsignatura" ColumnName="idEstudianteAsignatura" />
-                <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
-                <ScalarProperty Name="id_asignatura" ColumnName="id_asignatura" />
-                <ScalarProperty Name="id_docente" ColumnName="id_docente" />
-                <ScalarProperty Name="horario" ColumnName="horario" />
-                <ScalarProperty Name="id_periodo" ColumnName="id_periodo" />
-                <ScalarProperty Name="parcial_uno" ColumnName="parcial_uno" />
-                <ScalarProperty Name="parcial_dos" ColumnName="parcial_dos" />
-                <ScalarProperty Name="convocatoria" ColumnName="convocatoria" />
-                <ScalarProperty Name="nota_final" ColumnName="nota_final" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="fecha_inscripcion" ColumnName="fecha_inscripcion" />
-                <ScalarProperty Name="aprobado" ColumnName="aprobado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1122,6 +995,109 @@
                 <ScalarProperty Name="id_turno" ColumnName="id_turno" />
                 <ScalarProperty Name="Turno" ColumnName="Turno" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="estudianteAsignatura">
+            <EntityTypeMapping TypeName="ControlAlumnosModel.estudianteAsignatura">
+              <MappingFragment StoreEntitySet="estudianteAsignatura">
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="completado" ColumnName="completado" />
+                <ScalarProperty Name="aprobado" ColumnName="aprobado" />
+                <ScalarProperty Name="fecha_inscripcion" ColumnName="fecha_inscripcion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="nota_final" ColumnName="nota_final" />
+                <ScalarProperty Name="convocatoria" ColumnName="convocatoria" />
+                <ScalarProperty Name="parcial_dos" ColumnName="parcial_dos" />
+                <ScalarProperty Name="parcial_uno" ColumnName="parcial_uno" />
+                <ScalarProperty Name="id_periodo" ColumnName="id_periodo" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="id_docente" ColumnName="id_docente" />
+                <ScalarProperty Name="id_asignatura" ColumnName="id_asignatura" />
+                <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
+                <ScalarProperty Name="idEstudianteAsignatura" ColumnName="idEstudianteAsignatura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estudiante">
+            <EntityTypeMapping TypeName="ControlAlumnosModel.estudiante">
+              <MappingFragment StoreEntitySet="estudiante">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="id_periodo" ColumnName="id_periodo" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="id_municipio" ColumnName="id_municipio" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+                <ScalarProperty Name="fecha_grabacion" ColumnName="fecha_grabacion" />
+                <ScalarProperty Name="cargo_trabajo" ColumnName="cargo_trabajo" />
+                <ScalarProperty Name="telefono_trabajo" ColumnName="telefono_trabajo" />
+                <ScalarProperty Name="centro_trabajo" ColumnName="centro_trabajo" />
+                <ScalarProperty Name="trabaja" ColumnName="trabaja" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="no_cedula" ColumnName="no_cedula" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
+                <ScalarProperty Name="id_sexo" ColumnName="id_sexo" />
+                <ScalarProperty Name="id_estado_civil" ColumnName="id_estado_civil" />
+                <ScalarProperty Name="no_carnet" ColumnName="no_carnet" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="id_plan_estudio" ColumnName="id_plan_estudio" />
+                <ScalarProperty Name="id_turno" ColumnName="id_turno" />
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+                <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ListarEstudianteAsignatura1" FunctionName="ControlAlumnosModel.Store.ListarEstudianteAsignatura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarEstudianteAsignatura1_Result">
+                <ScalarProperty Name="idEs" ColumnName="idEs" />
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="centro_trabajo" ColumnName="centro_trabajo" />
+                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
+                <ScalarProperty Name="cargo_trabajo" ColumnName="cargo_trabajo" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
+                <ScalarProperty Name="trabaja" ColumnName="trabaja" />
+                <ScalarProperty Name="no_carnet" ColumnName="no_carnet" />
+                <ScalarProperty Name="no_cedula" ColumnName="no_cedula" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="telefono_trabajo" ColumnName="telefono_trabajo" />
+                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="planEstudio" ColumnName="planEstudio" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarHijosEstudianteAsig1" FunctionName="ControlAlumnosModel.Store.ListarHijosEstudianteAsig">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarHijosEstudianteAsig1_Result">
+                <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
+                <ScalarProperty Name="id_docente" ColumnName="id_docente" />
+                <ScalarProperty Name="id_asignatura" ColumnName="id_asignatura" />
+                <ScalarProperty Name="idPadre" ColumnName="idPadre" />
+                <ScalarProperty Name="idEstudianteAsignatura" ColumnName="idEstudianteAsignatura" />
+                <ScalarProperty Name="Asignatura" ColumnName="Asignatura" />
+                <ScalarProperty Name="Docente" ColumnName="Docente" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

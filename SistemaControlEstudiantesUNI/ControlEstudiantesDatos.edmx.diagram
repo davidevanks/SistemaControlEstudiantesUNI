@@ -10,25 +10,21 @@
         <EntityTypeShape EntityType="ControlAlumnosModel.asignaturas" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlAlumnosModel.catalogos" Width="1.5" PointX="0.75" PointY="26.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlAlumnosModel.docentes" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ControlAlumnosModel.estudiante" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="ControlAlumnosModel.estudianteAsignatura" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlAlumnosModel.estudianteGrupo" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlAlumnosModel.estudianteNotas" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlAlumnosModel.localidad" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlAlumnosModel.periodo" Width="1.5" PointX="0.75" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlAlumnosModel.turnos" Width="1.5" PointX="1.5" PointY="20.5" IsExpanded="true" />
-        <AssociationConnector Association="ControlAlumnosModel.FK_estudianteAsignatura_asignaturas" ManuallyRouted="false" />
         <AssociationConnector Association="ControlAlumnosModel.FK_estudianteNotas_asignaturas" ManuallyRouted="false" />
         <AssociationConnector Association="ControlAlumnosModel.FK_estudianteGrupo_catalogos" ManuallyRouted="false" />
-        <AssociationConnector Association="ControlAlumnosModel.FK_estudianteAsignatura_docentes" ManuallyRouted="false" />
         <AssociationConnector Association="ControlAlumnosModel.FK_estudianteNotas_docentes" ManuallyRouted="false" />
         <AssociationConnector Association="ControlAlumnosModel.FK_estudianteNotas_docentes1" ManuallyRouted="false" />
-        <AssociationConnector Association="ControlAlumnosModel.FK_estudiante_turnos" ManuallyRouted="false" />
-        <AssociationConnector Association="ControlAlumnosModel.FK_estudianteAsignatura_estudiante" ManuallyRouted="false" />
-        <AssociationConnector Association="ControlAlumnosModel.FK_estudianteGrupo_estudiante" ManuallyRouted="false" />
-        <AssociationConnector Association="ControlAlumnosModel.FK_estudianteNotas_estudiante" ManuallyRouted="false" />
-        <AssociationConnector Association="ControlAlumnosModel.FK_estudianteAsignatura_periodo" ManuallyRouted="false" />
         <AssociationConnector Association="ControlAlumnosModel.FK_docentes_catalogos" />
+        <EntityTypeShape EntityType="ControlAlumnosModel.estudianteAsignatura" Width="2" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ControlAlumnosModel.estudiante" Width="1.5" PointX="3.75" PointY="18" />
+        <AssociationConnector Association="ControlAlumnosModel.FK_estudiante_turnos" />
+        <AssociationConnector Association="ControlAlumnosModel.FK_estudianteGrupo_estudiante" />
+        <AssociationConnector Association="ControlAlumnosModel.FK_estudianteNotas_estudiante" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

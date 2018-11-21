@@ -14,17 +14,8 @@ namespace SistemaControlEstudiantesUNI
     
     public partial class periodo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public periodo()
-        {
-            this.estudianteAsignatura = new HashSet<estudianteAsignatura>();
-        }
-    
         public long idPeriodo { get; set; }
         public string nombre_periodo { get; set; }
         public Nullable<bool> activo { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<estudianteAsignatura> estudianteAsignatura { get; set; }
     }
 }

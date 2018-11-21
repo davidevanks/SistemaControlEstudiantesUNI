@@ -32,13 +32,13 @@ namespace SistemaControlEstudiantesUNI
         public virtual DbSet<asignaturas> asignaturas { get; set; }
         public virtual DbSet<catalogos> catalogos { get; set; }
         public virtual DbSet<docentes> docentes { get; set; }
-        public virtual DbSet<estudiante> estudiante { get; set; }
-        public virtual DbSet<estudianteAsignatura> estudianteAsignatura { get; set; }
         public virtual DbSet<estudianteGrupo> estudianteGrupo { get; set; }
         public virtual DbSet<estudianteNotas> estudianteNotas { get; set; }
         public virtual DbSet<localidad> localidad { get; set; }
         public virtual DbSet<periodo> periodo { get; set; }
         public virtual DbSet<turnos> turnos { get; set; }
+        public virtual DbSet<estudianteAsignatura> estudianteAsignatura { get; set; }
+        public virtual DbSet<estudiante> estudiante { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -159,6 +159,42 @@ namespace SistemaControlEstudiantesUNI
                 new ObjectParameter("idEs", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudiantes_Result>("ListarEstudiantes", idEsParameter);
+        }
+    
+        public virtual int ListarHijosEstudianteAsig(Nullable<int> ides)
+        {
+            var idesParameter = ides.HasValue ?
+                new ObjectParameter("ides", ides) :
+                new ObjectParameter("ides", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ListarHijosEstudianteAsig", idesParameter);
+        }
+    
+        public virtual int ListarEstudianteAsignatura(Nullable<int> ides)
+        {
+            var idesParameter = ides.HasValue ?
+                new ObjectParameter("ides", ides) :
+                new ObjectParameter("ides", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ListarEstudianteAsignatura", idesParameter);
+        }
+    
+        public virtual ObjectResult<ListarEstudianteAsignatura1_Result> ListarEstudianteAsignatura1(Nullable<int> ides)
+        {
+            var idesParameter = ides.HasValue ?
+                new ObjectParameter("ides", ides) :
+                new ObjectParameter("ides", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudianteAsignatura1_Result>("ListarEstudianteAsignatura1", idesParameter);
+        }
+    
+        public virtual ObjectResult<ListarHijosEstudianteAsig1_Result> ListarHijosEstudianteAsig1(Nullable<int> ides)
+        {
+            var idesParameter = ides.HasValue ?
+                new ObjectParameter("ides", ides) :
+                new ObjectParameter("ides", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarHijosEstudianteAsig1_Result>("ListarHijosEstudianteAsig1", idesParameter);
         }
     }
 }

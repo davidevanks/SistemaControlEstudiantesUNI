@@ -17,7 +17,6 @@ namespace SistemaControlEstudiantesUNI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public estudiante()
         {
-            this.estudianteAsignatura = new HashSet<estudianteAsignatura>();
             this.estudianteGrupo = new HashSet<estudianteGrupo>();
             this.estudianteNotas = new HashSet<estudianteNotas>();
         }
@@ -48,11 +47,10 @@ namespace SistemaControlEstudiantesUNI
         public Nullable<System.DateTime> fecha_modificacion { get; set; }
         public Nullable<long> id_municipio { get; set; }
         public Nullable<System.DateTime> fecha_ingreso { get; set; }
+        public Nullable<long> id_periodo { get; set; }
         public Nullable<bool> activo { get; set; }
     
         public virtual turnos turnos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<estudianteAsignatura> estudianteAsignatura { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<estudianteGrupo> estudianteGrupo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
