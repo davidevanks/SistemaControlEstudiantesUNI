@@ -62,10 +62,12 @@ namespace SistemaControlEstudiantesUNI.Models
                     idPadre=(long)x.idPadre,
                     id_asignatura=(long)x.id_asignatura,
                     id_docente=(long)x.id_docente,
-                    Docente=x.Docente,
-                    Asignatura=x.Asignatura,
-                    horario=x.horario,
-                    Grupo=x.Grupo
+                    Docente = x.Docente,
+                    Asignatura = x.Asignatura,
+                    horario =x.horario,
+                    id_grupo=x.idGrupo,
+                    Grupo = x.Grupo
+
 
                 }).ToList();
 
@@ -120,6 +122,113 @@ namespace SistemaControlEstudiantesUNI.Models
 
 
         //metodos para pantalla interna de asignaciones
+        public AgregarHijosEstudianteAsignatura ListarAsignarClasesEditar(int id)
+        {
+            AgregarHijosEstudianteAsignatura asig = new AgregarHijosEstudianteAsignatura();
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                asig = contexto.ListarHijosEstudianteAsig1(0).Where(x=>x.idEstudianteAsignatura==id).Select(x => new AgregarHijosEstudianteAsignatura
+                {
+                 id_asignatura=(long)x.id_asignatura,
+                 idEstudianteAsignatura=x.idEstudianteAsignatura,
+                 id_docente=(long)x.id_docente,
+                 id_estudiante=(long)x.id_estudiante,
+                 id_grupo=x.idGrupo,
+                 horario=x.horario,
+                 
+
+
+
+
+                }).FirstOrDefault();
+
+                return asig;
+            }
+
+        }
+
+
+        public bool EditarHijos(AgregarHijosEstudianteAsignatura hijos)
+        {
+
+            try
+            {
+                var asignaturasEstudiantes = new estudianteAsignatura { idEstudianteAsignatura = hijos.idEstudianteAsignatura };
+
+                using (var context = new ControlAlumnosEntities())
+
+                {
+
+                    context.estudianteAsignatura.Attach(asignaturasEstudiantes);
+
+                    asignaturasEstudiantes.idEstudianteAsignatura = hijos.idEstudianteAsignatura;
+                    asignaturasEstudiantes.id_asignatura = hijos.id_asignatura;
+                    asignaturasEstudiantes.id_docente = hijos.id_docente;
+                    asignaturasEstudiantes.id_estudiante = hijos.id_estudiante;
+                    asignaturasEstudiantes.id_grupo = hijos.id_grupo;
+                    asignaturasEstudiantes.id_periodo = hijos.id_periodo;
+                    asignaturasEstudiantes.id_grupo = hijos.id_grupo;
+                    asignaturasEstudiantes.horario = hijos.horario;
+
+                    context.Configuration.ValidateOnSaveEnabled = false;
+
+                    context.SaveChanges();
+                    return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw;
+            }
+
+
+
+        }
+
+
+        public bool EliminarHijos(AgregarHijosEstudianteAsignatura hijos)
+        {
+
+            try
+            {
+                var asignaturasEstudiantes = new estudianteAsignatura { idEstudianteAsignatura = hijos.idEstudianteAsignatura };
+
+                using (var context = new ControlAlumnosEntities())
+
+                {
+
+                    context.estudianteAsignatura.Attach(asignaturasEstudiantes);
+
+                    asignaturasEstudiantes.idEstudianteAsignatura = hijos.idEstudianteAsignatura;
+                    //asignaturasEstudiantes.id_asignatura = hijos.id_asignatura;
+                    //asignaturasEstudiantes.id_docente = hijos.id_docente;
+                    //asignaturasEstudiantes.id_estudiante = hijos.id_estudiante;
+                    //asignaturasEstudiantes.id_grupo = hijos.id_grupo;
+                    //asignaturasEstudiantes.id_periodo = hijos.id_periodo;
+                    //asignaturasEstudiantes.id_grupo = hijos.id_grupo;
+                    //asignaturasEstudiantes.horario = hijos.horario;
+                    asignaturasEstudiantes.activo = false;
+
+                    context.Configuration.ValidateOnSaveEnabled = false;
+
+                    context.SaveChanges();
+                    return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw;
+            }
+
+
+
+        }
+
         public List<docentes> lstDocente()
         {
 
@@ -127,7 +236,13 @@ namespace SistemaControlEstudiantesUNI.Models
 
             using (var contexto= new ControlAlumnosEntities())
             {
-                lstDoc = contexto.docentes.Where(x => x.activo == true).Select(x => x).ToList();
+                lstDoc = contexto.ListarDocentes().Select(x => new docentes {
+                    idDocentes=x.idDocentes,
+                    nombre=x.Docentes
+
+
+                }).ToList();
+
 
                 return lstDoc;
             }

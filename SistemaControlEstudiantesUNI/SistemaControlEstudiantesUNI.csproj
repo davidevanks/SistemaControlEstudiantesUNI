@@ -295,6 +295,9 @@
     <Compile Include="ListarAsignaturas_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="ListarDocentes_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="ListarEstudianteAsignatura1_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
@@ -504,6 +507,8 @@
     <Content Include="Views\estudianteAsignatura\Index.cshtml" />
     <Content Include="Views\estudianteAsignatura\Edit.cshtml" />
     <Content Include="Views\estudianteAsignatura\AsignarClase.cshtml" />
+    <Content Include="Views\estudianteAsignatura\EditAsignacion.cshtml" />
+    <Content Include="Views\estudianteAsignatura\EliminarAsignacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

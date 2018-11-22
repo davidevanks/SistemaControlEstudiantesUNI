@@ -157,6 +157,7 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         public long id_estudiante { get; set; }
         public long id_docente { get; set; }
         public long id_asignatura { get; set; }
+        public long idEstudianteAsignatura { get; set; }
         public long id_grupo { get; set; }
         public long idPadre { get; set; }
         public long id_periodo { get; set; }

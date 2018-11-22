@@ -1,0 +1,38 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.AgregarHijosEstudianteAsignatura
+
+@{
+    ViewBag.Title = "EliminarAsignacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar Asignacion</h2>
+
+<h3>Esta seguro que desea eliminarla?</h3>
+<div>
+    <h4>AgregarHijosEstudianteAsignatura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       
+     
+
+  
+
+     
+
+      
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.id_estudiante)
+        @Html.HiddenFor(model => model.id_periodo)
+        @Html.HiddenFor(model => model.idEstudianteAsignatura)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

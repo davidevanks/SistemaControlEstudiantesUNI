@@ -196,5 +196,10 @@ namespace SistemaControlEstudiantesUNI
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarHijosEstudianteAsig1_Result>("ListarHijosEstudianteAsig1", idesParameter);
         }
+    
+        public virtual ObjectResult<ListarDocentes_Result> ListarDocentes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocentes_Result>("ListarDocentes");
+        }
     }
 }

@@ -149,6 +149,111 @@ namespace SistemaControlEstudiantesUNI.Controllers
             }
         }
 
+
+
+
+        public ActionResult EditAsignacion(int id)
+        {
+            AgregarHijosEstudianteAsignatura hijos = new AgregarHijosEstudianteAsignatura();
+            hijos = dl.ListarAsignarClasesEditar(id);
+            
+            hijos.Asignatura = dl.lstAsignaturas();
+            hijos.Docente = dl.lstDocente();
+            hijos.Grupo = dl.lstGrupos();
+            hijos.id_estudiante = Convert.ToInt32(Session["idestudiante"]);
+            hijos.id_periodo = Convert.ToInt32(Session["idPeriodo"]);
+            return View(hijos);
+        }
+
+        // POST: estudianteAsignatura/Edit/5
+        [HttpPost]
+        public ActionResult EditAsignacion(AgregarHijosEstudianteAsignatura hijos)
+        {
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    if (dl.EditarHijos(hijos))
+                    {
+                        //Mandar msj de confirmación de guardado
+                        Success("Registro actualizado!", true);
+                        return RedirectToAction("Index");
+                    }
+
+                    else
+                    {
+
+                        // return View(catalogos);
+
+                    }
+
+                }
+                // TODO: Add insert logic here
+                Danger("Error al actualizar registro", true);
+                return View(hijos);
+
+            }
+            catch (Exception ex)
+            {
+                string msj = ex.ToString();
+                Danger("Error al guardar registro: " + ex.ToString(), true);
+                return View(hijos);
+            }
+        }
+
+
+
+        public ActionResult EliminarAsignacion(int id)
+        {
+            AgregarHijosEstudianteAsignatura hijos = new AgregarHijosEstudianteAsignatura();
+            hijos = dl.ListarAsignarClasesEditar(id);
+
+            hijos.Asignatura = dl.lstAsignaturas();
+            hijos.Docente = dl.lstDocente();
+            hijos.Grupo = dl.lstGrupos();
+            hijos.id_estudiante = Convert.ToInt32(Session["idestudiante"]);
+            hijos.id_periodo = Convert.ToInt32(Session["idPeriodo"]);
+            return View(hijos);
+        }
+
+        // POST: estudianteAsignatura/Edit/5
+        [HttpPost]
+        public ActionResult EliminarAsignacion(AgregarHijosEstudianteAsignatura hijos)
+        {
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    if (dl.EliminarHijos(hijos))
+                    {
+                        //Mandar msj de confirmación de guardado
+                        Success("Registro eliminado!", true);
+                        return RedirectToAction("Index");
+                    }
+
+                    else
+                    {
+
+                        // return View(catalogos);
+
+                    }
+
+                }
+                // TODO: Add insert logic here
+                Danger("Error al eliminar registro", true);
+                return View(hijos);
+
+            }
+            catch (Exception ex)
+            {
+                string msj = ex.ToString();
+                Danger("Error al eliminar registro: " + ex.ToString(), true);
+                return View(hijos);
+            }
+        }
+
         //
     }
 }
