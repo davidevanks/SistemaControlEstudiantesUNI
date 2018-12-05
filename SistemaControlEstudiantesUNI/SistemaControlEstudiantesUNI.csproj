@@ -271,6 +271,7 @@
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotasController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\TurnosController.cs" />
@@ -295,6 +296,9 @@
     <Compile Include="ListarAsignaturas_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="ListarDataNotas_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="ListarDocentes_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
@@ -314,6 +318,7 @@
     <Compile Include="Models\Asignaturas_DL.cs" />
     <Compile Include="Models\Catalogos_DL.cs" />
     <Compile Include="Models\Docentes_DL.cs" />
+    <Compile Include="Models\EditarNotas_DL.cs" />
     <Compile Include="Models\estudianteAsignatura_DL.cs" />
     <Compile Include="Models\Estudiantes_DL.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -348,6 +353,7 @@
     <Compile Include="ViewModels\Asignaturas_VM.cs" />
     <Compile Include="ViewModels\Catalogos_VM.cs" />
     <Compile Include="ViewModels\Docentes_VM.cs" />
+    <Compile Include="ViewModels\EditarNotas_VM.cs" />
     <Compile Include="ViewModels\estudianteAsignatura_VM.cs" />
     <Compile Include="ViewModels\Estudiantes_VM.cs" />
     <Compile Include="ViewModels\Periodo_VM.cs" />
@@ -509,6 +515,7 @@
     <Content Include="Views\estudianteAsignatura\AsignarClase.cshtml" />
     <Content Include="Views\estudianteAsignatura\EditAsignacion.cshtml" />
     <Content Include="Views\estudianteAsignatura\EliminarAsignacion.cshtml" />
+    <Content Include="Views\Notas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

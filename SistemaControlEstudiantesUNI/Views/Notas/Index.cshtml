@@ -1,0 +1,76 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.EstudianteEditarNotas_VM
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-offset-1">
+    <h2>Notas</h2>
+    <div class="row">
+      
+        <div class="col-md-6">
+          
+            <div class="form-group">
+                @Html.LabelFor(model => model.docentes, "Docente")
+                
+                @Html.DropDownListFor(model => model.docentes, new SelectList(Model.docentes, "id", "nombre"), "- Seleccione Docente -", new { @class = "form-control", @id = "doc" })
+               
+
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(model => model.Grupos, "Grupo")
+
+                @Html.DropDownListFor(model => model.Grupos, new SelectList(Model.Grupos, "id", "Grupo"), "- Seleccione Grupo -", new { @class = "form-control", @id = "grp" })
+
+
+            </div>
+        
+        
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Asignaturas, "Asignatura")
+
+                @Html.DropDownListFor(model => model.Asignaturas, new SelectList(Model.Asignaturas, "id", "Asignatura"), "- Seleccione Asignatura -", new { @class = "form-control", @id = "asig" })
+
+
+            </div>
+          </div>
+   
+
+
+         
+        </div>
+
+   
+
+    <table id="table-uni" class="table  table-bordered table-hover table-uni">
+        <thead>
+            <tr>
+
+                <th>Estudiante</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.estudiantes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estudiante)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.idEstudianteAsignatura }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.idEstudianteAsignatura }) |
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+        </div>
+
+

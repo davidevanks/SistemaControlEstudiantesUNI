@@ -201,5 +201,10 @@ namespace SistemaControlEstudiantesUNI
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDocentes_Result>("ListarDocentes");
         }
+    
+        public virtual ObjectResult<ListarDataNotas_Result> ListarDataNotas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDataNotas_Result>("ListarDataNotas");
+        }
     }
 }

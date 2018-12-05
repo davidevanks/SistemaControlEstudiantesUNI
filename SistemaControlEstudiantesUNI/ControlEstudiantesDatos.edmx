@@ -259,6 +259,7 @@
         <Function Name="ListarAsignaturas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idAsignatura" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="ListarDataNotas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListarDocentes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListarEstudianteAsignatura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ides" Type="int" Mode="In" />
@@ -605,6 +606,7 @@
           <Parameter Name="ides" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ListarDocentes" ReturnType="Collection(ControlAlumnosModel.ListarDocentes_Result)" />
+          <FunctionImport Name="ListarDataNotas" ReturnType="Collection(ControlAlumnosModel.ListarDataNotas_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -809,6 +811,19 @@
         <ComplexType Name="ListarDocentes_Result">
           <Property Type="Int64" Name="idDocentes" Nullable="false" />
           <Property Type="String" Name="Docentes" Nullable="true" MaxLength="301" />
+        </ComplexType>
+        <ComplexType Name="ListarDataNotas_Result">
+          <Property Type="Int64" Name="id_estudiante" Nullable="true" />
+          <Property Type="String" Name="Estudiante" Nullable="true" MaxLength="301" />
+          <Property Type="Int64" Name="id_docente" Nullable="true" />
+          <Property Type="Int64" Name="id_asignatura" Nullable="true" />
+          <Property Type="Int64" Name="idPadre" Nullable="true" />
+          <Property Type="Int64" Name="idEstudianteAsignatura" Nullable="false" />
+          <Property Type="String" Name="Asignatura" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Docente" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="horario" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="idGrupo" Nullable="false" />
+          <Property Type="String" Name="Grupo" Nullable="true" MaxLength="200" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1112,6 +1127,23 @@
               <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarDocentes_Result">
                 <ScalarProperty Name="idDocentes" ColumnName="idDocentes" />
                 <ScalarProperty Name="Docentes" ColumnName="Docentes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarDataNotas" FunctionName="ControlAlumnosModel.Store.ListarDataNotas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarDataNotas_Result">
+                <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
+                <ScalarProperty Name="Estudiante" ColumnName="Estudiante" />
+                <ScalarProperty Name="id_docente" ColumnName="id_docente" />
+                <ScalarProperty Name="id_asignatura" ColumnName="id_asignatura" />
+                <ScalarProperty Name="idPadre" ColumnName="idPadre" />
+                <ScalarProperty Name="idEstudianteAsignatura" ColumnName="idEstudianteAsignatura" />
+                <ScalarProperty Name="Asignatura" ColumnName="Asignatura" />
+                <ScalarProperty Name="Docente" ColumnName="Docente" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
