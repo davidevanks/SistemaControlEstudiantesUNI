@@ -74,3 +74,66 @@
         </div>
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+    <script>
+
+        $('#doc').change(function () {
+            var selectedDoc = $("#doc").val();
+            var regionsSelect = $('#grp');
+            console.log(selectedDoc)
+            console.log(regionsSelect)
+            regionsSelect.empty();
+            if (selectedDoc != null && selectedDoc != '') {
+                $.getJSON('@Url.Action("GetGrupos")', { id: selectedDoc }, function (Grupos) {
+                    if (Grupos != null && !jQuery.isEmptyObject(Grupos)) {
+                        regionsSelect.append($('<option/>', {
+                            value: null,
+                            text: "- Seleccione Grupo -"
+                        }));
+                        $.each(Grupos, function (id, G) {
+                            regionsSelect.append($('<option/>', {
+                                value: G.id,
+                                text: G.Grupo
+                            }));
+                        });
+                    };
+                });
+            }
+        });
+
+
+
+
+        $('#grp').change(function () {
+            var selectedGrp = $("#grp").val();
+            var selectDoc = $("#doc").val();
+            var regionsSelect = $('#asig');
+            console.log(selectedGrp)
+            console.log(regionsSelect)
+            regionsSelect.empty();
+            if (selectedGrp != null && selectedGrp != '') {
+                $.getJSON('@Url.Action("GetAsig")', { idDoc: selectDoc, idGrp: selectedGrp }, function (Asignaturas) {
+                    if (Asignaturas != null && !jQuery.isEmptyObject(Asignaturas)) {
+                        regionsSelect.append($('<option/>', {
+                            value: null,
+                            text: "- Seleccione Asignatura -"
+                        }));
+                        $.each(Asignaturas, function (id, A) {
+                            regionsSelect.append($('<option/>', {
+                                value: A.id,
+                                text: A.Asignatura
+                            }));
+                        });
+                    };
+                });
+            }
+        });
+
+    </script>
+}
+
+

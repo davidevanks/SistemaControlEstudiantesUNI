@@ -97,5 +97,32 @@ namespace SistemaControlEstudiantesUNI.Controllers
                 return View();
             }
         }
+
+
+        [HttpGet]
+        public ActionResult GetGrupos(string id)
+        {
+            //if (!string.IsNullOrWhiteSpace(id) && id.Length == 3)
+            //{
+
+
+            IEnumerable<GrupoNotas_VM> Grupos = dl.ListarGrupos(Convert.ToInt32(id));
+            return Json(Grupos, JsonRequestBehavior.AllowGet);
+            //}
+            //return null;
+        }
+
+        [HttpGet]
+        public ActionResult GetAsig(string iddoc,string idGrp)
+        {
+            //if (!string.IsNullOrWhiteSpace(id) && id.Length == 3)
+            //{
+
+
+            IEnumerable<AsignaturaNotas_VM> Asignaturas = dl.ListarAsignatura(Convert.ToInt32(iddoc), Convert.ToInt32(idGrp));
+            return Json(Asignaturas, JsonRequestBehavior.AllowGet);
+            //}
+            //return null;
+        }
     }
 }
