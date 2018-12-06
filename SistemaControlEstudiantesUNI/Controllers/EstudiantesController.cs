@@ -62,6 +62,7 @@ namespace SistemaControlEstudiantesUNI.Controllers
 
                 IEnumerable<localidad> Municipios = dl.lstMunicipio(Convert.ToInt32(id));
                 return Json(Municipios, JsonRequestBehavior.AllowGet);
+          
             //}
             //return null;
         }

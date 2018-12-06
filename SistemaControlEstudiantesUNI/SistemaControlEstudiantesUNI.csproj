@@ -516,6 +516,7 @@
     <Content Include="Views\estudianteAsignatura\EditAsignacion.cshtml" />
     <Content Include="Views\estudianteAsignatura\EliminarAsignacion.cshtml" />
     <Content Include="Views\Notas\Index.cshtml" />
+    <Content Include="Views\Notas\_estudiantes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

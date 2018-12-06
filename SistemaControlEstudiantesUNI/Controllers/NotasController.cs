@@ -124,5 +124,24 @@ namespace SistemaControlEstudiantesUNI.Controllers
             //}
             //return null;
         }
+
+
+        [HttpGet]
+        public PartialViewResult GetEstudiantes(string docente, string grupo,string asignatura)
+        {
+            //if (!string.IsNullOrWhiteSpace(id) && id.Length == 3)
+            //{
+            int idDoc = Convert.ToInt32(docente);
+            int idGr= Convert.ToInt32(grupo);
+            int idAsig = Convert.ToInt32(asignatura);
+
+            EstudianteEditarNotas_VM estudiante = new EstudianteEditarNotas_VM();
+            estudiante.estudiantes = dl.ListarEstudiante(idDoc,idGr,idAsig);
+            //return Json(estudiante.estudiantes, JsonRequestBehavior.AllowGet);
+            return PartialView("_estudiantes", estudiante);
+            //}
+            //return null;
+        }
+
     }
 }

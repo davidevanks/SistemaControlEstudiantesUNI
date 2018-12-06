@@ -1,0 +1,30 @@
+﻿@model  SistemaControlEstudiantesUNI.ViewModels.EstudianteEditarNotas_VM
+
+
+
+<table  class="table  table-bordered table-hover table-uni">
+    <thead>
+        <tr>
+
+            <th>Estudiante</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.estudiantes)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estudiante)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idEstudianteAsignatura }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idEstudianteAsignatura }) |
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

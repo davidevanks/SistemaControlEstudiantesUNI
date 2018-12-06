@@ -44,32 +44,11 @@
         </div>
 
    
+@*vista parcial*@
+    <div id="tableResult">
+@*@Html.Partial("_estudiantes")*@
+    </div>
 
-    <table id="table-uni" class="table  table-bordered table-hover table-uni">
-        <thead>
-            <tr>
-
-                <th>Estudiante</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.estudiantes)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estudiante)
-                    </td>
-                    <td>
-
-                        @Html.ActionLink("Edit", "Edit", new { id = item.idEstudianteAsignatura }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.idEstudianteAsignatura }) |
-
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 
         </div>
 
@@ -131,6 +110,47 @@
                     };
                 });
             }
+        });
+
+        $('#asig').change(function () {
+            var docenteS = $("#doc").val();
+            var grupoS = $("#grp").val();
+            var asignaturaS=$("#asig").val();
+
+            $.ajax({
+                url: '@Url.Action(actionName: "GetEstudiantes", controllerName: "Notas")',
+                type: 'Get',
+                data: { docente: docenteS, grupo: grupoS, asignatura: asignaturaS },
+                cache: false,
+                success: function (result) {
+                    $('#tableResult').html(result);
+                }
+            });
+
+
+            
+        });
+
+
+        $(document).ajaxComplete(function () {
+            $('.table-uni').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No hay resultados",
+                    "info": "Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay resultados",
+                    "infoFiltered": "(filtrados de _MAX_ registros)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": " Primero ",
+                        "last": " Último ",
+                        "next": " Siguiente ",
+                        "previous": "Previo "
+                    },
+
+
+                }
+            });
         });
 
     </script>
