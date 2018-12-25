@@ -323,6 +323,7 @@
     <Compile Include="Models\Estudiantes_DL.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MyExtensions.cs" />
     <Compile Include="Models\Periodo_DL.cs" />
     <Compile Include="Models\Turno_DL.cs" />
     <Compile Include="periodo.cs">

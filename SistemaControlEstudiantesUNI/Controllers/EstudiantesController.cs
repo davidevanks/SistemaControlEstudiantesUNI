@@ -9,6 +9,7 @@ using SistemaControlEstudiantesUNI.Models;
 
 namespace SistemaControlEstudiantesUNI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EstudiantesController : BaseController
     {
         Estudiantes_DL dl = new Estudiantes_DL();
@@ -106,6 +107,7 @@ namespace SistemaControlEstudiantesUNI.Controllers
         }
 
         // GET: Estudiantes/Edit/5
+        [EncryptedActionParameter]
         public ActionResult Edit(int id)
         {
 

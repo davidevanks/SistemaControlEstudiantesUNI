@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SistemaControlEstudiantesUNI.ViewModels.EstudianteSimple>
+@using SistemaControlEstudiantesUNI.Models;
 
 @{
     ViewBag.Title = "Index";
@@ -67,7 +68,8 @@
                         @Html.DisplayFor(modelItem => item.activo)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                        @*@Html.ActionLink("Editar", "Edit", new { id = item.id }) |*@
+                        @Html.EncodedActionLink("Editar","Edit", "Estudiantes", new { id = item.id },null) |
                         @Html.ActionLink("Ver Detalle", "Details", new { id = item.id }) 
                       
 

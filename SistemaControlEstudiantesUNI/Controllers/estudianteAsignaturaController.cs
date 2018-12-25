@@ -9,7 +9,7 @@ using SistemaControlEstudiantesUNI.ViewModels;
 namespace SistemaControlEstudiantesUNI.Controllers
 {
 
-    
+    [Authorize(Roles = "Admin")]
     public class estudianteAsignaturaController : BaseController
     {
 

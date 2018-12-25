@@ -13,6 +13,7 @@ using SistemaControlEstudiantesUNI.Utiles;
 
 namespace SistemaControlEstudiantesUNI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ReportesController : Controller
     {
         Asignaturas_DL dl = new Asignaturas_DL();
