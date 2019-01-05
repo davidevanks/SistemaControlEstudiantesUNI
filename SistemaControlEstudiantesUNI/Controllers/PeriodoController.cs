@@ -9,7 +9,7 @@ using SistemaControlEstudiantesUNI.Controllers;
 
 namespace SistemaControlEstudiantesUNI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class PeriodoController : BaseController
     {
         Periodo_DL dl = new Periodo_DL();

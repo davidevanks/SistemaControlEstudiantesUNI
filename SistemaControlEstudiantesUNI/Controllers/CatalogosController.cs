@@ -6,12 +6,13 @@ using System.Web.Mvc;
 using System.Data;
 using SistemaControlEstudiantesUNI.Models;
 using SistemaControlEstudiantesUNI.ViewModels;
+using PagedList;
 
 
 
 namespace SistemaControlEstudiantesUNI.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    //[Authorize(Roles ="Admin")]
     public class CatalogosController : BaseController
     {
         // GET: Catalogos
@@ -23,7 +24,12 @@ namespace SistemaControlEstudiantesUNI.Controllers
 
             Session["idPadre"] = null;
             List<Catalogos_VM> lstCatalogos = new List<Catalogos_VM>();
+            //descomentarear
+          
             lstCatalogos = dl.ListarCatalogos();
+       
+
+
             if (lstCatalogos.Count > 0)
             {
                 return View(lstCatalogos);
@@ -33,11 +39,11 @@ namespace SistemaControlEstudiantesUNI.Controllers
                 //regresar vista persoanlizada de error, modificar luego
                 return View(lstCatalogos);
             }
-            
+
         }
 
 
- 
+
 
         // GET: Catalogos/Details/5
         public ActionResult Details(int id)

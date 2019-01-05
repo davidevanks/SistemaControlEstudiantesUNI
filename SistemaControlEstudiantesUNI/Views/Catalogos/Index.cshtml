@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<SistemaControlEstudiantesUNI.ViewModels.Catalogos_VM>
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,10 +16,12 @@
         @Html.ActionLink("Crear Nuevo", "Create",null, new { @class = "btn btn-primary" })
     </p>
     <table id="table-uni" class="table  table-bordered table-hover table-uni">
+
         <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
+                 
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.activo)

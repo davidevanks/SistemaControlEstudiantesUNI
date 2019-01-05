@@ -124,7 +124,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.no_cedula)
 
-                    @Html.EditorFor(model => model.no_cedula, new { htmlAttributes = new { @class = "form-control cedula" } })
+                    @Html.EditorFor(model => model.no_cedula, new { htmlAttributes = new { @id= "txtCedula", @class = "form-control cedula" } })
                     @Html.ValidationMessageFor(model => model.no_cedula, "", new { @class = "text-danger" })
 
                 </div>
@@ -229,7 +229,7 @@
 
                 <div class="form-group">
                     @*<div class="col-md-offset-2 col-md-10">*@
-                    <input type="submit" value="Guardar" class="btn  btn-primary" />
+                    <input type="submit" value="Guardar" id="btnGuardar" onclick="ValirdarCedula(event);" class="btn  btn-primary" />
                     @*</div>*@
                     @*<div class="col-md-offset-2 col-md-10">*@
                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-success" })
@@ -278,4 +278,5 @@
         });
 
         </script>
+       
     }

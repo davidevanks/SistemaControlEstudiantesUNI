@@ -10,7 +10,7 @@ using SistemaControlEstudiantesUNI.Controllers;
 
 namespace SistemaControlEstudiantesUNI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public  class AsignaturaController : BaseController
     {
        

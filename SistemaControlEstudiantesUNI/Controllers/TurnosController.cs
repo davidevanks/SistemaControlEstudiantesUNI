@@ -9,7 +9,7 @@ using SistemaControlEstudiantesUNI.Controllers;
 
 namespace SistemaControlEstudiantesUNI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class TurnosController : BaseController
     {
         Turno_DL dl = new Turno_DL();
