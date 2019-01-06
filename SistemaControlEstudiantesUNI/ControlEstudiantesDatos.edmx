@@ -300,6 +300,10 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ValidarAsignatura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idAsignatura" Type="int" Mode="In" />
+          <Parameter Name="idEstudiante" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ControlAlumnosModelStoreContainer">
           <EntitySet Name="bitacora" EntityType="Self.bitacora" Schema="bitacora" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -607,6 +611,10 @@
           </FunctionImport>
           <FunctionImport Name="ListarDocentes" ReturnType="Collection(ControlAlumnosModel.ListarDocentes_Result)" />
           <FunctionImport Name="ListarDataNotas" ReturnType="Collection(ControlAlumnosModel.ListarDataNotas_Result)" />
+          <FunctionImport Name="ValidarAsignatura" ReturnType="Collection(Int32)">
+            <Parameter Name="idAsignatura" Mode="In" Type="Int32" />
+            <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1147,6 +1155,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ValidarAsignatura" FunctionName="ControlAlumnosModel.Store.ValidarAsignatura" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

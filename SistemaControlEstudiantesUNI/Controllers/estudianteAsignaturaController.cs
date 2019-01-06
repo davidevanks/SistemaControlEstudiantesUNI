@@ -115,25 +115,38 @@ namespace SistemaControlEstudiantesUNI.Controllers
         [HttpPost]
         public ActionResult AsignarClase(AgregarHijosEstudianteAsignatura asig)
         {
+            asig.Asignatura = dl.lstAsignaturas();
+            asig.Docente = dl.lstDocente();
+            asig.Grupo = dl.lstGrupos();
             try
             {
                 //Docentes.listaCat= dc.ListarCatalogoId(52).ToList();
                 if (ModelState.IsValid)
                 {
-                    if (dl.GuardarAsignacionClase(asig))
+                    if(dl.ValidarAsignatura((Int32)asig.id_estudiante,(Int32)asig.id_asignatura))
                     {
-                        int idd = Convert.ToInt32(Session["idestudiante"]);
-                        //Mandar msj de confirmación de guardado
-                        Success("Clase Asignada!", true);
-                        return RedirectToAction("Edit", new { id= Convert.ToInt32(Session["idestudiante"]) } );
-                    }
+                        if (dl.GuardarAsignacionClase(asig))
+                        {
+                            int idd = Convert.ToInt32(Session["idestudiante"]);
+                            //Mandar msj de confirmación de guardado
+                            Success("Clase Asignada!", true);
+                            return RedirectToAction("Edit", new { id = Convert.ToInt32(Session["idestudiante"]) });
+                        }
 
+                        else
+                        {
+
+                            // return View(catalogos);
+                            Danger("Alumno ya tiene asignada esta asignatura!", true);
+                            return View(asig);
+                        }
+                    }
                     else
                     {
-
-                        // return View(catalogos);
-
+                        Danger("No se puede asignar clase debido a que alumno no aprueba clase dependiente aún!", true);
+                        return View(asig);
                     }
+                   
 
                 }
                 // TODO: Add insert logic here

@@ -288,28 +288,40 @@ namespace SistemaControlEstudiantesUNI.Models
 
             try
             {
-                using (var contexto = new ControlAlumnosEntities())
+                Int64 CantAsig = 0;
+                var con = new ControlAlumnosEntities();
+                CantAsig = con.estudianteAsignatura.Where(x => x.id_asignatura == asig.id_asignatura && x.id_estudiante == asig.id_estudiante).Select(x => x.idEstudianteAsignatura).FirstOrDefault();
+                if(CantAsig==0)
                 {
-                    estudianteAsignatura ae = new estudianteAsignatura();
+                    using (var contexto = new ControlAlumnosEntities())
+                    {
+                        estudianteAsignatura ae = new estudianteAsignatura();
 
-                    ae.id_asignatura = asig.id_asignatura;
-                    ae.id_docente = asig.id_docente;
-                    ae.id_estudiante = asig.id_estudiante;
-                    ae.id_grupo = asig.id_grupo;
-                    ae.id_periodo = asig.id_periodo;
-                    ae.activo = true;
-                    ae.aprobado = false;
-                    ae.completado = false;
-                    ae.horario = asig.horario;
-                    ae.fecha_inscripcion = DateTime.Now;
-
-
-                    contexto.estudianteAsignatura.Add(ae);
-                    contexto.SaveChanges();
+                        ae.id_asignatura = asig.id_asignatura;
+                        ae.id_docente = asig.id_docente;
+                        ae.id_estudiante = asig.id_estudiante;
+                        ae.id_grupo = asig.id_grupo;
+                        ae.id_periodo = asig.id_periodo;
+                        ae.activo = true;
+                        ae.aprobado = false;
+                        ae.completado = false;
+                        ae.horario = asig.horario;
+                        ae.fecha_inscripcion = DateTime.Now;
 
 
-                    return true;
+                        contexto.estudianteAsignatura.Add(ae);
+                        contexto.SaveChanges();
+
+
+                        return true;
+                    }
                 }
+                else
+                {
+                    return false;
+
+                }
+              
             }
             catch (Exception)
             {
@@ -318,6 +330,32 @@ namespace SistemaControlEstudiantesUNI.Models
             }
 
 
+
+        }
+
+
+        //validar asignatura dependiente
+
+        public bool ValidarAsignatura(int idEst,int idAsig)
+        {
+            bool ban=false;
+            int indicador;
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                indicador = (int)contexto.ValidarAsignatura(idAsig, idEst).FirstOrDefault();
+
+                // si es 0, la clase no es permitida 
+                if (indicador == 0)
+                    ban = false;
+                //si el resultado es diferente que 0, nos indica que la clase fue aprobada y completada y tiene derecho a seguir
+                else if (indicador != 0)
+                    ban = true;
+                else if (indicador == 8)
+                    ban = true;
+
+            }
+            return ban;
 
         }
 

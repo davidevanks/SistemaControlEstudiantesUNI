@@ -206,5 +206,18 @@ namespace SistemaControlEstudiantesUNI
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDataNotas_Result>("ListarDataNotas");
         }
+    
+        public virtual ObjectResult<Nullable<int>> ValidarAsignatura(Nullable<int> idAsignatura, Nullable<int> idEstudiante)
+        {
+            var idAsignaturaParameter = idAsignatura.HasValue ?
+                new ObjectParameter("idAsignatura", idAsignatura) :
+                new ObjectParameter("idAsignatura", typeof(int));
+    
+            var idEstudianteParameter = idEstudiante.HasValue ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ValidarAsignatura", idAsignaturaParameter, idEstudianteParameter);
+        }
     }
 }
