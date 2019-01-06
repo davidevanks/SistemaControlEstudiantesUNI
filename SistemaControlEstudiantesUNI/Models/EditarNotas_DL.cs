@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SistemaControlEstudiantesUNI.ViewModels;
+using MoreLinq;
 
 
 namespace SistemaControlEstudiantesUNI.Models
@@ -56,7 +57,7 @@ namespace SistemaControlEstudiantesUNI.Models
                     id=(long)x.id_asignatura,
                     Asignatura=x.Asignatura
                     
-                }).Distinct().ToList();
+                }).DistinctBy(p=>p.id).ToList();
 
                 return lstAsig;
             }
