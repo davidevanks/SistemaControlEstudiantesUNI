@@ -83,5 +83,72 @@ namespace SistemaControlEstudiantesUNI.Models
 
         }
 
+        //metodos para editar / guardar las notas de clases una vez evaluados los estudiantes
+        public bool EditarNotas(HijosEstudianteAsignatura NotasEstudiantes)
+        {
+
+            try
+            {
+                var Notas = new estudianteAsignatura { idEstudianteAsignatura = NotasEstudiantes.idEstudianteAsignatura };
+
+                using (var context = new ControlAlumnosEntities())
+
+                {
+
+                    context.estudianteAsignatura.Attach(Notas);
+
+                    Notas.parcial_uno = NotasEstudiantes.parcial_uno;
+                    Notas.parcial_dos = NotasEstudiantes.parcial_dos;
+                    Notas.convocatoria = NotasEstudiantes.convocatoria;
+                    Notas.nota_final = NotasEstudiantes.nota_final;
+                    Notas.aprobado = NotasEstudiantes.aprobado;
+                    Notas.completado = NotasEstudiantes.completado;
+
+                    context.Configuration.ValidateOnSaveEnabled = false;
+
+                    context.SaveChanges();
+                    return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw;
+            }
+
+
+
+        }
+
+
+
+        public HijosEstudianteAsignatura ListarNota(Int64 idEstudianteAsignatura)
+        {
+
+            HijosEstudianteAsignatura ListaNotaO = new HijosEstudianteAsignatura();
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                ListaNotaO = contexto.ListarEstudianteAsignaturaXid(idEstudianteAsignatura).Select(x => new HijosEstudianteAsignatura
+                {
+                    idEstudianteAsignatura=x.idEstudianteAsignatura,
+                    parcial_uno=(float)x.parcial_uno.GetValueOrDefault()  ,
+                    parcial_dos=(float)x.parcial_dos.GetValueOrDefault(),
+                    nota_final =(float)x.nota_final.GetValueOrDefault(),
+                    convocatoria =(float)x.convocatoria.GetValueOrDefault(),
+                    completado =(bool)x.completado.GetValueOrDefault(),
+                    aprobado =(bool)x.aprobado.GetValueOrDefault()
+
+
+
+                }).FirstOrDefault();
+
+                return ListaNotaO;
+            }
+
+        }
+        //
+
     }
 }

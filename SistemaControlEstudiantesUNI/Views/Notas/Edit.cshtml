@@ -1,0 +1,84 @@
+﻿@model SistemaControlEstudiantesUNI.ViewModels.HijosEstudianteAsignatura
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-offset-1">
+    <h2>Registrar Notas</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>HijosEstudianteAsignatura</h4>
+            @Html.HiddenFor(model => model.idEstudianteAsignatura)
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Parcial I</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.parcial_uno, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.parcial_uno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Parcial II</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.parcial_dos, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.parcial_dos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Convocatoria</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.convocatoria, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.convocatoria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Nota Final</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nota_final, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nota_final, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Aprobado</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.aprobado)
+                        @Html.ValidationMessageFor(model => model.aprobado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Completado</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.completado)
+                        @Html.ValidationMessageFor(model => model.completado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+</div>

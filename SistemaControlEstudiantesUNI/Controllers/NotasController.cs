@@ -56,24 +56,47 @@ namespace SistemaControlEstudiantesUNI.Controllers
         }
 
         // GET: Notas/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Int64 id)
         {
-            return View();
+            HijosEstudianteAsignatura Nota = new HijosEstudianteAsignatura();
+            Nota = dl.ListarNota(id);
+            return View(Nota);
         }
 
         // POST: Notas/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(HijosEstudianteAsignatura Nota)
         {
             try
             {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (dl.EditarNotas(Nota))
+                    {
+                        //Mandar msj de confirmación de guardado
+                        Success("Registro actualizado!", true);
+                        return RedirectToAction("Index");
+                    }
+
+                    else
+                    {
+
+                        // return View(catalogos);
+
+                    }
+
+                }
+                // TODO: Add insert logic here
+                Danger("Error al actualizar registro", true);
+                return View(Nota);
+
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                string msj = ex.ToString();
+                Danger("Error al guardar registro: " + ex.ToString(), true);
+                return View(Nota);
             }
         }
 

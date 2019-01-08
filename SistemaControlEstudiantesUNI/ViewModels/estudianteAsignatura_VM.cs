@@ -132,7 +132,7 @@ namespace SistemaControlEstudiantesUNI.ViewModels
 
     public class HijosEstudianteAsignatura
     {
-
+        
         public long id_estudiante { get; set; }
         public long id_docente { get; set; }
         public long id_grupo { get; set; }
@@ -145,8 +145,14 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         public string horario { get; set; }
 
         public string Grupo { get; set; }
+        //campos para agregar notas de los estudiantes y aprobar / completar clases
+        public float parcial_uno { get; set; }
+        public float parcial_dos { get; set; }
+        public float convocatoria { get; set; }
+        public float nota_final { get; set; }
 
-
+        public bool aprobado { get; set; }
+        public bool completado { get; set; }
 
     }
 

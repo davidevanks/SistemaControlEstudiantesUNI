@@ -264,6 +264,9 @@
         <Function Name="ListarEstudianteAsignatura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ides" Type="int" Mode="In" />
         </Function>
+        <Function Name="ListarEstudianteAsignaturaXid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEstudianteAsignatura" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="ListarEstudiantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idEs" Type="bigint" Mode="In" />
         </Function>
@@ -615,6 +618,9 @@
             <Parameter Name="idAsignatura" Mode="In" Type="Int32" />
             <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ListarEstudianteAsignaturaXid" ReturnType="Collection(ControlAlumnosModel.ListarEstudianteAsignaturaXid_Result)">
+            <Parameter Name="idEstudianteAsignatura" Mode="In" Type="Int64" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -832,6 +838,15 @@
           <Property Type="String" Name="horario" Nullable="false" MaxLength="50" />
           <Property Type="Int64" Name="idGrupo" Nullable="false" />
           <Property Type="String" Name="Grupo" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="ListarEstudianteAsignaturaXid_Result">
+          <Property Type="Int64" Name="idEstudianteAsignatura" Nullable="false" />
+          <Property Type="Double" Name="parcial_uno" Nullable="true" />
+          <Property Type="Double" Name="parcial_dos" Nullable="true" />
+          <Property Type="Double" Name="convocatoria" Nullable="true" />
+          <Property Type="Double" Name="nota_final" Nullable="true" />
+          <Property Type="Boolean" Name="aprobado" Nullable="true" />
+          <Property Type="Boolean" Name="completado" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1156,6 +1171,19 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ValidarAsignatura" FunctionName="ControlAlumnosModel.Store.ValidarAsignatura" />
+          <FunctionImportMapping FunctionImportName="ListarEstudianteAsignaturaXid" FunctionName="ControlAlumnosModel.Store.ListarEstudianteAsignaturaXid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarEstudianteAsignaturaXid_Result">
+                <ScalarProperty Name="idEstudianteAsignatura" ColumnName="idEstudianteAsignatura" />
+                <ScalarProperty Name="parcial_uno" ColumnName="parcial_uno" />
+                <ScalarProperty Name="parcial_dos" ColumnName="parcial_dos" />
+                <ScalarProperty Name="convocatoria" ColumnName="convocatoria" />
+                <ScalarProperty Name="nota_final" ColumnName="nota_final" />
+                <ScalarProperty Name="aprobado" ColumnName="aprobado" />
+                <ScalarProperty Name="completado" ColumnName="completado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
