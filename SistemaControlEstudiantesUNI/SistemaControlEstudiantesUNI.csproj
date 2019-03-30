@@ -294,6 +294,8 @@
     <Compile Include="Controllers\NotasController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
+    <Compile Include="Controllers\rptInscripcionClasesController.cs" />
+    <Compile Include="Controllers\rpttesttController.cs" />
     <Compile Include="Controllers\TurnosController.cs" />
     <Compile Include="docentes.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
@@ -309,6 +311,13 @@
     </Compile>
     <Compile Include="estudianteNotas.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="formsReport\reporttesttt.aspx.cs">
+      <DependentUpon>reporttesttt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="formsReport\reporttesttt.aspx.designer.cs">
+      <DependentUpon>reporttesttt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -348,6 +357,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MyExtensions.cs" />
     <Compile Include="Models\Periodo_DL.cs" />
+    <Compile Include="Models\rptInscripcionClases_DL.cs" />
     <Compile Include="Models\Turno_DL.cs" />
     <Compile Include="periodo.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
@@ -357,6 +367,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Datos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="rptInscripcionClases_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
@@ -381,6 +394,7 @@
     <Compile Include="ViewModels\estudianteAsignatura_VM.cs" />
     <Compile Include="ViewModels\Estudiantes_VM.cs" />
     <Compile Include="ViewModels\Periodo_VM.cs" />
+    <Compile Include="ViewModels\rptInscripcionCLases_VM.cs" />
     <Compile Include="ViewModels\Turnos_VM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +414,7 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="formsReport\reporttesttt.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\logouni.png" />
@@ -544,6 +559,8 @@
     <Content Include="Views\Notas\Index.cshtml" />
     <Content Include="Views\Notas\_estudiantes.cshtml" />
     <Content Include="Views\Notas\Edit.cshtml" />
+    <Content Include="Views\rptInscripcionClases\ReportInscripcionClases.cshtml" />
+    <Content Include="Views\rpttestt\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -563,6 +580,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\rptAsignaturas.rdlc" />
+    <EmbeddedResource Include="Reportes\rptInscripcionClases.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

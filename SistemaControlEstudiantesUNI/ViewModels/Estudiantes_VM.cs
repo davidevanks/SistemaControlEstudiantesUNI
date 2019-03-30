@@ -63,6 +63,9 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         public string Sexo { get; set; }
         public long id_turno { get; set; }
         public string Turno { get; set; }
+
+        public long  id_periodo { get; set; }
+        public string nombrePeriodo { get; set; }
         public bool activo { get; set; }
 
     }
@@ -147,6 +150,7 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         [Display(Name = "Turno")]
        
         public List<turnos> Turnos { get; set; }
+        public List<Periodo_VM> periodos { get; set; }
         [Display(Name = "Cargo Trabajo")]
         public string cargo_trabajo { get; set; }
         public bool activo { get; set; }

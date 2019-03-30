@@ -49,6 +49,7 @@ namespace SistemaControlEstudiantesUNI
         public Nullable<System.DateTime> fecha_ingreso { get; set; }
         public Nullable<long> id_periodo { get; set; }
         public Nullable<bool> activo { get; set; }
+        public Nullable<int> id_anio_cursa { get; set; }
     
         public virtual turnos turnos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

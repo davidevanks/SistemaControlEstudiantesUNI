@@ -228,5 +228,10 @@ namespace SistemaControlEstudiantesUNI
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudianteAsignaturaXid_Result>("ListarEstudianteAsignaturaXid", idEstudianteAsignaturaParameter);
         }
+    
+        public virtual ObjectResult<rptInscripcionClases_Result> rptInscripcionClases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptInscripcionClases_Result>("rptInscripcionClases");
+        }
     }
 }
