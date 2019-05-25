@@ -51,7 +51,9 @@ namespace SistemaControlEstudiantesUNI.Models
                     Sexo=y.Sexo,
                     id_turno=y.id_turno,
                     Turno=y.Turno,
-                    activo=(bool)y.activo
+                    activo=(bool)y.activo,
+                    id_periodo=y.idPeriodo,
+                    nombrePeriodo=y.nombre_periodo
 
 
                 }).ToList();
@@ -102,7 +104,9 @@ namespace SistemaControlEstudiantesUNI.Models
                     Sexo = y.Sexo,
                     id_turno = y.id_turno,
                     Turno = y.Turno,
-                    activo = (bool)y.activo
+                    activo = (bool)y.activo,
+                    id_periodo = y.idPeriodo,
+                    nombrePeriodo = y.nombre_periodo
 
 
                 }).FirstOrDefault();
@@ -115,7 +119,6 @@ namespace SistemaControlEstudiantesUNI.Models
         //Metodos para catalogos de la tabla estudiantes
         public List<Catalogos_VM> lstCatalogos(int id)
         {
-
             List<Catalogos_VM> lstCatalogos = new List<Catalogos_VM>();
 
             using (var contexto= new ControlAlumnosEntities())
@@ -135,11 +138,25 @@ namespace SistemaControlEstudiantesUNI.Models
                 return lstCatalogos;
 
             }
-
-
         }
 
+        public List<periodo> lstPeriodos()
+        {
 
+            List<periodo> lstPeriodos = new List<periodo>();
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+
+
+
+                lstPeriodos = (from y in contexto.periodo where y.activo == true select y).ToList();
+
+                return lstPeriodos;
+
+            }
+
+        }
 
         public List<localidad> lstDepartamentos()
         {
@@ -160,7 +177,7 @@ namespace SistemaControlEstudiantesUNI.Models
 
                 //}).ToList();
 
-                lstDepartamentos = (from y in contexto.localidad where y.activo == true select y).ToList();
+                lstDepartamentos = (from y in contexto.localidad where y.activo == true && y.id_padre==0 select y).ToList();
 
                 return lstDepartamentos;
 
@@ -268,6 +285,8 @@ namespace SistemaControlEstudiantesUNI.Models
                     est.lugar_nacimiento = estudiantes.lugar_nacimiento;
                     est.telefono = estudiantes.telefono;
                     est.telefono_trabajo = estudiantes.telefono_trabajo;
+                    est.id_periodo = estudiantes.idPeriodo;
+                    est.anioPeriodo = estudiantes.anioPeriodo;
                     est.activo = true;
 
 
@@ -330,6 +349,8 @@ namespace SistemaControlEstudiantesUNI.Models
                     //Sexo = y.Sexo,
                     id_turno = y.id_turno,
                     //Turno = y.Turno,
+                    anioPeriodo=(int)y.anioPeriodo,
+                    idPeriodo=y.idPeriodo,
                     activo = (bool)y.activo
 
 
@@ -390,7 +411,8 @@ namespace SistemaControlEstudiantesUNI.Models
                     estudiantes.id_turno = est.id_turno;
                     //Turno = y.Turno,
                     estudiantes.activo = (bool)est.activo;
-
+                    estudiantes.id_periodo = est.idPeriodo;
+                    estudiantes.anioPeriodo = est.anioPeriodo;  
                     context.Configuration.ValidateOnSaveEnabled = false;
 
                     context.SaveChanges();

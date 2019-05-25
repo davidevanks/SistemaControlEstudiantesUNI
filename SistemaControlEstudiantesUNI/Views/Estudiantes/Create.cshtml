@@ -48,7 +48,7 @@
 
                     @Html.LabelFor(model => model.fecha_nacimiento)
 
-                    @Html.EditorFor(model => model.fecha_nacimiento, new { htmlAttributes = new { @class = "form-control fecha" } })
+                    @Html.EditorFor(model => model.fecha_nacimiento, new { htmlAttributes = new { @id = "FechaNac", @class = "form-control fecha" } })
                     @Html.ValidationMessageFor(model => model.fecha_nacimiento, "", new { @class = "text-danger" })
 
                 </div>
@@ -56,7 +56,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.edad)
 
-                    @Html.EditorFor(model => model.edad, new { htmlAttributes = new { @class = "form-control " } })
+                    @Html.EditorFor(model => model.edad, new { htmlAttributes = new { @id = "edadNum", @class = "form-control " } })
                     @Html.ValidationMessageFor(model => model.edad, "", new { @class = "text-danger" })
 
                 </div>
@@ -108,6 +108,17 @@
                         @Html.EditorFor(model => model.trabaja)
                         @Html.ValidationMessageFor(model => model.trabaja, "", new { @class = "text-danger" })
                     </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.periodos)
+
+                    @Html.DropDownListFor(model => model.idPeriodo, new SelectList(Model.periodos, "idPeriodo", "nombre_periodo"), "- Seleccione Periodo -", new { @class = "form-control", @id = "Mun" })
+                    @Html.ValidationMessageFor(model => model.idPeriodo)
+
+
 
                 </div>
             </div>
@@ -169,7 +180,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Departamentos, "Departamento")
                     @Html.Hidden("Completo", Model)
-                    @Html.DropDownListFor(model => model.id_departamento, new SelectList(Model.Departamentos, "idLocalidad", "Nombre"), "- Seleccione Departamento -", new { @class = "form-control", @id = "dep" })
+                    @Html.DropDownListFor(model => model.id_departamento, new SelectList(Model.Departamentos, "idLocalidad", "Nombre"), "- Seleccione Departamento -", new { @class = "form-control", @id = "depp" })
                     @Html.ValidationMessageFor(model => model.id_departamento)
 
                 </div>
@@ -177,7 +188,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Municipios)
 
-                    @Html.DropDownListFor(model => model.id_municipio, new SelectList(Model.Municipios, "idLocalidad", "Nombre"), "- Seleccione Municipio -", new { @class = "form-control", @id = "Mun" })
+                    @Html.DropDownListFor(model => model.id_municipio, new SelectList(Model.Municipios, "idLocalidad", "Nombre"), "- Seleccione Municipio -", new { @class = "form-control", @id = "Munn" })
                     @Html.ValidationMessageFor(model => model.id_municipio)
 
 
@@ -218,6 +229,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Año Periodo</label>
+                    @*<div class="col-md-10">*@
+                    @Html.EditorFor(model => model.anioPeriodo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.anioPeriodo, "", new { @class = "text-danger" })
+                    @*</div>*@
+                </div>
+
+                <div class="form-group">
                     @Html.LabelFor(model => model.activo)
 
                     <div class="checkbox">
@@ -253,9 +272,10 @@
 
         <script>
 
-        $('#dep').change(function () {
-            var selectedCountry = $("#dep").val();
-            var regionsSelect = $('#Mun');
+
+       $('#depp').change(function () {
+            var selectedCountry = $("#depp").val();
+            var regionsSelect = $('#Munn');
             console.log(selectedCountry)
             console.log(regionsSelect)
             regionsSelect.empty();
@@ -277,6 +297,31 @@
             }
         });
 
+
+
+
+
+            function calcularEdad(birthday) {
+                var birthday_arr = birthday.split("/");
+                var birthday_date = new Date(birthday_arr[2], birthday_arr[1] - 1, birthday_arr[0]);
+                var ageDifMs = Date.now() - birthday_date.getTime();
+
+                var ageDate = new Date(ageDifMs);
+
+                return Math.abs(ageDate.getUTCFullYear() - 1970) + 1;
+            }
+
+
+
+
+            $('#FechaNac').change(function () {
+
+                var fecha = $('#FechaNac').val();
+
+                var age = calcularEdad(fecha);
+
+                $("#edadNum").val(calcularEdad(fecha));
+            });
         </script>
        
     }

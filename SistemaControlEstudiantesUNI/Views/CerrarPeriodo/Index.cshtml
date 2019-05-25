@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div  class="col-md-offset-1">
+    <h2>Cerrar Periodo Actual</h2>
+
+@using (Html.BeginForm("CerrarPeriodoCiclo", "CerrarPeriodo"))
+{
+    <div class="form-horizontal">
+        <p>Proceso de cierre de todo el periodo actual, una vez cerrado, las notas no se pueden modificar y se reinician la asignación de año y periodo para cada estudiante</p>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cerrar Ciclo" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+
+
+

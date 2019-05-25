@@ -42,7 +42,8 @@ namespace SistemaControlEstudiantesUNI.Controllers
             AgregarEstudiante estudiante = new AgregarEstudiante();
             estudiante.Carreras = dl.lstCatalogos(1);
             estudiante.Departamentos = dl.lstDepartamentos();
-            estudiante.Municipios = dl.lstMunicipio(1);
+            estudiante.Municipios = dl.lstMunicipio(-1);
+
             estudiante.planEstudios = dl.lstCatalogos(5);
             estudiante.Sexos = dl.lstCatalogos(4);
             estudiante.Turnos = dl.lstTurnos();
@@ -50,7 +51,8 @@ namespace SistemaControlEstudiantesUNI.Controllers
             estudiante.fecha_grabacion = DateTime.Now;
             estudiante.fecha_ingreso = DateTime.Now.ToShortDateString();
             estudiante.fecha_nacimiento = DateTime.Now.ToShortDateString();
-      
+            estudiante.periodos = dl.lstPeriodos();
+            
             return View(estudiante);
         }
 
@@ -121,6 +123,7 @@ namespace SistemaControlEstudiantesUNI.Controllers
             estudiantes.Turnos = dl.lstTurnos();
             estudiantes.estadoCiviles = dl.lstCatalogos(3);
             estudiantes.fecha_modificacion = DateTime.Now;
+            estudiantes.periodos = dl.lstPeriodos();
 
             return View(estudiantes);
         }

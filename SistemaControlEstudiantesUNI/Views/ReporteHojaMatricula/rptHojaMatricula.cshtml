@@ -1,0 +1,43 @@
+﻿@model   SistemaControlEstudiantesUNI.ViewModels.EstudianteSimple
+@{
+    ViewBag.Title = "rptHojaMatricula";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div  class="col-md-offset-1">
+    <h2>Hoja de Matricula</h2>
+
+    <div id="bodyReport">
+       
+        <h3 style="text-align: center;">UNIVERSIDAD NACIONAL DE INGENIERIA</h3>
+        <p style="text-align: center;">FACULTAD DE ELECTROTECNIA Y COMPUTACI&Oacute;N</p>
+        <p style="text-align: center;"><strong>HOJA DE MATRICULA DE NUEVO INGRESO</strong></p>
+        <p style="text-align: center;">&nbsp;</p>
+        <p style="text-align: left;"><strong>FACULTAD: ELECTROTECNIA Y COMPUTACI&Oacute;N- </strong>CARRERA: Ing. El&eacute;ctrica() Ing. En Computaci&oacute;n() Ing. En Telecomunicaciones() Generaci&oacute;n 20()</p>
+        <p style="text-align: left;">TURNO SABATINO:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PLAN ESTUDIO:@Model.planEstudio&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+        <p style="text-align: center;"><strong>1. Actualizaci&oacute;n de datos personales: Es obligaci&oacute;n del estudiante llenar la informaci&oacute;n solicitada.</strong></p>
+        <p style="text-align: center;">&nbsp;</p>
+        <p style="text-align: left;"><strong>Nombres y Apellidos:</strong> <span style="text-decoration: underline;">@Model.nombres @Model.apellidos</span></p>
+        <p style="text-align: left;"><strong>Carnet:</strong> <span style="text-decoration: underline;">@Model.no_carnet</span> <strong>Estado Civil</strong> Casado() Sexo M ()</p>
+        <p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Soltero()&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;F ()</p>
+        <p style="text-align: left;"><strong>Lugar y fecha de nacimiento:</strong> <span style="text-decoration: underline;">@Model.lugar_nacimiento</span> <span style="text-decoration: underline;">@Model.fecha_nacimiento</span> <strong>Municipio:</strong> <span style="text-decoration: underline;">@Model.Municipio</span></p>
+        <p style="text-align: left;">&nbsp;<strong>Departamento:</strong> <span style="text-decoration: underline;">@Model.Departamento</span> <strong>No. De Cedula:</strong><span style="text-decoration: underline;">@Model.no_cedula</span> <strong>Edad:</strong><span style="text-decoration: underline;">@Model.edad</span></p>
+        <p style="text-align: left;"><strong>Direcci&oacute;n Habitual:</strong> <span style="text-decoration: underline;">@Model.direccion_habitual&nbsp;</span></p>
+        <p style="text-align: left;"><strong>Direccion de correo electr&oacute;nico:</strong> <span style="text-decoration: underline;">@Model.email</span></p>
+        <p style="text-align: left;"><strong>No. Tel Convencional:</strong> <span style="text-decoration: underline;">@Model.telefono</span> <strong>Celular:</strong> <span style="text-decoration: underline;">@Model.celular</span> <strong>Trabaja Actualmente:</strong> Si () No()</p>
+        <p style="text-align: left;"><strong>Centro de Trabajo:</strong> <span style="text-decoration: underline;">@Model.centro_trabajo</span> <strong>Telefono:</strong> <span style="text-decoration: underline;">@Model.telefono_trabajo</span></p>
+        <p style="text-align: left;"><strong>Puesto que ocupa:</strong></p>
+        <p style="text-align: left;">&nbsp;</p>
+        <p style="text-align: left;"><strong>Firma estudiante:</strong>__________________</p>
+        <p style="text-align: left;">&nbsp;</p>
+        <p style="text-align: left;"><strong>Firma funcionario:</strong>_________________</p>
+        <p style="text-align: left;">&nbsp;</p>
+        <p style="text-align: center;"><strong>Fecha:</strong>______________</p>
+        <p style="text-align: left;">&nbsp;</p>
+
+
+    </div>
+
+
+
+</div>

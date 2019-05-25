@@ -15,7 +15,7 @@ namespace SistemaControlEstudiantesUNI.Models
 
             using (var contexto= new ControlAlumnosEntities())
             {
-                lstEstAsig = contexto.ListarEstudianteAsignatura1(0).Select(x => new estudianteAsignaturaSimple_VM
+                lstEstAsig = contexto.ListarEstudianteAsignatura(0).Select(x => new estudianteAsignaturaSimple_VM
                 {
                     id = x.idEs,
                     //idEstudianteAsignatura=(long)x.idEstudianteAsignatura,
@@ -84,7 +84,7 @@ namespace SistemaControlEstudiantesUNI.Models
 
             using (var contexto = new ControlAlumnosEntities())
             {
-                asig = contexto.ListarEstudianteAsignatura1(id).Select(x => new AgregarEstudianteAsignatura_VM
+                asig = contexto.ListarEstudianteAsignatura(id).Select(x => new AgregarEstudianteAsignatura_VM
                 {
                     id = x.idEs,
                     //idEstudianteAsignatura = (long)x.idEstudianteAsignatura,
@@ -107,6 +107,7 @@ namespace SistemaControlEstudiantesUNI.Models
                     //horario = x.horario,
                     //id_docente = (long)x.id_docente,
                     //Docente = x.Docente,
+                    anioPeriodo=(int)x.anioPeriodo,
                     activo = (bool)x.activo
 
 
@@ -290,7 +291,7 @@ namespace SistemaControlEstudiantesUNI.Models
             {
                 Int64 CantAsig = 0;
                 var con = new ControlAlumnosEntities();
-                CantAsig = con.estudianteAsignatura.Where(x => x.id_asignatura == asig.id_asignatura && x.id_estudiante == asig.id_estudiante).Select(x => x.idEstudianteAsignatura).FirstOrDefault();
+                CantAsig = con.estudianteAsignatura.Where(x => x.id_asignatura == asig.id_asignatura && x.id_estudiante == asig.id_estudiante && x.activo==true).Select(x => x.idEstudianteAsignatura).FirstOrDefault();
                 if(CantAsig==0)
                 {
                     using (var contexto = new ControlAlumnosEntities())
@@ -307,8 +308,9 @@ namespace SistemaControlEstudiantesUNI.Models
                         ae.completado = false;
                         ae.horario = asig.horario;
                         ae.fecha_inscripcion = DateTime.Now;
-
-
+                        //se agrego periodoActual a 1
+                        ae.periodoActual = true;
+                        ae.anioPeriodo = asig.anioPeriodo;
                         contexto.estudianteAsignatura.Add(ae);
                         contexto.SaveChanges();
 

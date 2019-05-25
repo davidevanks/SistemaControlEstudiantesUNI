@@ -126,6 +126,7 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         public List<docentes> Docente { get; set; }
 
         public List<HijosEstudianteAsignatura> lstHijosEsAsig { get; set; }
+        public int anioPeriodo { get; set; }
         public bool activo { get; set; }
 
     }
@@ -172,6 +173,8 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         public string horario { get; set; }
         public List<catalogos> Grupo { get; set; }
 
+        public bool periodoActual { get; set; }
+        public int anioPeriodo { get; set; }
 
     }
 

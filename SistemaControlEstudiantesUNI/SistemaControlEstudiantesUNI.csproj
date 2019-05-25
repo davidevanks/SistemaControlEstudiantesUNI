@@ -19,8 +19,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -127,6 +127,10 @@
     </Reference>
     <Reference Include="ReportViewerForMvc, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ReportViewerForMvc.1.1.1\lib\net45\ReportViewerForMvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Select.Pdf, Version=18.4.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>..\packages\Select.Pdf.18.4.0\lib\net40\Select.Pdf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -286,6 +290,7 @@
     <Compile Include="Controllers\AsignaturaController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CatalogosController.cs" />
+    <Compile Include="Controllers\CerrarPeriodoController.cs" />
     <Compile Include="Controllers\DocentesController.cs" />
     <Compile Include="Controllers\estudianteAsignaturaController.cs" />
     <Compile Include="Controllers\EstudiantesController.cs" />
@@ -293,9 +298,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotasController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
-    <Compile Include="Controllers\ReportesController.cs" />
-    <Compile Include="Controllers\rptInscripcionClasesController.cs" />
-    <Compile Include="Controllers\rpttesttController.cs" />
+    <Compile Include="Controllers\ReporteHojaMatriculaController.cs" />
     <Compile Include="Controllers\TurnosController.cs" />
     <Compile Include="docentes.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
@@ -331,10 +334,10 @@
     <Compile Include="ListarDocentes_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="ListarEstudianteAsignatura1_Result.cs">
+    <Compile Include="ListarEstudianteAsignaturaXid_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="ListarEstudianteAsignaturaXid_Result.cs">
+    <Compile Include="ListarEstudianteAsignatura_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="ListarEstudiantes_Result.cs">
@@ -349,6 +352,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Asignaturas_DL.cs" />
     <Compile Include="Models\Catalogos_DL.cs" />
+    <Compile Include="Models\CerrarCiclo_DL.cs" />
     <Compile Include="Models\Docentes_DL.cs" />
     <Compile Include="Models\EditarNotas_DL.cs" />
     <Compile Include="Models\estudianteAsignatura_DL.cs" />
@@ -357,17 +361,13 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MyExtensions.cs" />
     <Compile Include="Models\Periodo_DL.cs" />
+    <Compile Include="Models\Reportes_DL.cs" />
     <Compile Include="Models\rptInscripcionClases_DL.cs" />
     <Compile Include="Models\Turno_DL.cs" />
     <Compile Include="periodo.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reportes\Datos.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Datos.xsd</DependentUpon>
-    </Compile>
     <Compile Include="rptInscripcionClases_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
@@ -425,6 +425,10 @@
     <Content Include="img\ui-icons_cc0000_256x240.png" />
     <Content Include="img\ui-icons_ffffff_256x240.png" />
     <Content Include="ReportViewerWebForm.aspx" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -439,17 +443,8 @@
     <Content Include="ControlEstudiantesDatos.edmx.diagram">
       <DependentUpon>ControlEstudiantesDatos.edmx</DependentUpon>
     </Content>
-    <Content Include="Reportes\Datos.xsc">
-      <DependentUpon>Datos.xsd</DependentUpon>
-    </Content>
-    <None Include="Reportes\Datos.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Datos.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Reportes\Datos.xss">
-      <DependentUpon>Datos.xsd</DependentUpon>
-    </Content>
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTable.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -458,6 +453,8 @@
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.mask.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -561,6 +558,9 @@
     <Content Include="Views\Notas\Edit.cshtml" />
     <Content Include="Views\rptInscripcionClases\ReportInscripcionClases.cshtml" />
     <Content Include="Views\rpttestt\Index.cshtml" />
+    <Content Include="Views\CerrarPeriodo\Index.cshtml" />
+    <Content Include="Views\ReporteHojaMatricula\Index.cshtml" />
+    <Content Include="Views\ReporteHojaMatricula\rptHojaMatricula.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -577,10 +577,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Reportes\rptAsignaturas.rdlc" />
-    <EmbeddedResource Include="Reportes\rptInscripcionClases.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

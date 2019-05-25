@@ -152,15 +152,6 @@ namespace SistemaControlEstudiantesUNI
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarAsignaturas_Result>("ListarAsignaturas", idAsignaturaParameter);
         }
     
-        public virtual ObjectResult<ListarEstudiantes_Result> ListarEstudiantes(Nullable<long> idEs)
-        {
-            var idEsParameter = idEs.HasValue ?
-                new ObjectParameter("idEs", idEs) :
-                new ObjectParameter("idEs", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudiantes_Result>("ListarEstudiantes", idEsParameter);
-        }
-    
         public virtual int ListarHijosEstudianteAsig(Nullable<int> ides)
         {
             var idesParameter = ides.HasValue ?
@@ -168,24 +159,6 @@ namespace SistemaControlEstudiantesUNI
                 new ObjectParameter("ides", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ListarHijosEstudianteAsig", idesParameter);
-        }
-    
-        public virtual int ListarEstudianteAsignatura(Nullable<int> ides)
-        {
-            var idesParameter = ides.HasValue ?
-                new ObjectParameter("ides", ides) :
-                new ObjectParameter("ides", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ListarEstudianteAsignatura", idesParameter);
-        }
-    
-        public virtual ObjectResult<ListarEstudianteAsignatura1_Result> ListarEstudianteAsignatura1(Nullable<int> ides)
-        {
-            var idesParameter = ides.HasValue ?
-                new ObjectParameter("ides", ides) :
-                new ObjectParameter("ides", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudianteAsignatura1_Result>("ListarEstudianteAsignatura1", idesParameter);
         }
     
         public virtual ObjectResult<ListarHijosEstudianteAsig1_Result> ListarHijosEstudianteAsig1(Nullable<int> ides)
@@ -232,6 +205,29 @@ namespace SistemaControlEstudiantesUNI
         public virtual ObjectResult<rptInscripcionClases_Result> rptInscripcionClases()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptInscripcionClases_Result>("rptInscripcionClases");
+        }
+    
+        public virtual ObjectResult<ListarEstudianteAsignatura_Result> ListarEstudianteAsignatura(Nullable<int> ides)
+        {
+            var idesParameter = ides.HasValue ?
+                new ObjectParameter("ides", ides) :
+                new ObjectParameter("ides", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudianteAsignatura_Result>("ListarEstudianteAsignatura", idesParameter);
+        }
+    
+        public virtual ObjectResult<ListarEstudiantes_Result> ListarEstudiantes(Nullable<long> idEs)
+        {
+            var idEsParameter = idEs.HasValue ?
+                new ObjectParameter("idEs", idEs) :
+                new ObjectParameter("idEs", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudiantes_Result>("ListarEstudiantes", idEsParameter);
+        }
+    
+        public virtual int CerrarPeriodo()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CerrarPeriodo");
         }
     }
 }

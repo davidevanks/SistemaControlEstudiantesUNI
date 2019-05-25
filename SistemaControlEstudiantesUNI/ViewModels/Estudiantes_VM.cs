@@ -150,9 +150,11 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         [Display(Name = "Turno")]
        
         public List<turnos> Turnos { get; set; }
-        public List<Periodo_VM> periodos { get; set; }
+        public List<periodo> periodos { get; set; }
+        public long idPeriodo { get; set; }
         [Display(Name = "Cargo Trabajo")]
         public string cargo_trabajo { get; set; }
+        public int anioPeriodo { get; set; }
         public bool activo { get; set; }
     }
 

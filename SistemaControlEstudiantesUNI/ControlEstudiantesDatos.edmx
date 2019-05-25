@@ -88,6 +88,7 @@
           <Property Name="id_anio_cursa" Type="int" />
           <Property Name="id_periodo" Type="bigint" />
           <Property Name="activo" Type="bit" />
+          <Property Name="anioPeriodo" Type="int" />
         </EntityType>
         <EntityType Name="estudianteAsignatura">
           <Key>
@@ -258,6 +259,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CerrarPeriodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="ListarAsignaturas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idAsignatura" Type="bigint" Mode="In" />
@@ -587,14 +589,8 @@
           <FunctionImport Name="ListarAsignaturas" ReturnType="Collection(ControlAlumnosModel.ListarAsignaturas_Result)">
           <Parameter Name="idAsignatura" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="ListarEstudiantes" ReturnType="Collection(ControlAlumnosModel.ListarEstudiantes_Result)">
-          <Parameter Name="idEs" Mode="In" Type="Int64" />
-          </FunctionImport>
           <EntitySet Name="estudianteAsignatura" EntityType="ControlAlumnosModel.estudianteAsignatura" />
           <FunctionImport Name="ListarHijosEstudianteAsig">
-          <Parameter Name="ides" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ListarEstudianteAsignatura">
           <Parameter Name="ides" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="estudiante" EntityType="ControlAlumnosModel.estudiante" />
@@ -610,9 +606,6 @@
             <End Role="estudiante" EntitySet="estudiante" />
             <End Role="estudianteNotas" EntitySet="estudianteNotas" />
           </AssociationSet>
-          <FunctionImport Name="ListarEstudianteAsignatura1" ReturnType="Collection(ControlAlumnosModel.ListarEstudianteAsignatura1_Result)">
-          <Parameter Name="ides" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ListarHijosEstudianteAsig1" ReturnType="Collection(ControlAlumnosModel.ListarHijosEstudianteAsig1_Result)">
           <Parameter Name="ides" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -626,6 +619,13 @@
           <Parameter Name="idEstudianteAsignatura" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="rptInscripcionClases" ReturnType="Collection(ControlAlumnosModel.rptInscripcionClases_Result)" />
+          <FunctionImport Name="ListarEstudianteAsignatura" ReturnType="Collection(ControlAlumnosModel.ListarEstudianteAsignatura_Result)">
+          <Parameter Name="ides" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarEstudiantes" ReturnType="Collection(ControlAlumnosModel.ListarEstudiantes_Result)">
+          <Parameter Name="idEs" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="CerrarPeriodo" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -658,42 +658,6 @@
           <Property Type="String" Name="codigoAsignaturaRequisito" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="asignaturaRequisito" Nullable="false" MaxLength="150" />
           <Property Type="Boolean" Name="activoAsignatura" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="ListarEstudiantes_Result">
-          <Property Type="Int64" Name="idEs" Nullable="false" />
-          <Property Type="String" Name="nombres" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="apellidos" Nullable="true" MaxLength="150" />
-          <Property Type="DateTime" Name="fecha_nacimiento" Nullable="true" />
-          <Property Type="Int32" Name="edad" Nullable="true" />
-          <Property Type="String" Name="celular" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="centro_trabajo" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="direccion_habitual" Nullable="true" />
-          <Property Type="String" Name="cargo_trabajo" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="lugar_nacimiento" Nullable="true" MaxLength="150" />
-          <Property Type="Boolean" Name="trabaja" Nullable="true" />
-          <Property Type="String" Name="no_carnet" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="no_cedula" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="telefono_trabajo" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="fecha_grabacion" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="fecha_ingreso" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="fecha_modificacion" Nullable="true" Precision="23" />
-          <Property Type="Int64" Name="id_carrera" Nullable="false" />
-          <Property Type="String" Name="Carrera" Nullable="true" MaxLength="200" />
-          <Property Type="Int64" Name="id_departamento" Nullable="true" />
-          <Property Type="String" Name="Departamento" Nullable="true" MaxLength="200" />
-          <Property Type="Int64" Name="id_estado_civil" Nullable="true" />
-          <Property Type="String" Name="estadoCivil" Nullable="true" MaxLength="200" />
-          <Property Type="Int64" Name="id_municipio" Nullable="true" />
-          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="200" />
-          <Property Type="Int64" Name="id_plan_estudio" Nullable="false" />
-          <Property Type="String" Name="planEstudio" Nullable="true" MaxLength="200" />
-          <Property Type="Int64" Name="id_sexo" Nullable="true" />
-          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="200" />
-          <Property Type="Int64" Name="id_turno" Nullable="false" />
-          <Property Type="String" Name="Turno" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="activo" Nullable="true" />
         </ComplexType>
         <EntityType Name="estudianteAsignatura">
           <Key>
@@ -753,6 +717,7 @@
           <NavigationProperty Name="estudianteGrupo" Relationship="ControlAlumnosModel.FK_estudianteGrupo_estudiante" FromRole="estudiante" ToRole="estudianteGrupo" />
           <NavigationProperty Name="estudianteNotas" Relationship="ControlAlumnosModel.FK_estudianteNotas_estudiante" FromRole="estudiante" ToRole="estudianteNotas" />
           <Property Name="id_anio_cursa" Type="Int32" />
+          <Property Name="anioPeriodo" Type="Int32" />
         </EntityType>
         <Association Name="FK_estudiante_turnos">
           <End Type="ControlAlumnosModel.turnos" Role="turnos" Multiplicity="1" />
@@ -790,34 +755,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="ListarEstudianteAsignatura1_Result">
-          <Property Type="Int64" Name="idEs" Nullable="false" />
-          <Property Type="Int64" Name="idPeriodo" Nullable="false" />
-          <Property Type="String" Name="Periodo" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="nombres" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="apellidos" Nullable="true" MaxLength="150" />
-          <Property Type="DateTime" Name="fecha_nacimiento" Nullable="true" />
-          <Property Type="Int32" Name="edad" Nullable="true" />
-          <Property Type="String" Name="celular" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="centro_trabajo" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="direccion_habitual" Nullable="true" />
-          <Property Type="String" Name="cargo_trabajo" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="lugar_nacimiento" Nullable="true" MaxLength="150" />
-          <Property Type="Boolean" Name="trabaja" Nullable="true" />
-          <Property Type="String" Name="no_carnet" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="no_cedula" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="telefono_trabajo" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Carrera" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Departamento" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="estadoCivil" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="planEstudio" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Turno" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="activo" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="ListarHijosEstudianteAsig1_Result">
           <Property Type="Int64" Name="id_estudiante" Nullable="true" />
           <Property Type="Int64" Name="id_docente" Nullable="true" />
@@ -876,6 +813,74 @@
           <Property Type="String" Name="horario" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Docente" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="Periodo" Nullable="true" MaxLength="101" />
+        </ComplexType>
+        <ComplexType Name="ListarEstudianteAsignatura_Result">
+          <Property Type="Int64" Name="idEs" Nullable="false" />
+          <Property Type="Int64" Name="idPeriodo" Nullable="false" />
+          <Property Type="String" Name="Periodo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombres" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="apellidos" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="fecha_nacimiento" Nullable="true" />
+          <Property Type="Int32" Name="edad" Nullable="true" />
+          <Property Type="String" Name="celular" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="centro_trabajo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="direccion_habitual" Nullable="true" />
+          <Property Type="String" Name="cargo_trabajo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="lugar_nacimiento" Nullable="true" MaxLength="150" />
+          <Property Type="Boolean" Name="trabaja" Nullable="true" />
+          <Property Type="String" Name="no_carnet" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="no_cedula" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="telefono_trabajo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Carrera" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Departamento" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="estadoCivil" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="planEstudio" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Turno" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="anioPeriodo" Nullable="true" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarEstudiantes_Result">
+          <Property Type="Int64" Name="idEs" Nullable="false" />
+          <Property Type="String" Name="nombres" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="apellidos" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="fecha_nacimiento" Nullable="true" />
+          <Property Type="Int32" Name="edad" Nullable="true" />
+          <Property Type="String" Name="celular" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="centro_trabajo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="direccion_habitual" Nullable="true" />
+          <Property Type="String" Name="cargo_trabajo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="lugar_nacimiento" Nullable="true" MaxLength="150" />
+          <Property Type="Boolean" Name="trabaja" Nullable="true" />
+          <Property Type="String" Name="no_carnet" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="no_cedula" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="telefono_trabajo" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="fecha_grabacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_ingreso" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_modificacion" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="id_carrera" Nullable="false" />
+          <Property Type="String" Name="Carrera" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="id_departamento" Nullable="true" />
+          <Property Type="String" Name="Departamento" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="id_estado_civil" Nullable="true" />
+          <Property Type="String" Name="estadoCivil" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="id_municipio" Nullable="true" />
+          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="id_plan_estudio" Nullable="false" />
+          <Property Type="String" Name="planEstudio" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="id_sexo" Nullable="true" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="id_turno" Nullable="false" />
+          <Property Type="String" Name="Turno" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+          <Property Type="Int64" Name="idPeriodo" Nullable="false" />
+          <Property Type="String" Name="nombre_periodo" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="anioPeriodo" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1031,46 +1036,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ListarEstudiantes" FunctionName="ControlAlumnosModel.Store.ListarEstudiantes">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarEstudiantes_Result">
-                <ScalarProperty Name="idEs" ColumnName="idEs" />
-                <ScalarProperty Name="nombres" ColumnName="nombres" />
-                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
-                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
-                <ScalarProperty Name="edad" ColumnName="edad" />
-                <ScalarProperty Name="celular" ColumnName="celular" />
-                <ScalarProperty Name="centro_trabajo" ColumnName="centro_trabajo" />
-                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
-                <ScalarProperty Name="cargo_trabajo" ColumnName="cargo_trabajo" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
-                <ScalarProperty Name="trabaja" ColumnName="trabaja" />
-                <ScalarProperty Name="no_carnet" ColumnName="no_carnet" />
-                <ScalarProperty Name="no_cedula" ColumnName="no_cedula" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="telefono_trabajo" ColumnName="telefono_trabajo" />
-                <ScalarProperty Name="fecha_grabacion" ColumnName="fecha_grabacion" />
-                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
-                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
-                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
-                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
-                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-                <ScalarProperty Name="id_estado_civil" ColumnName="id_estado_civil" />
-                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
-                <ScalarProperty Name="id_municipio" ColumnName="id_municipio" />
-                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
-                <ScalarProperty Name="id_plan_estudio" ColumnName="id_plan_estudio" />
-                <ScalarProperty Name="planEstudio" ColumnName="planEstudio" />
-                <ScalarProperty Name="id_sexo" ColumnName="id_sexo" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="id_turno" ColumnName="id_turno" />
-                <ScalarProperty Name="Turno" ColumnName="Turno" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="estudianteAsignatura">
             <EntityTypeMapping TypeName="ControlAlumnosModel.estudianteAsignatura">
               <MappingFragment StoreEntitySet="estudianteAsignatura">
@@ -1097,6 +1062,7 @@
           <EntitySetMapping Name="estudiante">
             <EntityTypeMapping TypeName="ControlAlumnosModel.estudiante">
               <MappingFragment StoreEntitySet="estudiante">
+                <ScalarProperty Name="anioPeriodo" ColumnName="anioPeriodo" />
                 <ScalarProperty Name="id_anio_cursa" ColumnName="id_anio_cursa" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
                 <ScalarProperty Name="id_periodo" ColumnName="id_periodo" />
@@ -1129,38 +1095,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="ListarEstudianteAsignatura1" FunctionName="ControlAlumnosModel.Store.ListarEstudianteAsignatura">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarEstudianteAsignatura1_Result">
-                <ScalarProperty Name="idEs" ColumnName="idEs" />
-                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="nombres" ColumnName="nombres" />
-                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
-                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
-                <ScalarProperty Name="edad" ColumnName="edad" />
-                <ScalarProperty Name="celular" ColumnName="celular" />
-                <ScalarProperty Name="centro_trabajo" ColumnName="centro_trabajo" />
-                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
-                <ScalarProperty Name="cargo_trabajo" ColumnName="cargo_trabajo" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
-                <ScalarProperty Name="trabaja" ColumnName="trabaja" />
-                <ScalarProperty Name="no_carnet" ColumnName="no_carnet" />
-                <ScalarProperty Name="no_cedula" ColumnName="no_cedula" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="telefono_trabajo" ColumnName="telefono_trabajo" />
-                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
-                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
-                <ScalarProperty Name="planEstudio" ColumnName="planEstudio" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Turno" ColumnName="Turno" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ListarHijosEstudianteAsig1" FunctionName="ControlAlumnosModel.Store.ListarHijosEstudianteAsig">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarHijosEstudianteAsig1_Result">
@@ -1241,6 +1175,83 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarEstudianteAsignatura" FunctionName="ControlAlumnosModel.Store.ListarEstudianteAsignatura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarEstudianteAsignatura_Result">
+                <ScalarProperty Name="idEs" ColumnName="idEs" />
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="centro_trabajo" ColumnName="centro_trabajo" />
+                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
+                <ScalarProperty Name="cargo_trabajo" ColumnName="cargo_trabajo" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
+                <ScalarProperty Name="trabaja" ColumnName="trabaja" />
+                <ScalarProperty Name="no_carnet" ColumnName="no_carnet" />
+                <ScalarProperty Name="no_cedula" ColumnName="no_cedula" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="telefono_trabajo" ColumnName="telefono_trabajo" />
+                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="planEstudio" ColumnName="planEstudio" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="anioPeriodo" ColumnName="anioPeriodo" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarEstudiantes" FunctionName="ControlAlumnosModel.Store.ListarEstudiantes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarEstudiantes_Result">
+                <ScalarProperty Name="idEs" ColumnName="idEs" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="centro_trabajo" ColumnName="centro_trabajo" />
+                <ScalarProperty Name="direccion_habitual" ColumnName="direccion_habitual" />
+                <ScalarProperty Name="cargo_trabajo" ColumnName="cargo_trabajo" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
+                <ScalarProperty Name="trabaja" ColumnName="trabaja" />
+                <ScalarProperty Name="no_carnet" ColumnName="no_carnet" />
+                <ScalarProperty Name="no_cedula" ColumnName="no_cedula" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="telefono_trabajo" ColumnName="telefono_trabajo" />
+                <ScalarProperty Name="fecha_grabacion" ColumnName="fecha_grabacion" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="id_estado_civil" ColumnName="id_estado_civil" />
+                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="id_municipio" ColumnName="id_municipio" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="id_plan_estudio" ColumnName="id_plan_estudio" />
+                <ScalarProperty Name="planEstudio" ColumnName="planEstudio" />
+                <ScalarProperty Name="id_sexo" ColumnName="id_sexo" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="id_turno" ColumnName="id_turno" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="nombre_periodo" ColumnName="nombre_periodo" />
+                <ScalarProperty Name="anioPeriodo" ColumnName="anioPeriodo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CerrarPeriodo" FunctionName="ControlAlumnosModel.Store.CerrarPeriodo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

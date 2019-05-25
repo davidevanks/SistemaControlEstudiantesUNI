@@ -58,6 +58,7 @@ namespace SistemaControlEstudiantesUNI.Controllers
             asig.lstHijosEsAsig = dl.ListarHijosEstudianteAsig(id);
             Session["idestudiante"] = id;
             Session["idPeriodo"] = asig.id_periodo;
+            Session["anioPeriodo"] = asig.anioPeriodo;
             return View(asig);
         }
 
@@ -118,6 +119,7 @@ namespace SistemaControlEstudiantesUNI.Controllers
             asig.Asignatura = dl.lstAsignaturas();
             asig.Docente = dl.lstDocente();
             asig.Grupo = dl.lstGrupos();
+            asig.anioPeriodo = (int)Session["anioPeriodo"];
             try
             {
                 //Docentes.listaCat= dc.ListarCatalogoId(52).ToList();

@@ -47,5 +47,8 @@ namespace SistemaControlEstudiantesUNI
         public long id_turno { get; set; }
         public string Turno { get; set; }
         public Nullable<bool> activo { get; set; }
+        public long idPeriodo { get; set; }
+        public string nombre_periodo { get; set; }
+        public Nullable<int> anioPeriodo { get; set; }
     }
 }
