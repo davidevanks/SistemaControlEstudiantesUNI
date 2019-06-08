@@ -298,7 +298,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotasController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
+    <Compile Include="Controllers\ReporteConstanciaIndividualController.cs" />
     <Compile Include="Controllers\ReporteHojaMatriculaController.cs" />
+    <Compile Include="Controllers\ReporteInscripcionClasesController.cs" />
     <Compile Include="Controllers\TurnosController.cs" />
     <Compile Include="docentes.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
@@ -315,12 +317,8 @@
     <Compile Include="estudianteNotas.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="formsReport\reporttesttt.aspx.cs">
-      <DependentUpon>reporttesttt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="formsReport\reporttesttt.aspx.designer.cs">
-      <DependentUpon>reporttesttt.aspx</DependentUpon>
+    <Compile Include="GetListadoEstudiantesInscripcion_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -362,12 +360,18 @@
     <Compile Include="Models\MyExtensions.cs" />
     <Compile Include="Models\Periodo_DL.cs" />
     <Compile Include="Models\Reportes_DL.cs" />
-    <Compile Include="Models\rptInscripcionClases_DL.cs" />
+    <Compile Include="Models\rptConstanciaIndividual_DL.cs" />
     <Compile Include="Models\Turno_DL.cs" />
     <Compile Include="periodo.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reporteInscripcionClases_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rptConstanciaAlumnoIndividual_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="rptInscripcionClases_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
@@ -394,6 +398,7 @@
     <Compile Include="ViewModels\estudianteAsignatura_VM.cs" />
     <Compile Include="ViewModels\Estudiantes_VM.cs" />
     <Compile Include="ViewModels\Periodo_VM.cs" />
+    <Compile Include="ViewModels\rptConstanciaIndividual_VM.cs" />
     <Compile Include="ViewModels\rptInscripcionCLases_VM.cs" />
     <Compile Include="ViewModels\Turnos_VM.cs" />
   </ItemGroup>
@@ -414,7 +419,6 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="formsReport\reporttesttt.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\logouni.png" />
@@ -561,6 +565,10 @@
     <Content Include="Views\CerrarPeriodo\Index.cshtml" />
     <Content Include="Views\ReporteHojaMatricula\Index.cshtml" />
     <Content Include="Views\ReporteHojaMatricula\rptHojaMatricula.cshtml" />
+    <Content Include="Views\ReporteConstanciaIndividual\rptConstanciaIndividual.cshtml" />
+    <Content Include="Views\ReporteConstanciaIndividual\Index.cshtml" />
+    <Content Include="Views\ReporteInscripcionClases\Index.cshtml" />
+    <Content Include="Views\ReporteInscripcionClases\rptInscripcionClases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

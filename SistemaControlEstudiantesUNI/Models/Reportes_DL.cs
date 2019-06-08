@@ -22,7 +22,7 @@ namespace SistemaControlEstudiantesUNI.Models
                     //    idEstudiante=x.idEstudiante,
                     //    nombres=x.nombres
                     //}).ToList();
-                    lstEstudiantes = (from a in contexto.estudiante where a.activo == true select a).ToList();
+                    lstEstudiantes = (from a in contexto.estudiante where a.activo == true && a.id_periodo != 10005 && a.anioPeriodo!=0 select a).ToList();
 
 
                 }
@@ -92,5 +92,106 @@ namespace SistemaControlEstudiantesUNI.Models
         #endregion
 
 
+        #region Reporte constancia Individual
+        public rptConstanciaIndividual_VM GetRptConstanciaIndividual(int idEstudiante)
+        {
+
+            rptConstanciaIndividual_VM lstRptConstanciaIndividual = new rptConstanciaIndividual_VM();
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                lstRptConstanciaIndividual = contexto.rptConstanciaAlumnoIndividual(idEstudiante).Select(x => new rptConstanciaIndividual_VM
+                {
+                    idEstudiante = (int)x.idEstudiante,
+                    no_carnet = x.no_carnet,
+                    Carrera = x.Carrera,
+                    Turno = x.Turno,
+                    NombreApellido = x.NombreApellido,
+                    AnioCursa = x.AnioCursa,
+                    Horario = x.Horario,
+                    FechaLetras=x.fechaLetra
+                }).ToList().FirstOrDefault();
+
+                return lstRptConstanciaIndividual;
+            }
+        }
+        #endregion
+
+
+        #region Reporte inscripción clase
+        public rptInscripcionCLases_VM GetRptInscripciónClase(int idEstudiante)
+        {
+
+            rptInscripcionCLases_VM DatosInscripcion = new rptInscripcionCLases_VM();
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                DatosInscripcion = contexto.reporteInscripcionClases(idEstudiante).Select(x => new rptInscripcionCLases_VM
+                {
+                  idEstudiante=(int)x.idEstudiante,
+                  NombreApellido=x.nombreAsignatura,
+                  no_carnet=x.no_carnet,
+                  Carreara=x.Carreara,
+                  Turno=x.Turno,
+                  PlanEstudio=x.PlanEstudio,
+                  EstadoCivil=x.EstadoCivil,
+                  Sexo=x.Sexo,
+                  no_cedula=x.no_cedula,
+                  edad=(int)x.edad,
+                  direccion_habitual=x.direccion_habitual,
+                  email=x.email,
+                  celular=x.celular,
+                  telefono=x.telefono,
+                  fechaIngreso=(DateTime)x.fecha_ingreso,
+                  Periodo=x.Periodo
+
+                }).ToList().FirstOrDefault();
+
+                return DatosInscripcion;
+            }
+        }
+
+
+        public List<rptListaAsignaturas> GetDetalleRptInscripciónClase(int idEstudiante)
+        {
+
+            List<rptListaAsignaturas> DetalleDatosInscripcion = new List<rptListaAsignaturas>();
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                DetalleDatosInscripcion = contexto.reporteInscripcionClases(idEstudiante).Select(x => new rptListaAsignaturas
+                {
+                         nombreAsignatura =x.nombreAsignatura,
+                         horario=x.horario, 
+                         Docente =x.Docente
+
+                }).ToList();
+
+                return DetalleDatosInscripcion;
+            }
+        }
+
+
+
+        public List<estudiante> ListarEstudiantesInscripcion()
+        {
+            List<estudiante> lstEstudiantes = new List<estudiante>();
+
+           
+
+            using (var contexto = new ControlAlumnosEntities())
+            {
+                lstEstudiantes = contexto.GetListadoEstudiantesInscripcion().Select(x => new estudiante
+                {
+                   idEstudiante=x.idEstudiante,
+                   nombres=x.NombreApellido
+
+                }).ToList();
+
+                return lstEstudiantes;
+            }
+
+        }
+        #endregion
     }
 }

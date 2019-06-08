@@ -23,12 +23,21 @@ namespace SistemaControlEstudiantesUNI.ViewModels
         public string direccion_habitual { get; set; }
         public string email { get; set; }
         public string celular { get; set; }
+        public string telefono { get; set; }
 
-        public string fechaIngreso { get; set; }
+        public DateTime fechaIngreso { get; set; }
+ 
+        public string Periodo { get; set; }
+
+        public List<rptListaAsignaturas> ListaAsignaturas { get; set; }
+
+    }
+
+    public class rptListaAsignaturas
+    {
         public string nombreAsignatura { get; set; }
         public string horario { get; set; }
         public string Docente { get; set; }
-        public string Periodo { get; set; }
 
     }
 }

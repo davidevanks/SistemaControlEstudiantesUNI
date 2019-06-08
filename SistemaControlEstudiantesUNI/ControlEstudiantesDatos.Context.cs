@@ -202,9 +202,13 @@ namespace SistemaControlEstudiantesUNI
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudianteAsignaturaXid_Result>("ListarEstudianteAsignaturaXid", idEstudianteAsignaturaParameter);
         }
     
-        public virtual ObjectResult<rptInscripcionClases_Result> rptInscripcionClases()
+        public virtual ObjectResult<rptInscripcionClases_Result> rptInscripcionClases(Nullable<int> idEstudiante)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptInscripcionClases_Result>("rptInscripcionClases");
+            var idEstudianteParameter = idEstudiante.HasValue ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptInscripcionClases_Result>("rptInscripcionClases", idEstudianteParameter);
         }
     
         public virtual ObjectResult<ListarEstudianteAsignatura_Result> ListarEstudianteAsignatura(Nullable<int> ides)
@@ -228,6 +232,29 @@ namespace SistemaControlEstudiantesUNI
         public virtual int CerrarPeriodo()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CerrarPeriodo");
+        }
+    
+        public virtual ObjectResult<rptConstanciaAlumnoIndividual_Result> rptConstanciaAlumnoIndividual(Nullable<int> idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante.HasValue ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptConstanciaAlumnoIndividual_Result>("rptConstanciaAlumnoIndividual", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<reporteInscripcionClases_Result> reporteInscripcionClases(Nullable<int> idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante.HasValue ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<reporteInscripcionClases_Result>("reporteInscripcionClases", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<GetListadoEstudiantesInscripcion_Result> GetListadoEstudiantesInscripcion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListadoEstudiantesInscripcion_Result>("GetListadoEstudiantesInscripcion");
         }
     }
 }

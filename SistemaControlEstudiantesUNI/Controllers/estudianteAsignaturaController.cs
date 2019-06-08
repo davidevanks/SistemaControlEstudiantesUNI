@@ -139,7 +139,7 @@ namespace SistemaControlEstudiantesUNI.Controllers
                         {
 
                             // return View(catalogos);
-                            Danger("Alumno ya tiene asignada esta asignatura!", true);
+                            Danger("Alumno ya tiene asignada esta asignatura o ya fue aprobada en un periodo anterior!", true);
                             return View(asig);
                         }
                     }

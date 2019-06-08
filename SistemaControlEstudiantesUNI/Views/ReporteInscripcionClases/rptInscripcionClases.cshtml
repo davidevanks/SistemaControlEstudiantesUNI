@@ -1,0 +1,70 @@
+﻿@model   SistemaControlEstudiantesUNI.ViewModels.rptInscripcionCLases_VM
+@{
+    ViewBag.Title = "rptInscripcionClases";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-offset-1">
+    <h2>Inscripción de clases</h2>
+
+    <div id="bodyReport">
+
+
+
+        <h3 style="text-align: center;">UNIVERSIDAD NACIONAL DE INGENIERIA</h3>
+        <h3 style="text-align: center;">FACULTAD DE ELECTROTECNIA Y COMPUTACI&Oacute;N</h3>
+        <h3 style="text-align: center;">CARRERAS DE MODALIDAD SEMIPRESENCIAL</h3>
+        
+        <p style="text-align: center;"><span style="text-decoration: underline;"><strong>INSCRIPCI&Oacute;N DE ASIGNATURAS</strong></span></p>
+        <p style="text-align: center;">&nbsp;</p>
+        <p style="text-align: left;">Generaci&oacute;n (&nbsp; )&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Carrera:<span style="text-decoration: underline;">@Model.Carreara&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Turno @Model.Turno</p>
+        <p style="text-align: left;">Plan estudio (@Model.PlanEstudio )&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Carnet:<span style="text-decoration: underline;">@Model.no_carnet</span></p>
+        @*<p style="text-align: left;">&nbsp;</p>
+        <p style="text-align: left;">&nbsp;</p>*@
+        <p style="text-align: left;">Nombre y apellidos: <span style="text-decoration: underline;">@Model.NombreApellido</span></p>
+        <p style="text-align: left;">@ViewBag.Sexo&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Direcci&oacute;n Correo Electr&oacute;nico:<span style="text-decoration: underline;">@Model.email&nbsp; </span>&nbsp; &nbsp; Tel&eacute;fono:<span style="text-decoration: underline;">@Model.telefono</span></p>
+        <p style="text-align: left;">CEDULA<span style="text-decoration: underline;">:@Model.no_cedula</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Estado Civil:<span style="text-decoration: underline;">@Model.EstadoCivil</span></p>
+        <p style="text-align: left;">Direcci&oacute;n actual de habitaci&oacute;n<span style="text-decoration: underline;">:@Model.direccion_habitual</span></p>
+        
+        <p style="text-align: center;"><strong>@Model.Periodo</strong></p>
+       
+        <table align="center" border="1">
+            <tbody>
+                <tr>
+                    <td><strong>Asignatura</strong></td>
+                    <td><strong>Horario</strong></td>
+                    <td><strong>Docente</strong></td>
+                </tr>
+            
+                    @foreach (var d in Model.ListaAsignaturas)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => d.nombreAsignatura)</td>
+                            <td>@Html.DisplayFor(modelItem => d.horario)</td>
+                            <td>@Html.DisplayFor(modelItem => d.Docente)</td>
+                        </tr>
+                    }
+
+
+                       
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+        <p>Firmadel estudiante:________________ Firmadel funcionario:________________</p>
+    
+     
+        <p>Fecha:________________</p>
+      
+        <p><strong><span style="text-decoration: underline;">Observaci&oacute;n: La actualizaci&oacute;n de datos esobligaci&oacute;n del estudiante llenar la informaci&oacute;n solicitada, esta inscripci&oacute;n de asignaturas es trimestral y obligatoria.</span></strong></p>
+        
+        <blockquote>
+            <p>Impreso por modalidad semipresencial</p>
+        </blockquote>
+        <p>&nbsp;</p>
+
+    </div>
+
+
+
+</div>
+

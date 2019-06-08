@@ -291,7 +291,7 @@ namespace SistemaControlEstudiantesUNI.Models
             {
                 Int64 CantAsig = 0;
                 var con = new ControlAlumnosEntities();
-                CantAsig = con.estudianteAsignatura.Where(x => x.id_asignatura == asig.id_asignatura && x.id_estudiante == asig.id_estudiante && x.activo==true).Select(x => x.idEstudianteAsignatura).FirstOrDefault();
+                CantAsig = con.estudianteAsignatura.Where(x => x.id_asignatura == asig.id_asignatura && x.id_estudiante == asig.id_estudiante && x.activo==true ).Select(x => x.idEstudianteAsignatura).FirstOrDefault();
                 if(CantAsig==0)
                 {
                     using (var contexto = new ControlAlumnosEntities())
