@@ -8,6 +8,161 @@ namespace SistemaControlEstudiantesUNI.Models
 {
     public class Reportes_DL
     {
+
+        #region Reporte de Constancia de Notas
+        public List<ListaConstanciaNotas> GetListaEstudiantesConsNotas()
+        {
+            List<ListaConstanciaNotas> lstEstudiante = new List<ListaConstanciaNotas>();
+
+            try
+            {
+
+                using (var contexto=new ControlAlumnosEntities())
+                {
+                    lstEstudiante = contexto.GetListaConstanciaNotas().Select(x => new ListaConstanciaNotas
+                    {
+                        id=x.idEstudiante,
+                        Estudiante=x.Estudiante
+
+                    }).ToList();
+
+                    return lstEstudiante;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msj = ex.ToString();
+                throw;
+            }
+
+        }
+
+        public rptConstanciaNotasIndividual_VM GetListaEstudiantesNotasDetalle(int idEstudiante)
+        {
+            rptConstanciaNotasIndividual_VM lstEstudianteDetalles = new rptConstanciaNotasIndividual_VM();
+
+            try
+            {
+
+                using (var contexto = new ControlAlumnosEntities())
+                {
+                    lstEstudianteDetalles = contexto.GetListaConstanciaNotasDetalleEstudiante(idEstudiante).Select(x => new rptConstanciaNotasIndividual_VM
+                    {
+                        id = x.idEstudiante,
+                        Estudiante = x.Estudiante,
+                        no_carnet=x.no_carnet,
+                        Carrera=x.Carrera,
+                        AnioCursa=x.AnioCursa,
+                        fechaLetra=x.fechaLetra
+
+                    }).FirstOrDefault();
+
+                    return lstEstudianteDetalles;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msj = ex.ToString();
+                throw;
+            }
+
+        }
+
+
+        public List<ConstanciaNotasPeriodos> GetListaConstanciaNotasPeriodos(int idEstudiante)
+        {
+            List<ConstanciaNotasPeriodos> lstPeriodos = new List<ConstanciaNotasPeriodos>();
+
+            try
+            {
+
+                using (var contexto = new ControlAlumnosEntities())
+                {
+                    lstPeriodos = contexto.GetListaConstanciaNotasPeriodos(idEstudiante).Select(x => new ConstanciaNotasPeriodos
+                    {
+                      id=x.idPeriodo,
+                      Periodo=x.Periodo
+
+                    }).ToList();
+
+                    return lstPeriodos;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msj = ex.ToString();
+                throw;
+            }
+
+        }
+
+
+        public List<ConstanciaNotasAsignaturas> GetListaConstanciaNotasAsignaturas(int idEstudiante)
+        {
+            List<ConstanciaNotasAsignaturas> lstPeriodos = new List<ConstanciaNotasAsignaturas>();
+
+            try
+            {
+
+                using (var contexto = new ControlAlumnosEntities())
+                {
+                    lstPeriodos = contexto.GetListaConstanciaNotasAsignaturas(idEstudiante).Select(x => new ConstanciaNotasAsignaturas
+                    {
+                        id=x.idEstudiante,
+                        idPeriodo =x.idPeriodo,
+                        Asignatura =x.Asignatura,
+                        Notas =x.Notas,
+                        Conv =x.Conv,
+                        NotaLetras =x.NotaLetras,
+                        ConvLetras =x.ConvLetras
+
+                     }).ToList();
+
+                    return lstPeriodos;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msj = ex.ToString();
+                throw;
+            }
+
+        }
+
+        #endregion
+
+        #region Reporte certificado final notas
+        public List<ConstanciaNotasAsignaturas> GetListaCertificadoFinalNotasAsignaturas(int idEstudiante)
+        {
+            List<ConstanciaNotasAsignaturas> lstPeriodos = new List<ConstanciaNotasAsignaturas>();
+
+            try
+            {
+
+                using (var contexto = new ControlAlumnosEntities())
+                {
+                    lstPeriodos = contexto.GetListaCertificadoFinalNotasAsignaturas(idEstudiante).Select(x => new ConstanciaNotasAsignaturas
+                    {
+                        id = x.idEstudiante,
+                        idPeriodo = x.idPeriodo,
+                        Asignatura = x.Asignatura,
+                        Notas = x.Notas,
+                        NotaLetras = x.NotaLetras
+
+                    }).ToList();
+
+                    return lstPeriodos;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msj = ex.ToString();
+                throw;
+            }
+
+        }
+        #endregion
+
         #region ReporteHojaMatricula
         public List<estudiante> ListarEstudiantes()
         {

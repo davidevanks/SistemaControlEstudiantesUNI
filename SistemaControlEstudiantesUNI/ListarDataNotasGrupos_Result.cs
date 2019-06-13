@@ -11,15 +11,10 @@ namespace SistemaControlEstudiantesUNI
 {
     using System;
     
-    public partial class ListarEstudianteAsignaturaXid_Result
+    public partial class ListarDataNotasGrupos_Result
     {
-        public long idEstudianteAsignatura { get; set; }
-        public Nullable<double> parcial_uno { get; set; }
-        public Nullable<double> parcial_dos { get; set; }
-        public Nullable<double> convocatoria { get; set; }
-        public Nullable<double> nota_final { get; set; }
-        public Nullable<double> notaCierre { get; set; }
-        public Nullable<bool> aprobado { get; set; }
-        public Nullable<bool> completado { get; set; }
+        public long idGrupo { get; set; }
+        public string Grupo { get; set; }
+        public long id_docente { get; set; }
     }
 }

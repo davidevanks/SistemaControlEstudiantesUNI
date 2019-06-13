@@ -1,0 +1,137 @@
+﻿@model IEnumerable<SistemaControlEstudiantesUNI.ViewModels.ListaConstanciaNotas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-offset-1">
+    <h2>Reporte Constancia de Notas</h2>
+
+    <div class="form-group">
+        <label>Estudiante</label>
+
+        @*   @Html.DropDownListFor(model => model.idEstudiante, new SelectList(Model.nombres, "idEstudiante", "nombres"), "- Seleccione Estudiante -", new { @class = "form-control" })*@
+
+
+    </div>
+
+
+
+    <div class="form-group">
+        <select id="ddlEstudiantes" name="esId" class="form-control">
+
+            @foreach (var es in Model)
+            {
+                <option value="@es.id">@es.Estudiante</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="btnGenerar" value="Generar Reporte" class="btn btn-primary" />
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+
+        <input type="submit" value="Imprimir" id="btnGuardar" class="btn  btn-primary" />
+
+        @*</div>*@
+    </div>
+
+
+    <div id="rptPreview">
+
+    </div>
+</div>
+
+
+@section Scripts {
+
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js">
+
+
+
+
+
+    </script>
+
+    <script>
+        $('#btnGenerar').click(function () {
+
+            var idEstudianteP = $("#ddlEstudiantes").val();
+
+            $.ajax({
+                url: '@Url.Action(actionName: "GetReporte", controllerName: "ReporteConstanciaNotasInd")',
+                type: 'Get',
+                // type: 'Post',
+                data: { idEstudiante: idEstudianteP },
+                cache: false,
+                success: function (result) {
+
+                    $('#rptPreview').show();
+                    $('#rptPreview').html(result);
+
+
+                }
+            });
+        });
+
+
+        $('#btnGuardar').click(function () {
+
+            @*var htmlP = { 'html': $("#rptPreview").html() }// $("#rptPreview").html();
+         //   var htmlP = 1;
+
+            $.ajax({
+                url: '@Url.Action(actionName: "GetPdf", controllerName: "ReporteHojaMatricula")',
+                type: 'Get',
+                // type: 'Post',
+                data: { html: htmlP },
+                datatype: "json",
+                cache: false,
+                success: function (result) {
+
+                    $('#rptPreview').show();
+                    $('#rptPreview').html(result);
+
+
+                }
+            });*@
+
+            imprimir();
+        });
+
+        function imprimir() {
+
+            //var divToPrint = document.getElementById('rptPreview');
+
+            var divToPrint = document.getElementById('bodyReport');
+
+
+
+            var newWin = window.open('', 'Print-Window');
+            console.log(divToPrint.innerHTML);
+            newWin.document.open();
+
+            newWin.document.write('<html><style type="text/css">@@page { size: auto; margin: 17mm; }</style ><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+            newWin.document.close();
+
+            setTimeout(function () { newWin.close(); }, 10);
+
+        }
+    </script>
+
+
+}
+
+
+
+
+
+
+
+

@@ -31,5 +31,6 @@ namespace SistemaControlEstudiantesUNI
         public Nullable<long> id_grupo { get; set; }
         public Nullable<int> anioPeriodo { get; set; }
         public Nullable<bool> periodoActual { get; set; }
+        public Nullable<double> notaCierre { get; set; }
     }
 }

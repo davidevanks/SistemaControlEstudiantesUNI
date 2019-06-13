@@ -105,6 +105,7 @@
           <Property Name="parcial_dos" Type="float" />
           <Property Name="convocatoria" Type="float" />
           <Property Name="nota_final" Type="float" />
+          <Property Name="notaCierre" Type="float" />
           <Property Name="activo" Type="bit" />
           <Property Name="anioPeriodo" Type="int" />
           <Property Name="fecha_inscripcion" Type="datetime" />
@@ -261,11 +262,27 @@
         </Association>
         <Function Name="CerrarPeriodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetListaCertificadoFinalNotasAsignaturas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEstudiante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetListaConstanciaNotas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaConstanciaNotasAsignaturas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEstudiante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetListaConstanciaNotasDetalleEstudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEstudiante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetListaConstanciaNotasPeriodos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEstudiante" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetListadoEstudiantesInscripcion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListarAsignaturas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idAsignatura" Type="bigint" Mode="In" />
         </Function>
         <Function Name="ListarDataNotas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListarDataNotasAsignatura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListarDataNotasDocentes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListarDataNotasGrupos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListarDocentes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ListarEstudianteAsignatura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ides" Type="int" Mode="In" />
@@ -624,9 +641,6 @@
             <Parameter Name="idAsignatura" Mode="In" Type="Int32" />
             <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ListarEstudianteAsignaturaXid" ReturnType="Collection(ControlAlumnosModel.ListarEstudianteAsignaturaXid_Result)">
-          <Parameter Name="idEstudianteAsignatura" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="rptInscripcionClases" ReturnType="Collection(ControlAlumnosModel.rptInscripcionClases_Result)" >
           <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -644,6 +658,26 @@
           <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetListadoEstudiantesInscripcion" ReturnType="Collection(ControlAlumnosModel.GetListadoEstudiantesInscripcion_Result)" />
+          <FunctionImport Name="ListarDataNotasDocentes" ReturnType="Collection(ControlAlumnosModel.ListarDataNotasDocentes_Result)" />
+          <FunctionImport Name="ListarDataNotasAsignatura" ReturnType="Collection(ControlAlumnosModel.ListarDataNotasAsignatura_Result)" />
+          <FunctionImport Name="ListarDataNotasGrupos" ReturnType="Collection(ControlAlumnosModel.ListarDataNotasGrupos_Result)" />
+          <FunctionImport Name="ListarDataNotasDocentes1" ReturnType="Collection(ControlAlumnosModel.ListarDataNotasDocentes1_Result)" />
+          <FunctionImport Name="GetListaConstanciaNotas" ReturnType="Collection(ControlAlumnosModel.GetListaConstanciaNotas_Result)" />
+          <FunctionImport Name="GetListaConstanciaNotasAsignaturas" ReturnType="Collection(ControlAlumnosModel.GetListaConstanciaNotasAsignaturas_Result)">
+          <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetListaConstanciaNotasDetalleEstudiante" ReturnType="Collection(ControlAlumnosModel.GetListaConstanciaNotasDetalleEstudiante_Result)">
+          <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetListaConstanciaNotasPeriodos" ReturnType="Collection(ControlAlumnosModel.GetListaConstanciaNotasPeriodos_Result)">
+          <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarEstudianteAsignaturaXid" ReturnType="Collection(ControlAlumnosModel.ListarEstudianteAsignaturaXid_Result)">
+          <Parameter Name="idEstudianteAsignatura" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetListaCertificadoFinalNotasAsignaturas" ReturnType="Collection(ControlAlumnosModel.GetListaCertificadoFinalNotasAsignaturas_Result)">
+            <Parameter Name="idEstudiante" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -698,6 +732,7 @@
           <Property Name="id_grupo" Type="Int64" />
           <Property Name="anioPeriodo" Type="Int32" />
           <Property Name="periodoActual" Type="Boolean" />
+          <Property Name="notaCierre" Type="Double" />
         </EntityType>
         <EntityType Name="estudiante">
           <Key>
@@ -801,15 +836,6 @@
           <Property Type="String" Name="horario" Nullable="false" MaxLength="50" />
           <Property Type="Int64" Name="idGrupo" Nullable="false" />
           <Property Type="String" Name="Grupo" Nullable="true" MaxLength="200" />
-        </ComplexType>
-        <ComplexType Name="ListarEstudianteAsignaturaXid_Result">
-          <Property Type="Int64" Name="idEstudianteAsignatura" Nullable="false" />
-          <Property Type="Double" Name="parcial_uno" Nullable="true" />
-          <Property Type="Double" Name="parcial_dos" Nullable="true" />
-          <Property Type="Double" Name="convocatoria" Nullable="true" />
-          <Property Type="Double" Name="nota_final" Nullable="true" />
-          <Property Type="Boolean" Name="aprobado" Nullable="true" />
-          <Property Type="Boolean" Name="completado" Nullable="true" />
         </ComplexType>
         <ComplexType Name="rptInscripcionClases_Result">
           <Property Type="Int64" Name="idEstudiante" Nullable="false" />
@@ -934,6 +960,70 @@
         <ComplexType Name="GetListadoEstudiantesInscripcion_Result">
           <Property Type="Int64" Name="idEstudiante" Nullable="false" />
           <Property Type="String" Name="NombreApellido" Nullable="true" MaxLength="301" />
+        </ComplexType>
+        <ComplexType Name="ListarDataNotasDocentes_Result">
+          <Property Type="Int64" Name="id_docente" Nullable="true" />
+          <Property Type="String" Name="Docente" Nullable="true" MaxLength="301" />
+        </ComplexType>
+        <ComplexType Name="ListarDataNotasAsignatura_Result">
+          <Property Type="Int64" Name="id_asignatura" Nullable="true" />
+          <Property Type="String" Name="Asignatura" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Docente" Nullable="true" MaxLength="301" />
+          <Property Type="Int64" Name="idDocente" Nullable="false" />
+          <Property Type="String" Name="horario" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="idGrupo" Nullable="false" />
+          <Property Type="String" Name="Grupo" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="ListarDataNotasGrupos_Result">
+          <Property Type="Int64" Name="idGrupo" Nullable="false" />
+          <Property Type="String" Name="Grupo" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="id_docente" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ListarDataNotasDocentes1_Result">
+          <Property Type="Int64" Name="id_docente" Nullable="true" />
+          <Property Type="String" Name="Docente" Nullable="true" MaxLength="301" />
+        </ComplexType>
+        <ComplexType Name="GetListaConstanciaNotas_Result">
+          <Property Type="Int64" Name="idEstudiante" Nullable="false" />
+          <Property Type="String" Name="Estudiante" Nullable="true" MaxLength="301" />
+        </ComplexType>
+        <ComplexType Name="GetListaConstanciaNotasAsignaturas_Result">
+          <Property Type="Int64" Name="idEstudiante" Nullable="false" />
+          <Property Type="Int64" Name="idPeriodo" Nullable="false" />
+          <Property Type="String" Name="Asignatura" Nullable="true" MaxLength="150" />
+          <Property Type="Double" Name="Notas" Nullable="false" />
+          <Property Type="Double" Name="Conv" Nullable="false" />
+          <Property Type="String" Name="NotaLetras" Nullable="true" MaxLength="180" />
+          <Property Type="String" Name="ConvLetras" Nullable="true" MaxLength="180" />
+        </ComplexType>
+        <ComplexType Name="GetListaConstanciaNotasDetalleEstudiante_Result">
+          <Property Type="Int64" Name="idEstudiante" Nullable="false" />
+          <Property Type="String" Name="Estudiante" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="no_carnet" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AnioCursa" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Carrera" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="fechaLetra" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetListaConstanciaNotasPeriodos_Result">
+          <Property Type="Int64" Name="idPeriodo" Nullable="false" />
+          <Property Type="String" Name="Periodo" Nullable="true" MaxLength="151" />
+        </ComplexType>
+        <ComplexType Name="ListarEstudianteAsignaturaXid_Result">
+          <Property Type="Int64" Name="idEstudianteAsignatura" Nullable="false" />
+          <Property Type="Double" Name="parcial_uno" Nullable="true" />
+          <Property Type="Double" Name="parcial_dos" Nullable="true" />
+          <Property Type="Double" Name="convocatoria" Nullable="true" />
+          <Property Type="Double" Name="nota_final" Nullable="true" />
+          <Property Type="Double" Name="notaCierre" Nullable="true" />
+          <Property Type="Boolean" Name="aprobado" Nullable="true" />
+          <Property Type="Boolean" Name="completado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetListaCertificadoFinalNotasAsignaturas_Result">
+          <Property Type="Int64" Name="idEstudiante" Nullable="false" />
+          <Property Type="Int64" Name="idPeriodo" Nullable="false" />
+          <Property Type="String" Name="Asignatura" Nullable="true" MaxLength="150" />
+          <Property Type="Double" Name="Notas" Nullable="false" />
+          <Property Type="String" Name="NotaLetras" Nullable="true" MaxLength="180" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1092,6 +1182,7 @@
           <EntitySetMapping Name="estudianteAsignatura">
             <EntityTypeMapping TypeName="ControlAlumnosModel.estudianteAsignatura">
               <MappingFragment StoreEntitySet="estudianteAsignatura">
+                <ScalarProperty Name="notaCierre" ColumnName="notaCierre" />
                 <ScalarProperty Name="periodoActual" ColumnName="periodoActual" />
                 <ScalarProperty Name="anioPeriodo" ColumnName="anioPeriodo" />
                 <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
@@ -1190,19 +1281,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ValidarAsignatura" FunctionName="ControlAlumnosModel.Store.ValidarAsignatura" />
-          <FunctionImportMapping FunctionImportName="ListarEstudianteAsignaturaXid" FunctionName="ControlAlumnosModel.Store.ListarEstudianteAsignaturaXid">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarEstudianteAsignaturaXid_Result">
-                <ScalarProperty Name="idEstudianteAsignatura" ColumnName="idEstudianteAsignatura" />
-                <ScalarProperty Name="parcial_uno" ColumnName="parcial_uno" />
-                <ScalarProperty Name="parcial_dos" ColumnName="parcial_dos" />
-                <ScalarProperty Name="convocatoria" ColumnName="convocatoria" />
-                <ScalarProperty Name="nota_final" ColumnName="nota_final" />
-                <ScalarProperty Name="aprobado" ColumnName="aprobado" />
-                <ScalarProperty Name="completado" ColumnName="completado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="rptInscripcionClases" FunctionName="ControlAlumnosModel.Store.rptInscripcionClases">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ControlAlumnosModel.rptInscripcionClases_Result">
@@ -1349,6 +1427,102 @@
               <ComplexTypeMapping TypeName="ControlAlumnosModel.GetListadoEstudiantesInscripcion_Result">
                 <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
                 <ScalarProperty Name="NombreApellido" ColumnName="NombreApellido" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarDataNotasAsignatura" FunctionName="ControlAlumnosModel.Store.ListarDataNotasAsignatura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarDataNotasAsignatura_Result">
+                <ScalarProperty Name="id_asignatura" ColumnName="id_asignatura" />
+                <ScalarProperty Name="Asignatura" ColumnName="Asignatura" />
+                <ScalarProperty Name="Docente" ColumnName="Docente" />
+                <ScalarProperty Name="idDocente" ColumnName="idDocente" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarDataNotasGrupos" FunctionName="ControlAlumnosModel.Store.ListarDataNotasGrupos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarDataNotasGrupos_Result">
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+                <ScalarProperty Name="id_docente" ColumnName="id_docente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarDataNotasDocentes1" FunctionName="ControlAlumnosModel.Store.ListarDataNotasDocentes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarDataNotasDocentes1_Result">
+                <ScalarProperty Name="id_docente" ColumnName="id_docente" />
+                <ScalarProperty Name="Docente" ColumnName="Docente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaConstanciaNotas" FunctionName="ControlAlumnosModel.Store.GetListaConstanciaNotas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.GetListaConstanciaNotas_Result">
+                <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
+                <ScalarProperty Name="Estudiante" ColumnName="Estudiante" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaConstanciaNotasAsignaturas" FunctionName="ControlAlumnosModel.Store.GetListaConstanciaNotasAsignaturas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.GetListaConstanciaNotasAsignaturas_Result">
+                <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="Asignatura" ColumnName="Asignatura" />
+                <ScalarProperty Name="Notas" ColumnName="Notas" />
+                <ScalarProperty Name="Conv" ColumnName="Conv" />
+                <ScalarProperty Name="NotaLetras" ColumnName="NotaLetras" />
+                <ScalarProperty Name="ConvLetras" ColumnName="ConvLetras" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaConstanciaNotasDetalleEstudiante" FunctionName="ControlAlumnosModel.Store.GetListaConstanciaNotasDetalleEstudiante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.GetListaConstanciaNotasDetalleEstudiante_Result">
+                <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
+                <ScalarProperty Name="Estudiante" ColumnName="Estudiante" />
+                <ScalarProperty Name="no_carnet" ColumnName="no_carnet" />
+                <ScalarProperty Name="AnioCursa" ColumnName="AnioCursa" />
+                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+                <ScalarProperty Name="fechaLetra" ColumnName="fechaLetra" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaConstanciaNotasPeriodos" FunctionName="ControlAlumnosModel.Store.GetListaConstanciaNotasPeriodos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.GetListaConstanciaNotasPeriodos_Result">
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarEstudianteAsignaturaXid" FunctionName="ControlAlumnosModel.Store.ListarEstudianteAsignaturaXid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.ListarEstudianteAsignaturaXid_Result">
+                <ScalarProperty Name="idEstudianteAsignatura" ColumnName="idEstudianteAsignatura" />
+                <ScalarProperty Name="parcial_uno" ColumnName="parcial_uno" />
+                <ScalarProperty Name="parcial_dos" ColumnName="parcial_dos" />
+                <ScalarProperty Name="convocatoria" ColumnName="convocatoria" />
+                <ScalarProperty Name="nota_final" ColumnName="nota_final" />
+                <ScalarProperty Name="notaCierre" ColumnName="notaCierre" />
+                <ScalarProperty Name="aprobado" ColumnName="aprobado" />
+                <ScalarProperty Name="completado" ColumnName="completado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaCertificadoFinalNotasAsignaturas" FunctionName="ControlAlumnosModel.Store.GetListaCertificadoFinalNotasAsignaturas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlAlumnosModel.GetListaCertificadoFinalNotasAsignaturas_Result">
+                <ScalarProperty Name="idEstudiante" ColumnName="idEstudiante" />
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="Asignatura" ColumnName="Asignatura" />
+                <ScalarProperty Name="Notas" ColumnName="Notas" />
+                <ScalarProperty Name="NotaLetras" ColumnName="NotaLetras" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

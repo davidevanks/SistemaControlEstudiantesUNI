@@ -59,7 +59,7 @@
 
 
     <script>
-
+        var table;
         $('#doc').change(function () {
             var selectedDoc = $("#doc").val();
             var regionsSelect = $('#grp');
@@ -133,7 +133,9 @@
 
 
         $(document).ajaxComplete(function () {
-            $('.table-uni').DataTable({
+            table.destroy();
+
+         table=    $('.table-uni').DataTable({
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ registros por página",
                     "zeroRecords": "No hay resultados",

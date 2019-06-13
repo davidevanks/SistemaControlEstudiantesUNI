@@ -33,6 +33,13 @@
                     @Html.ValidationMessageFor(model => model.parcial_dos, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Nota Final</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nota_final, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nota_final, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="control-label col-md-2">Convocatoria</label>
@@ -42,14 +49,14 @@
                 </div>
             </div>
 
+        
             <div class="form-group">
-                <label class="control-label col-md-2">Nota Final</label>
+                <label class="control-label col-md-2">Nota Cierre</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.nota_final, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.nota_final, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.notaCierre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.notaCierre, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2">Aprobado</label>
                 <div class="col-md-10">
@@ -60,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label class="control-label col-md-2">Completado</label>
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -68,7 +75,7 @@
                         @Html.ValidationMessageFor(model => model.completado, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

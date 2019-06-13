@@ -298,7 +298,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotasController.cs" />
     <Compile Include="Controllers\PeriodoController.cs" />
+    <Compile Include="Controllers\ReporteCertificadoFinalNotasController.cs" />
     <Compile Include="Controllers\ReporteConstanciaIndividualController.cs" />
+    <Compile Include="Controllers\ReporteConstanciaNotasIndController.cs" />
     <Compile Include="Controllers\ReporteHojaMatriculaController.cs" />
     <Compile Include="Controllers\ReporteInscripcionClasesController.cs" />
     <Compile Include="Controllers\TurnosController.cs" />
@@ -317,6 +319,21 @@
     <Compile Include="estudianteNotas.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetListaCertificadoFinalNotasAsignaturas_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListaConstanciaNotasAsignaturas_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListaConstanciaNotasDetalleEstudiante_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListaConstanciaNotasPeriodos_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListaConstanciaNotas_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetListadoEstudiantesInscripcion_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
@@ -324,6 +341,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ListarAsignaturas_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarDataNotasAsignatura_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarDataNotasDocentes1_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarDataNotasDocentes_Result.cs">
+      <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarDataNotasGrupos_Result.cs">
       <DependentUpon>ControlEstudiantesDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="ListarDataNotas_Result.cs">
@@ -399,6 +428,7 @@
     <Compile Include="ViewModels\Estudiantes_VM.cs" />
     <Compile Include="ViewModels\Periodo_VM.cs" />
     <Compile Include="ViewModels\rptConstanciaIndividual_VM.cs" />
+    <Compile Include="ViewModels\rptConstanciaNotasIndividual_VM.cs" />
     <Compile Include="ViewModels\rptInscripcionCLases_VM.cs" />
     <Compile Include="ViewModels\Turnos_VM.cs" />
   </ItemGroup>
@@ -569,6 +599,10 @@
     <Content Include="Views\ReporteConstanciaIndividual\Index.cshtml" />
     <Content Include="Views\ReporteInscripcionClases\Index.cshtml" />
     <Content Include="Views\ReporteInscripcionClases\rptInscripcionClases.cshtml" />
+    <Content Include="Views\ReporteConstanciaNotasInd\Index.cshtml" />
+    <Content Include="Views\ReporteConstanciaNotasInd\rptConstanciaNotasIndividual.cshtml" />
+    <Content Include="Views\ReporteCertificadoFinalNotas\Index.cshtml" />
+    <Content Include="Views\ReporteCertificadoFinalNotas\rptCertificadoFinalNotas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

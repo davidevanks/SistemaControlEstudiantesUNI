@@ -193,15 +193,6 @@ namespace SistemaControlEstudiantesUNI
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ValidarAsignatura", idAsignaturaParameter, idEstudianteParameter);
         }
     
-        public virtual ObjectResult<ListarEstudianteAsignaturaXid_Result> ListarEstudianteAsignaturaXid(Nullable<long> idEstudianteAsignatura)
-        {
-            var idEstudianteAsignaturaParameter = idEstudianteAsignatura.HasValue ?
-                new ObjectParameter("idEstudianteAsignatura", idEstudianteAsignatura) :
-                new ObjectParameter("idEstudianteAsignatura", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudianteAsignaturaXid_Result>("ListarEstudianteAsignaturaXid", idEstudianteAsignaturaParameter);
-        }
-    
         public virtual ObjectResult<rptInscripcionClases_Result> rptInscripcionClases(Nullable<int> idEstudiante)
         {
             var idEstudianteParameter = idEstudiante.HasValue ?
@@ -255,6 +246,76 @@ namespace SistemaControlEstudiantesUNI
         public virtual ObjectResult<GetListadoEstudiantesInscripcion_Result> GetListadoEstudiantesInscripcion()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListadoEstudiantesInscripcion_Result>("GetListadoEstudiantesInscripcion");
+        }
+    
+        public virtual ObjectResult<ListarDataNotasDocentes_Result> ListarDataNotasDocentes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDataNotasDocentes_Result>("ListarDataNotasDocentes");
+        }
+    
+        public virtual ObjectResult<ListarDataNotasAsignatura_Result> ListarDataNotasAsignatura()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDataNotasAsignatura_Result>("ListarDataNotasAsignatura");
+        }
+    
+        public virtual ObjectResult<ListarDataNotasGrupos_Result> ListarDataNotasGrupos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDataNotasGrupos_Result>("ListarDataNotasGrupos");
+        }
+    
+        public virtual ObjectResult<ListarDataNotasDocentes1_Result> ListarDataNotasDocentes1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarDataNotasDocentes1_Result>("ListarDataNotasDocentes1");
+        }
+    
+        public virtual ObjectResult<GetListaConstanciaNotas_Result> GetListaConstanciaNotas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaConstanciaNotas_Result>("GetListaConstanciaNotas");
+        }
+    
+        public virtual ObjectResult<GetListaConstanciaNotasAsignaturas_Result> GetListaConstanciaNotasAsignaturas(Nullable<int> idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante.HasValue ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaConstanciaNotasAsignaturas_Result>("GetListaConstanciaNotasAsignaturas", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<GetListaConstanciaNotasDetalleEstudiante_Result> GetListaConstanciaNotasDetalleEstudiante(Nullable<int> idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante.HasValue ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaConstanciaNotasDetalleEstudiante_Result>("GetListaConstanciaNotasDetalleEstudiante", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<GetListaConstanciaNotasPeriodos_Result> GetListaConstanciaNotasPeriodos(Nullable<int> idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante.HasValue ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaConstanciaNotasPeriodos_Result>("GetListaConstanciaNotasPeriodos", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<ListarEstudianteAsignaturaXid_Result> ListarEstudianteAsignaturaXid(Nullable<long> idEstudianteAsignatura)
+        {
+            var idEstudianteAsignaturaParameter = idEstudianteAsignatura.HasValue ?
+                new ObjectParameter("idEstudianteAsignatura", idEstudianteAsignatura) :
+                new ObjectParameter("idEstudianteAsignatura", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListarEstudianteAsignaturaXid_Result>("ListarEstudianteAsignaturaXid", idEstudianteAsignaturaParameter);
+        }
+    
+        public virtual ObjectResult<GetListaCertificadoFinalNotasAsignaturas_Result> GetListaCertificadoFinalNotasAsignaturas(Nullable<int> idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante.HasValue ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaCertificadoFinalNotasAsignaturas_Result>("GetListaCertificadoFinalNotasAsignaturas", idEstudianteParameter);
         }
     }
 }

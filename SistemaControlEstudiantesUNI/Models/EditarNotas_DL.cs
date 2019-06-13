@@ -16,11 +16,11 @@ namespace SistemaControlEstudiantesUNI.Models
 
             using (var contexto = new ControlAlumnosEntities())
             {
-                lstDoc = contexto.ListarDataNotas().Select(x => new DocentesNotas_VM
+                lstDoc = contexto.ListarDataNotasDocentes1().Select(x => new DocentesNotas_VM
                 {
                     id=(long)x.id_docente,
                     nombre=x.Docente
-                }).Distinct().ToList();
+                }).ToList();
 
                 return lstDoc;
             }
@@ -34,7 +34,7 @@ namespace SistemaControlEstudiantesUNI.Models
 
             using (var contexto = new ControlAlumnosEntities())
             {
-                lstGr = contexto.ListarDataNotas().Where(x=>x.id_docente==idDocente).Select(x => new GrupoNotas_VM
+                lstGr = contexto.ListarDataNotasGrupos().Where(x=>x.id_docente==idDocente).Select(x => new GrupoNotas_VM
                 {
                    id=x.idGrupo,
                    Grupo=x.Grupo
@@ -52,7 +52,7 @@ namespace SistemaControlEstudiantesUNI.Models
 
             using (var contexto = new ControlAlumnosEntities())
             {
-                lstAsig = contexto.ListarDataNotas().Where(x => x.id_docente == idDocente && x.idGrupo==idGrupo).Select(x => new AsignaturaNotas_VM
+                lstAsig = contexto.ListarDataNotasAsignatura().Where(x => x.idDocente == idDocente && x.idGrupo==idGrupo).Select(x => new AsignaturaNotas_VM
                 {
                     id=(long)x.id_asignatura,
                     Asignatura=x.Asignatura
@@ -103,7 +103,7 @@ namespace SistemaControlEstudiantesUNI.Models
                     Notas.nota_final = NotasEstudiantes.nota_final;
                     Notas.aprobado = NotasEstudiantes.aprobado;
                     Notas.completado = NotasEstudiantes.completado;
-
+                    Notas.notaCierre = NotasEstudiantes.notaCierre;
                     context.Configuration.ValidateOnSaveEnabled = false;
 
                     context.SaveChanges();
@@ -138,8 +138,9 @@ namespace SistemaControlEstudiantesUNI.Models
                     nota_final =(float)x.nota_final.GetValueOrDefault(),
                     convocatoria =(float)x.convocatoria.GetValueOrDefault(),
                     completado =(bool)x.completado.GetValueOrDefault(),
-                    aprobado =(bool)x.aprobado.GetValueOrDefault()
-
+                    aprobado =(bool)x.aprobado.GetValueOrDefault(),
+                    notaCierre=(float)x.notaCierre.GetValueOrDefault()
+                    
 
 
                 }).FirstOrDefault();

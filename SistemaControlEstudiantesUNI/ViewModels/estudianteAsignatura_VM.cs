@@ -147,10 +147,11 @@ namespace SistemaControlEstudiantesUNI.ViewModels
 
         public string Grupo { get; set; }
         //campos para agregar notas de los estudiantes y aprobar / completar clases
-        public float parcial_uno { get; set; }
-        public float parcial_dos { get; set; }
-        public float convocatoria { get; set; }
-        public float nota_final { get; set; }
+        public float? parcial_uno { get; set; }
+        public float? parcial_dos { get; set; }
+        public float? convocatoria { get; set; }
+        public float? nota_final { get; set; }
+        public float? notaCierre { get; set; }
 
         public bool aprobado { get; set; }
         public bool completado { get; set; }

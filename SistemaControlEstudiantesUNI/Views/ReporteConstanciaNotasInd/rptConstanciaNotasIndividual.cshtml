@@ -1,0 +1,62 @@
+﻿@model   SistemaControlEstudiantesUNI.ViewModels.rptConstanciaNotasIndividual_VM
+<div class="col-md-offset-1">
+    <h2>Constancia de Notas</h2>
+
+    <div id="bodyReport">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+   
+        <h2 style="text-align: center;">CONSTANCIA DE NOTAS</h2>
+       
+        <p style="text-align: left;">La coordinadora de la Carreras semi presencial, por este medio certifica que seg&uacute;n los archivos que lleva esta oficina, el Br. <span style="text-decoration: underline;"><strong>@Model.Estudiante, </strong></span><strong>carne No. @Model.no_carnet, </strong>Estudiante del aniocursa de la<strong> @Model.Carrera, </strong>obtuvo las siguientes calificaciones:</p>
+        <table align="center">
+            <tbody>
+                <tr>
+                    <td>Asignatura &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+                    <td>Notas &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Conv &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Notas Letra &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Conv Letras &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+                @foreach (var d in Model.LstPeriodos)
+                {
+                    <tr>
+                        <td><strong>@Html.DisplayFor(modelItem => d.Periodo)</strong></td>
+                        @foreach (var c in Model.LstAsignaturas.Where(x=>x.idPeriodo==d.id))
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => c.Asignatura)</td>  
+                                <td>@Html.DisplayFor(modelItem => c.Notas)</td> 
+                                <td>@Html.DisplayFor(modelItem => c.Conv)</td>  
+                                <td>@Html.DisplayFor(modelItem => c.NotaLetras)</td> 
+                                <td>@Html.DisplayFor(modelItem => c.ConvLetras)</td> 
+                            </tr>
+                          
+                        }
+
+                    </tr>
+                }
+            
+            
+            </tbody>
+        </table>
+        <p style="text-align: center;">--------------------------------------ULTIMA LINEA----------------------------------------</p>
+        <p style="text-align: left;">A solicitud de parte interesada y para fines que estime conveniente se extiende el presente certificado en la ciudad de Managua FechaLetras</p>
+        <p style="text-align: left;">&nbsp;</p>
+        <p style="text-align: center;">Ing. Juan Gonzalez Mena</p>
+        <p style="text-align: center;">Coordinador</p>
+        <p style="text-align: center;">Carreras SemiPresenciales</p>
+        <p style="text-align: center;">UNI-FEC</p>
+        <p style="text-align: left;">CC: Archivo</p>
+        <p style="text-align: left;">&nbsp;</p>
+        <p style="text-align: center;">Br @Model.Estudiante - @Model.no_carnet</p>
+
+
+    </div>
+
+
+
+</div>
+
